@@ -502,7 +502,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
   <button class="rbtn" data-nav="activity" title="Notifikasi" aria-label="Notifikasi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M18 16V11a6 6 0 10-12 0v5l-2 2h16z"/><path d="M10 21h4"/></svg><i class="rdot" id="actDot" hidden></i></button>
   <button class="rbtn" data-nav="archive" id="rArchive" title="Arkib" aria-label="Arkib" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4"/></svg></button>
   <span class="rspace"></span>
-  <button class="rbtn" data-nav="new" id="rNew" title="Projek baru" aria-label="Projek baru" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg></button>
+  <button class="rbtn" data-nav="new" id="rNew" title="Projek Baru" aria-label="Projek Baru" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg></button>
   <button class="ravatar" id="rAvatar" type="button" aria-haspopup="true" aria-label="Profil" title="Profil"><span class="uini" translate="no">?</span></button>
 </nav>
 <div class="wrap" id="app">
@@ -512,7 +512,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
   </header>
   <section class="home" id="home" hidden>
     <div class="hhead">
-      <div class="hleft"><h1>Semua projek</h1><p class="hsub" id="hSub"></p></div>
+      <div class="hleft"><h1>Semua Projek</h1><p class="hsub" id="hSub"></p></div>
       <div class="htools">
         <div class="seg" id="hFilter" role="group" aria-label="Tapis jenis"><button type="button" data-hf="all" aria-pressed="true">Semua</button><button type="button" data-hf="photo" aria-pressed="false">Photo</button><button type="button" data-hf="video" aria-pressed="false">Video</button></div>
         <select class="sel" id="hSort" aria-label="Susunan"><option value="upd">Terkini dikemaskini</option><option value="name">Nama A-Z</option></select>
@@ -522,7 +522,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
     <div class="pgrid" id="hGrid"></div>
   </section>
   <div id="projview">
-  <nav class="crumb" id="crumb"><a href="#" data-nav="home">Semua projek</a><span aria-hidden="true">/</span><span id="crumbName" translate="no"></span></nav>
+  <nav class="crumb" id="crumb"><a href="#" data-nav="home">Semua Projek</a><span aria-hidden="true">/</span><span id="crumbName" translate="no"></span></nav>
   <div class="top">
     <div class="brand">
       <h1 id="pname">Memuatkan…</h1>
@@ -535,7 +535,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
       <button class="btn" id="btnShare" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Kongsi ke client</button>
       <button class="btn" id="btnProjEdit" title="Tetapan projek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Projek</button>
       <button class="btn" id="btnArchive" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4"/></svg>Arkib</button>
-      <button class="btn" id="btnProjNew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Projek baru</button>
+      <button class="btn" id="btnProjNew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Projek Baru</button>
     </div>
   </div>
 
@@ -727,7 +727,7 @@ const EN = {
   'Mod':'Mode', 'Pilih projek':'Select project', 'Tetapan projek':'Project settings', 'Tutup':'Close',
   'Jadual Editor ·':'Editor Schedule ·', 'Jadual Editor':'Editor Schedule', 'Paparan public':'Public view',
   'Lihat':'View', 'Terbitkan ke public':'Publish to public', 'Kongsi ke client':'Share with client',
-  'Projek':'Project', 'Arkib':'Archive', 'Arkib ({0})':'Archive ({0})', 'Arkib {0}':'Archive {0}', 'Projek baru':'New project',
+  'Projek':'Project', 'Arkib':'Archive', 'Arkib ({0})':'Archive ({0})', 'Arkib {0}':'Archive {0}', 'Projek Baru':'New Project', 'Projek baru':'New project',
   'Mod Lihat: inilah paparan yang dilihat oleh public. Tukar ke':'View mode: this is exactly what the public sees. Switch to',
   'untuk tambah atau ubah data.':'to add or change data.',
   'Mod Edit · Admin':'Edit mode · Admin', 'Mod Lihat · Admin':'View mode · Admin',
@@ -887,8 +887,8 @@ const EN = {
   'Admin':'Admin',
   // shell
   'Profil':'Profile', 'Bahasa':'Language', 'Pemilik · Admin':'Owner · Admin', 'Admin · boleh edit':'Admin · can edit', 'Lihat sahaja':'View only', 'Tetamu':'Guest', 'Pengguna':'User',
-  'Utama':'Home', 'Carian':'Search', 'Notifikasi':'Notifications', 'Semua projek':'All projects', 'Tapis jenis':'Filter by type', 'Susunan':'Sort',
-  'Terkini dikemaskini':'Recently updated', 'Nama A-Z':'Name A-Z', 'Paparan':'View', 'Senarai':'List', '{0} projek aktif':a=>`${a[0]} active ${pl(a[0],'project','projects')}`,
+  'Utama':'Home', 'Carian':'Search', 'Notifikasi':'Notifications', 'Semua Projek':'All Projects', 'Semua projek':'All projects', 'Tapis jenis':'Filter by type', 'Susunan':'Sort',
+  'Terkini dikemaskini':'Recently updated', 'Nama A-Z':'Name A-Z', 'Paparan':'View', 'Senarai':'List', '{0} Projek Aktif':a=>`${a[0]} Active ${pl(a[0],'Project','Projects')}`,
   'Nama projek':'Project name', 'Jenis':'Type', 'Progres':'Progress', 'Kandungan':'Contents', 'Dikemaskini':'Updated',
   'Belum dibaca':'Unread', 'Tandakan semua dibaca':'Mark all as read', 'Tiada kemaskini baru.':'No new updates.', 'Belum ada aktiviti.':'No activity yet.',
   'Cari status, editor, scene, nota…':'Search status, editor, scene, notes…', 'Cari status, editor, kata kunci dan lain-lain':'Search for status, editor, keywords and more',
@@ -1068,17 +1068,17 @@ function renderHome(){
   const st=new Map(ps.map(p=>[p.id,statsOf(p)]));
   ps=ps.slice().sort((a,b)=> hs==='name' ? String(a.name).localeCompare(String(b.name)) : ((st.get(b.id)?.upd||b.createdAt||0)-(st.get(a.id)?.upd||a.createdAt||0)));
   const tot=visibleProjects().length;
-  $('hSub').textContent = `${tot} projek aktif`;
+  $('hSub').textContent = `${tot} Projek Aktif`;
   document.querySelectorAll('#hFilter [data-hf]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.hf===hf)));
   document.querySelectorAll('#hView [data-hv]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.hv===hv)));
   $('hSort').value=hs;
   const g=$('hGrid'); g.className='pgrid'+(hv==='list'?' list':'');
-  const newCard = canWrite && hf==='all' ? (hv==='list' ? '' : `<button class="pcard pnew" data-act="newproj"><span>${ICON_PLUS}</span>Projek baru</button>`) : '';
+  const newCard = canWrite && hf==='all' ? (hv==='list' ? '' : `<button class="pcard pnew" data-act="newproj"><span>${ICON_PLUS}</span>Projek Baru</button>`) : '';
   if(!ps.length && !newCard){ g.innerHTML='<div class="empty"><h3>Belum ada projek</h3><p>Tiada projek untuk dipaparkan.</p></div>'; return; }
   if(hv==='list'){
     g.innerHTML=`<div class="prow head"><span></span><span>Nama projek</span><span>Jenis</span><span>Progres</span><span>Kandungan</span><span>Dikemaskini</span></div>`+ps.map(p=>{ const s=st.get(p.id);
       return `<button class="prow" data-open="${esc(p.id)}" style="${gradVars(p.name)}"><span class="pav" translate="no">${esc(initials(p.name))}</span><strong translate="no">${esc(p.name||'Projek tanpa nama')}</strong><span class="m">${isVid(p)?'VIDEO':'PHOTO'}</span><span class="pcbar">${barHtml(s)}</span><span class="m">${s?s.label:'…'}</span><span class="m">${s?ago(s.upd):''}</span></button>`; }).join('')
-      +(canWrite?`<button class="prow" data-act="newproj"><span class="pav" style="background:var(--surface2);color:var(--ink)">+</span><strong>Projek baru</strong></button>`:'');
+      +(canWrite?`<button class="prow" data-act="newproj"><span class="pav" style="background:var(--surface2);color:var(--ink)">+</span><strong>Projek Baru</strong></button>`:'');
     return;
   }
   g.innerHTML=ps.map(p=>{ const s=st.get(p.id);
@@ -1565,7 +1565,7 @@ function openProject(isNew){
   const p=isNew?{name:'',master:'',type:'photo'}:cur();
   let type=p.type||'photo';
   const canType = isNew || !entries.length;
-  openModal(isNew?'Projek baru':'Tetapan projek', `
+  openModal(isNew?'Projek Baru':'Tetapan projek', `
     <div class="f"><label>Jenis projek</label>
       ${canType?`<div class="seg" id="pType" role="group" aria-label="Jenis projek" style="align-self:flex-start"><button type="button" data-type="photo" aria-pressed="${type==='photo'}">Photo</button><button type="button" data-type="video" aria-pressed="${type==='video'}">Video</button></div>
       <span class="hint" id="pTypeHint"></span>`:`<span class="typetag">${type==='video'?'VIDEO':'PHOTO'}</span>`}</div>
