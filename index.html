@@ -450,6 +450,48 @@ body{padding-left:68px}
 .dmenu .mi-tx b{font-size:13.5px;font-weight:600}
 .dmenu .mi-tx small{font-size:11.5px;color:var(--muted)}
 .dmenu hr{border:0;border-top:1px solid var(--line);margin:4px 6px}
+@media (min-width:821px){.evtrack .vrow{grid-template-columns:28px minmax(170px,1.4fr) 140px 72px minmax(0,.6fr) 92px minmax(0,1.6fr) 36px}}
+@media (min-width:821px){.row.bo{grid-template-columns:28px 44px minmax(0,1fr) 140px 120px 120px 36px}}
+.rteam{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.rteam .tchip{padding:2px 8px 2px 3px;font-size:11px}
+.rteam .tchip i{width:16px;height:16px;font-size:8.5px}
+.name small.evl{font-weight:500}
+.mnav{display:flex;align-items:center;gap:8px}
+.mnav span{min-width:86px;text-align:center;font-weight:600;font-size:13.5px}
+.mnav .btn{width:34px;padding:0;justify-content:center}
+.sday{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.sday-h{display:flex;align-items:center;gap:10px;padding:0 2px}
+.sday-h h3{margin:0;font-size:15px;font-weight:700}
+.sday-h .meta{margin-left:auto;font-size:12px;color:var(--muted)}
+.sbadge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--ink);color:var(--bg)}
+.sday.past{opacity:.55}
+.ev{display:grid;grid-template-columns:128px minmax(0,1fr) auto;gap:16px;align-items:start;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.sday.today .ev{border-color:var(--line2)}
+.ev-time{font-weight:600;font-size:13.5px;padding-top:1px;font-variant-numeric:tabular-nums}
+.ev-main{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ev-main h4{margin:0;font-size:15px;font-weight:600;line-height:1.35}
+.ev-loc{margin:0;display:flex;gap:6px;align-items:flex-start;font-size:13px;color:var(--muted)}
+.ev-loc svg{width:14px;height:14px;flex:none;margin-top:2px}
+.ev-note{margin:0;font-size:12.5px;color:var(--muted);font-style:italic}
+.ev-team{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.ev-act{display:flex;align-items:center;gap:6px}
+.tchip.sm{padding:3px 10px 3px 4px;font-size:12px}
+.tchip.sm i{width:18px;height:18px;font-size:9px}
+@media (max-width:700px){.ev{grid-template-columns:1fr;gap:8px}.ev-act{justify-content:flex-start}}
+.evbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-6px 0 12px;font-size:13px;color:var(--muted)}
+.evbar svg{width:15px;height:15px}
+.evbar .dot{opacity:.6}
+.crew-list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.crew-row{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:10px;align-items:center;padding:8px 10px 8px 14px;border-bottom:1px solid var(--line)}
+.crew-row:last-child{border-bottom:0}
+.crew-row .crew-n{font-weight:500;overflow-wrap:anywhere}
+.crew-row select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 10px;width:100%}
+.sitbl{overflow:auto;max-height:300px;border:1px solid var(--line);border-radius:12px}
+.sitbl table{border-collapse:collapse;width:100%;font-size:12.5px}
+.sitbl th{position:sticky;top:0;background:var(--surface2);text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:8px 10px}
+.sitbl td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+.sitbl td.nw{white-space:nowrap}
+.siwarn{margin:0 0 8px;padding:8px 12px 8px 28px;border-radius:10px;background:var(--c-run-bg);color:var(--c-run);font-size:12.5px}
 .subtabs{display:flex;gap:8px;margin:0 0 18px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--surface);width:fit-content;max-width:100%}
 .subtabs button{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:var(--muted);font:inherit;padding:8px 16px 8px 12px;border-radius:10px;cursor:pointer;text-align:left}
 .subtabs button svg{width:18px;height:18px;flex:none}
@@ -560,6 +602,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
 <nav class="rail" id="rail">
   <button class="rail-logo" data-nav="home" title="escMedia" translate="no"><span class="logo">e</span></button>
   <button class="rbtn" data-nav="home" title="Utama" aria-label="Utama"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg></button>
+  <button class="rbtn" data-nav="sched" title="Jadual" aria-label="Jadual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button>
   <button class="rbtn" data-nav="search" title="Carian" aria-label="Carian"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
   <button class="rbtn" data-nav="activity" title="Notifikasi" aria-label="Notifikasi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M18 16V11a6 6 0 10-12 0v5l-2 2h16z"/><path d="M10 21h4"/></svg><i class="rdot" id="actDot" hidden></i></button>
   <button class="rbtn" data-nav="archive" id="rArchive" title="Arkib" aria-label="Arkib" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4"/></svg></button>
@@ -583,6 +626,18 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
     </div>
     <div class="pgrid" id="hGrid"></div>
   </section>
+  <section class="home sched" id="sched" hidden>
+    <div class="hhead">
+      <div class="hleft"><h1>Jadual</h1><p class="hsub" id="sSub"></p></div>
+      <div class="htools">
+        <div class="seg" id="sRange" role="group" aria-label="Julat"><button type="button" data-sr="up" aria-pressed="true">Akan Datang</button><button type="button" data-sr="month" aria-pressed="false">Ikut Bulan</button></div>
+        <div class="mnav" id="sMonthNav" hidden><button type="button" class="btn sm" data-sm="-1" aria-label="Bulan sebelum">‹</button><span id="sMonth"></span><button type="button" class="btn sm" data-sm="1" aria-label="Bulan seterusnya">›</button></div>
+        <button class="btn" id="sCrew" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg>Crew</button>
+        <button class="btn primary" id="sUp" aria-haspopup="menu" aria-expanded="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Upload<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+      </div>
+    </div>
+    <div id="sList"></div>
+  </section>
   <div id="projview">
   <nav class="crumb" id="crumb"><a href="#" data-nav="home">Semua Projek</a><span aria-hidden="true">/</span><span id="crumbName" translate="no"></span></nav>
   <div class="top">
@@ -602,6 +657,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
     </div>
   </div>
 
+  <div class="evbar" id="evBar" hidden></div>
   <div class="teambar" id="teamBar" hidden></div>
 
   <div class="subtabs" id="subTabs" role="tablist" aria-label="Senarai" hidden>
@@ -767,15 +823,15 @@ const ptype = p => (p && p.type) || 'photo';
 const isBoth = p => ptype(p) === 'both';
 const hasPhotoT = p => ptype(p) !== 'video';
 const hasVideoT = p => ptype(p) !== 'photo';
-const curKind = () => { const p = cur(); return isBoth(p) ? sub : ptype(p); };
-const isVid = p => { p = p===undefined ? cur() : p; if(!p) return false; return isBoth(p) ? (p.id===curPid && sub==='video') : p.type==='video'; };
-const entV = (p,e) => isBoth(p) ? e.kind==='video' : ptype(p)==='video';
+const curKind = () => { const p = cur(); return isBoth(p) ? 'photo' : ptype(p); };
+const isVid = p => { p = p===undefined ? cur() : p; if(!p) return false; return p.type==='video'; };
+const entV = (p,e) => ptype(p)==='video';
 const typeLabel = p => isBoth(p) ? 'PHOTO & VIDEO' : ptype(p)==='video' ? 'VIDEO' : 'PHOTO';
 /* Photo & Video projects keep both lists in one entries collection, told apart by `kind`. */
 function kcol(pid, kind){
   const col = db.collection(`projects/${pid}/entries`);
   const p = projects.find(x=>x.id===pid);
-  if(!isBoth(p)) return col;
+  if(!isBoth(p) || true) return col;
   const keep = d => ((d.data().kind)||'photo') === kind;
   const wrap = s => { const docs = s.docs.filter(keep); return {docs, size:docs.length, empty:!docs.length}; };
   return {
@@ -784,9 +840,10 @@ function kcol(pid, kind){
     onSnapshot: (cb, er) => col.onSnapshot(s=>cb(wrap(s)), er)
   };
 }
-const stList = () => isVid() ? VSTATUSES : STATUSES;
+const BSTATUSES = [{v:'ON GOING', c:'run'},{v:'REVISION', c:'rev'},{v:'SUBMIT', c:'ok'},{v:'BATAL', c:'idle'}];
+const stList = () => isVid() ? VSTATUSES : isBoth(cur()) ? BSTATUSES : STATUSES;
 const sClass = v => (stList().find(s => s.v === v) || {c:'idle'}).c;
-const dClass = v => v==='BELUM MULA' ? 'todo' : sClass(v);
+const dClass = v => (v==='BELUM MULA'||v==='BATAL') ? 'todo' : sClass(v);
 const HARI = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
 const BULAN = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis'];
 const $ = id => document.getElementById(id);
@@ -968,6 +1025,30 @@ const EN = {
   'Client tidak perlu akaun Claude. Mereka nampak versi terakhir yang anda tekan':"Clients don't need a Claude account. They see the version from the last time you pressed",
   ', jadi tekan butang itu selepas setiap kemaskini. Link ini membuka projek ini sahaja, tetapi pengguna yang tahu menukar link masih boleh melihat projek lain dalam apps yang sama.':', so press that button after every update. This link opens this project only, but someone who knows how to change the link can still see other projects in the same app.',
   'Buka paparan client ↗':'Open client view ↗', 'Disalin ✓':'Copied ✓', 'Link disalin':'Link copied', 'Tekan Ctrl+C / Salin untuk menyalin':'Press Ctrl+C / Copy to copy',
+  // schedule
+  'Jadual':'Schedule', 'Akan Datang':'Upcoming', 'Ikut Bulan':'By Month', 'Crew':'Crew', '{0} Acara Akan Datang':a=>`${a[0]} Upcoming ${pl(a[0],'Event','Events')}`,
+  '{0} acara':a=>`${a[0]} ${pl(a[0],'event','events')}`, 'Hari ini':'Today', 'Esok':'Tomorrow', 'Buka projek':'Open project', 'Jadikan projek':'Make project',
+  'Edit acara':'Edit event', 'Tambah acara':'Add event', 'Tarikh':'Date', 'Masa':'Time', 'Acara':'Event', 'Lokasi':'Location', 'Nota':'Notes',
+  'Asingkan nama dengan koma.':'Separate names with commas.', 'Isi tarikh dan nama acara.':'Fill in the date and event name.', 'Acara ditambah':'Event added',
+  'Acara disimpan':'Event saved', 'Acara dipadam':'Event deleted', 'Tekan lagi untuk padam':'Press again to delete', 'Peranan crew':'Crew roles',
+  'Tetapkan peranan setiap orang sekali. Bila acara dijadikan projek, team diisi ikut peranan ini.':'Set each person\'s role once. When an event becomes a project, the team is filled using these roles.',
+  'Belum ada nama. Nama akan muncul selepas anda tampal jadual.':'No names yet. Names appear after you paste a schedule.', 'Tambah nama':'Add name',
+  'Peranan crew disimpan':'Crew roles saved', '— Pilih —':'— Choose —', 'Tampal jadual WhatsApp':'Paste WhatsApp schedule',
+  'Salin mesej jadual dari WhatsApp dan tampal di bawah. Tarikh, masa, acara, lokasi dan team dibaca automatik.':'Copy the schedule message from WhatsApp and paste it below. Date, time, event, location and team are read automatically.',
+  'Mesej jadual':'Schedule message', 'Cipta projek juga untuk setiap acara baru':'Also create a project for each new event', 'Simpan':'Save',
+  'Simpan {0} acara':a=>`Save ${a[0]} ${pl(a[0],'event','events')}`, 'Baru':'New', 'Kemaskini':'Update', 'Sama':'Same', 'Team':'Team',
+  'Nama baru: tetapkan peranan sekali':'New names: set their role once', 'App akan ingat peranan ini untuk upload seterusnya.':'The app will remember these roles for future uploads.',
+  'Belum jumpa acara. Pastikan ada baris tarikh (cth 19/11) dan baris masa (cth 3.30-4.30pm: Nama acara).':'No events found yet. Make sure there is a date line (e.g. 19/11) and a time line (e.g. 3.30-4.30pm: Event name).',
+  'Jadual dikemaskini':'Schedule updated', 'Tarikh, masa, acara, lokasi, team':'Date, time, event, location, team', 'Masuk ke Jadual acara':'Goes into the event Schedule',
+  'Tiada acara akan datang':'No upcoming events', 'Tiada acara bulan ini':'No events this month', 'Jadual akan dipaparkan di sini.':'The schedule will appear here.',
+  'Jadual belum boleh dibaca':'Schedule cannot be read yet', 'Peranan belum ditetapkan':'Role not set yet', 'Bulan sebelum':'Previous month', 'Bulan seterusnya':'Next month', 'Julat':'Range',
+  'Acara masuk ke senarai projek ini':'Events go into this project\'s list', '{0} acara dimasukkan ke projek':a=>`${a[0]} ${pl(a[0],'event','events')} added to the project`,
+  'Acara akan dimasukkan ke senarai projek':'Events will be added to the list of project', 'dan juga dipaparkan dalam Jadual.':'and also shown in the Schedule.',
+  'BATAL':'CANCELLED', 'Batal':'Cancel', 'Jumlah acara':'Total events', 'Revision / batal':'Revision / cancelled', '{0} hari acara':a=>`${a[0]} event ${pl(a[0],'day','days')}`,
+  'Output photo':'Photo output', 'Output video':'Video output', 'Link output photo':'Photo output link', 'Link output video':'Video output link', 'Nama acara':'Event name',
+  'Nama acara tidak boleh kosong.':'Event name cannot be empty.', 'Satu senarai acara. Setiap baris ada link output photo dan link output video.':'One list of events. Each row has a photo output link and a video output link.',
+  '{0} acara':a=>`${a[0]} ${pl(a[0],'event','events')}`, '{0}/{1} submit':'{0}/{1} submitted',
+  'Cari acara…':'Search events…',
   // chips
   'Belum Mula':'Not Started', 'On Going':'On Going',
   // menus
@@ -1093,7 +1174,7 @@ function setLang(l){
   if(l===LANG) return;
   LANG = l==='en' ? 'en' : 'ms'; store.set('je.lang', LANG); syncLangUI();
   trTree(document.body);
-  if(i18nReady && !staticView){ renderHeader(); render(); renderHome(); if(!$('actPanel').hidden) renderAct(); if(!$('searchOv').hidden) renderSearch(); }
+  if(i18nReady && !staticView){ renderHeader(); render(); renderHome(); renderSched(); if(!$('actPanel').hidden) renderAct(); if(!$('searchOv').hidden) renderSearch(); }
 }
 if(typeof document!=='undefined' && document.body){ syncLangUI(); trTree(document.body); }
 
@@ -1167,14 +1248,16 @@ function statsOf(p){
   const n=list.length, upd=Math.max(p.createdAt||0,...list.map(e=>e.updatedAt||0));
   const vl=list.filter(e=>entV(p,e)), pl=list.length-vl.length;
   const vLabel = hasScenes(vl) ? `${epCount(vl)} episod · ${vl.length} scene` : `${vl.length} episod`;
-  const label = isBoth(p) ? `${pl} fail · ${vLabel}` : ptype(p)!=='video' ? `${n} fail` : vLabel;
+  const label = isBoth(p) ? `${n} acara` : ptype(p)!=='video' ? `${n} fail` : vLabel;
   return {n,c,pct:n?Math.round(c.ok/n*100):0,upd,label};
 }
 const barHtml=(st)=>st&&st.n?['ok','sent','run','rev'].map(k=>`<i class="${k}" style="width:${(st.c[k]||0)/st.n*100}%"></i>`).join(''):'';
 function setView(v){
   view=v;
-  $('home').hidden = v!=='home'; $('projview').hidden = v!=='project';
+  $('home').hidden = v!=='home'; $('projview').hidden = v!=='project'; $('sched').hidden = v!=='sched';
   document.querySelectorAll('.rail [data-nav="home"].rbtn').forEach(b=>b.setAttribute('aria-current',String(v==='home')));
+  document.querySelector('.rail [data-nav="sched"]')?.setAttribute('aria-current',String(v==='sched'));
+  if(v==='sched'){ closeMenu?.(); renderSched(); window.scrollTo(0,0); }
   if(v==='home'){ renderHome(); loadAll(); window.scrollTo(0,0); }
 }
 function renderHome(){
@@ -1346,7 +1429,10 @@ async function boot(){
     if(first) maybeMigrate();
     allAt=0; loadAll();
     openArchive.redraw?.();
+    renderSched();
   }, err=>fail(err));
+  db.collection('events').onSnapshot(s=>{ evErr=false; events=s.docs.map(d=>({id:d.id,...d.data()})); renderSched(); }, ()=>{ evErr=true; renderSched(); });
+  db.collection('crew').onSnapshot(s=>{ crew={}; s.docs.forEach(d=>{ const x=d.data(); if(x&&x.name) crew[nkey(x.name)]={id:d.id,...x}; }); renderSched(); }, ()=>{});
 }
 let migOffered=false;
 function maybeMigrate(){
@@ -1409,7 +1495,7 @@ function setMode(m){ if(!isAdmin) return; mode=m; store.set('je.mode', m); apply
 
 function applySub(){
   const p=cur();
-  entries = isBoth(p) ? entriesAll.filter(e=>(e.kind||'photo')===sub) : entriesAll;
+  entries = entriesAll;
 }
 function setSub(k){
   if(sub===k) return;
@@ -1450,6 +1536,7 @@ function renderHeader(){
   $('arcnote').hidden = !(p && p.archived && isAdmin);
   if(p && p.archived && isAdmin) $('arcnote').innerHTML = `Projek ini diarkib (${projYear(p)}) dan tidak dipaparkan kepada public.${canWrite?'<button class="btn" data-act="unarchive">Pulihkan</button>':''}`;
   $('ptype').hidden = !p; $('ptype').textContent = p ? typeLabel(p) : '';
+  renderEvBar(p);
   renderTeamBar(p);
   renderSubTabs();
   $('projsel').disabled = !groups.length;
@@ -1459,7 +1546,7 @@ function renderHeader(){
   $('btnProjMenu').hidden = !canWrite;
 }
 function renderSubTabs(){
-  const p=cur(), both=isBoth(p); $('subTabs').hidden=!both;
+  const p=cur(), both=false; $('subTabs').hidden=true;
   if(both){ const np=entriesAll.filter(e=>(e.kind||'photo')==='photo').length, vl=entriesAll.filter(e=>e.kind==='video');
     $('subTabs').querySelectorAll('[data-sub]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.sub===sub)));
     $('subNP').textContent=`${np} fail`; $('subNV').textContent= hasScenes(vl) ? `${epCount(vl)} episod · ${vl.length} scene` : `${vl.length} episod`; }
@@ -1489,7 +1576,8 @@ function render(){
 function renderStrip(){
   const V=isVid(), n=entries.length, c={ok:0,run:0,rev:0,idle:0,sent:0};
   entries.forEach(e=>{ const k=sClass(e.status); c[k]=(c[k]||0)+1; });
-  const labels = V ? [hasScenes(entries)?'Jumlah scene':'Jumlah episod','Done','Dalam proses','Belum mula / cancel'] : ['Jumlah fail','Submit','On going','Revision / belum'];
+  const BO=isBoth(cur());
+  const labels = V ? [hasScenes(entries)?'Jumlah scene':'Jumlah episod','Done','Dalam proses','Belum mula / cancel'] : BO ? ['Jumlah acara','Submit','On going','Revision / batal'] : ['Jumlah fail','Submit','On going','Revision / belum'];
   document.querySelectorAll('#strip .stat span').forEach((el,i)=>el.textContent=labels[i]);
   $('sTotal').textContent=n; $('sOk').textContent=c.ok; $('sRun').textContent=V?c.run+c.sent:c.run; $('sRev').textContent=c.rev+c.idle;
   const pct = n? Math.round(c.ok/n*100):0;
@@ -1498,7 +1586,7 @@ function renderStrip(){
   const p=cur();
   $('sMaster').innerHTML = p.master ? `<a href="${esc(p.master)}" target="_blank" rel="noopener">Master folder ↗</a>` : (canWrite&&!V?'<a href="#" data-act="editproj">+ Letak link master folder</a>':'');
   if(V){ $('sDays').textContent = [p.label?`Tarikh: ${p.label}`:'', p.cancelled?'Projek CANCEL':''].filter(Boolean).join(' · ') || (hasScenes(entries)?`${epCount(entries)} episod · ${n} scene`:`${n} episod`); }
-  else { const nd = Object.keys(dayMap()).length; $('sDays').textContent = `${nd} hari penggambaran`; }
+  else { const nd = Object.keys(dayMap()).length; $('sDays').textContent = BO ? `${nd} hari acara` : `${nd} hari penggambaran`; }
   const last = entries.reduce((m,e)=>Math.max(m,e.updatedAt||0),0);
   if(!db && SNAP?.publishedAt){ $('sUpd').textContent='Dikemaskini '+new Date(SNAP.publishedAt).toLocaleString(LOC(),{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); return; }
   $('sUpd').textContent = last? 'Kemaskini '+new Date(last).toLocaleString(LOC(),{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
@@ -1544,7 +1632,7 @@ async function publishPublic(){
 }
 function renderFilters(){
   const counts={ALL:entries.length}; STATUSES.forEach(s=>counts[s.v]=0); entries.forEach(e=>counts[e.status]=(counts[e.status]||0)+1);
-  $('fdate').hidden = isVid(); $('q').placeholder = isVid() ? 'Cari episod, lokasi, nota…' : 'Cari nama fail…';
+  $('fdate').hidden = isVid(); $('q').placeholder = isVid() ? 'Cari episod, lokasi, nota…' : isBoth(cur()) ? 'Cari acara…' : 'Cari nama fail…';
   $('chips').innerHTML = [{v:'ALL',l:'Semua'}, ...stList().map(s=>({v:s.v,l:titleCase(s.v)}))]
     .filter(s=>s.v==='ALL'||counts[s.v]||filt.status===s.v)
     .map(s=>`<button class="chip${s.v==='ALL'?'':' st s-'+dClass(s.v)}" data-status="${s.v}" aria-pressed="${filt.status===s.v}"><span>${esc(s.l)}</span> <span class="mono">${counts[s.v]||0}</span></button>`).join('');
@@ -1582,20 +1670,32 @@ function renderDays(){
   const ro = canWrite?'':' ro';
   let html='';
   for(const [d,rows] of groups){
+    const BO=isBoth(cur());
     const allDay=entries.filter(e=>(e.date||'')===d), ok=allDay.filter(e=>e.status==='SUBMIT').length;
     const allSel = rows.every(r=>selected.has(r.id));
     html+=`<section class="track"><div class="track-h">
       <span class="daytag">${d?'HARI '+String(dm[d]).padStart(2,'0'):'TIADA TARIKH'}</span>
-      <h2>${fmtDate(d,true)}</h2><span class="meta">${allDay.length} fail</span>
+      <h2>${fmtDate(d,true)}</h2><span class="meta">${allDay.length} ${BO?'acara':'fail'}</span>
       <span class="mini"><span class="mono">${ok}/${allDay.length} submit</span><span class="bar"><i class="ok" style="width:${allDay.length?ok/allDay.length*100:0}%"></i></span>
       ${canWrite?`<button class="btn addhere" data-act="addon" data-date="${d}">+ Tambah</button>`:''}</span>
     </div>
-    <div class="row head${ro}"><span class="chk">${canWrite?`<input type="checkbox" data-selall="${d}" ${allSel?'checked':''} aria-label="Pilih semua hari ini">`:''}</span><span>No</span><span>Nama fail</span><span>Bilik</span><span>Status</span><span>Editor</span><span>Footage</span><span>Output</span><span></span></div>`;
+    <div class="row head${ro}${BO?' bo':''}"><span class="chk">${canWrite?`<input type="checkbox" data-selall="${d}" ${allSel?'checked':''} aria-label="Pilih semua hari ini">`:''}</span><span>No</span>${BO?'<span>Acara</span><span>Status</span><span>Output photo</span><span>Output video</span>':'<span>Nama fail</span><span>Bilik</span><span>Status</span><span>Editor</span><span>Footage</span><span>Output</span>'}<span></span></div>`;
     for(const e of rows){
+      if(BO){ html+=`<div class="row bo${selected.has(e.id)?' sel':''}${ro}" data-id="${esc(e.id)}">
+        <span class="chk">${canWrite?`<input type="checkbox" data-sel="${esc(e.id)}" ${selected.has(e.id)?'checked':''} aria-label="Pilih ${esc(e.name)}">`:''}</span>
+        <span class="no mono">${noMap.get(e.id)}</span>
+        <span class="name" translate="no">${esc(e.name)}${(e.time||e.location)?`<small class="evl">${[e.time,e.location].filter(Boolean).map(esc).join(' · ')}</small>`:''}${(e.team||[]).length?`<span class="rteam">${e.team.map(roleChip).join('')}</span>`:''}${e.notes?`<small>${esc(e.notes)}</small>`:''}</span>
+        <span class="st">${statusView(e)}</span>
+        <span class="lk">${linkBtn(e.output,'Photo')}</span>
+        <span class="lk">${linkBtn(e.voutput,'Video')}</span>
+        <span class="ed">${canWrite?`<button class="iconbtn" data-edit="${esc(e.id)}" aria-label="Edit ${esc(e.name)}">${ICON_EDIT}</button>`:''}</span>
+        <span class="metaline"><span class="tag">#${noMap.get(e.id)}</span>${statusView(e)}</span>
+        <span class="links">${linkBtn(e.output,'Output photo')}${linkBtn(e.voutput,'Output video')}</span>
+      </div>`; continue; }
       html+=`<div class="row${selected.has(e.id)?' sel':''}${ro}" data-id="${esc(e.id)}">
         <span class="chk">${canWrite?`<input type="checkbox" data-sel="${esc(e.id)}" ${selected.has(e.id)?'checked':''} aria-label="Pilih ${esc(e.name)}">`:''}</span>
         <span class="no mono">${noMap.get(e.id)}</span>
-        <span class="name" translate="no">${esc(e.name)}${e.notes?`<small>${esc(e.notes)}</small>`:''}</span>
+        <span class="name" translate="no">${esc(e.name)}${(e.time||e.location)?`<small class="evl">${[e.time,e.location].filter(Boolean).map(esc).join(' · ')}</small>`:''}${(e.team||[]).length?`<span class="rteam">${e.team.map(roleChip).join('')}</span>`:''}${e.notes?`<small>${esc(e.notes)}</small>`:''}</span>
         <span class="room" translate="no">${esc(e.room||'—')}</span>
         <span class="st">${statusView(e)}</span>
         <span class="ped">${normEd(e.editor)?`<span class="edtag">${esc(normEd(e.editor))}</span>`:'<span class="nolnk">—</span>'}</span>
@@ -1634,6 +1734,7 @@ function statusOpts(v){ const L=stList(); return (v&&!L.some(s=>s.v===v)?`<optio
 
 function openAdd(date){
   if(isVid()) return openAddVideo();
+  if(isBoth(cur())) return openEvRow(null, date);
   openModal('Tambah fail', `
     <div class="f"><label for="aNames">Nama fail</label>
       <textarea id="aNames" placeholder="AHMAD RIYANSHAH&#10;KHAIRIE RIDZWAN&#10;…"></textarea>
@@ -1664,6 +1765,39 @@ function openAdd(date){
     }catch(err){ $('aSave').disabled=false; upd(); $('aErr').textContent=writeErr(err); }
   };
 }
+function openEvRow(id, date){
+  const e = id ? entries.find(x=>x.id===id) : {name:'', date:date??lastDate(), time:'', location:'', team:[], status:'ON GOING', output:'', voutput:'', notes:''};
+  if(!e) return;
+  openModal(id?'Edit acara':'Tambah acara', `
+    <div class="f"><label for="bName">Nama acara</label><input id="bName" value="${esc(e.name||'')}" placeholder="Cth: Majlis Perasmian KL Festival" translate="no"></div>
+    <div class="grid3">
+      <div class="f"><label for="bDate">Tarikh</label><input type="date" id="bDate" value="${esc(e.date||'')}"></div>
+      <div class="f"><label for="bTime">Masa</label><input id="bTime" value="${esc(e.time||'')}" placeholder="3.30-4.30pm"></div>
+      <div class="f"><label for="bStatus">Status</label><select id="bStatus">${statusOpts(e.status||'ON GOING')}</select></div>
+    </div>
+    <div class="f"><label for="bLoc">Lokasi</label><input id="bLoc" value="${esc(e.location||'')}" translate="no"></div>
+    <div class="f"><label for="bTeam">Team</label><input id="bTeam" value="${esc((e.team||[]).join(', '))}" placeholder="Cth: Iyman, Pijot, Aima" translate="no"><span class="hint">Asingkan nama dengan koma.</span></div>
+    <div class="grid2">
+      <div class="f"><label for="bOut">Link output photo</label><input id="bOut" type="url" value="${esc(e.output||'')}" placeholder="https://drive.google.com/…"></div>
+      <div class="f"><label for="bVOut">Link output video</label><input id="bVOut" type="url" value="${esc(e.voutput||'')}" placeholder="https://drive.google.com/…"></div>
+    </div>
+    <div class="f"><label for="bNotes">Komen / catatan</label><input id="bNotes" value="${esc(e.notes||'')}"></div>
+    <div class="err" id="bErr"></div>`,
+    `${id?'<div class="left"><button class="btn danger" id="bDel">Padam</button></div>':''}<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="bSave">Simpan</button>`);
+  $('bSave').onclick=async()=>{
+    const name=$('bName').value.trim(); if(!name){ $('bErr').textContent='Nama acara tidak boleh kosong.'; return; }
+    const d={name, date:$('bDate').value||'', time:timeInfo($('bTime').value).label, location:$('bLoc').value.trim(), team:splitNames($('bTeam').value), status:$('bStatus').value,
+      output:normLink($('bOut').value), voutput:normLink($('bVOut').value), notes:$('bNotes').value.trim(), updatedAt:Date.now()};
+    $('bSave').disabled=true;
+    try{
+      if(id) await entriesCol().doc(id).update(d);
+      else { const order=entries.reduce((m,x)=>Math.max(m,x.order||0),0)+1; await entriesCol().doc().set({...d, room:'', footage:'', editor:'', order, createdAt:Date.now()}); }
+      closeModal(); toast(id?'Disimpan':'Acara ditambah');
+    }catch(err){ $('bSave').disabled=false; $('bErr').textContent=writeErr(err); }
+  };
+  if(id) $('bDel').onclick=async()=>{ const b=$('bDel'); if(!b.dataset.armed){ b.dataset.armed='1'; b.textContent='Tekan lagi untuk padam'; b.classList.add('solid'); return; }
+    b.disabled=true; try{ await entriesCol().doc(id).delete(); selected.delete(id); closeModal(); toast('Acara dipadam'); }catch(err){ $('bErr').textContent=writeErr(err); b.disabled=false; } };
+}
 function writeErr(err){
   if(err?.code==='invalid_argument') return 'Anda tiada akses untuk menyimpan perubahan di sini.';
   if(err?.code==='permission-denied') return 'Tiada kebenaran. Log masuk dengan email admin, atau semak peraturan Firestore.';
@@ -1672,6 +1806,7 @@ function writeErr(err){
 }
 function openEdit(id){
   if(isVid()) return openEditVideo(id);
+  if(isBoth(cur())) return openEvRow(id);
   const e=entries.find(x=>x.id===id); if(!e) return;
   openModal('Edit fail', `
     <div class="f"><label for="eName">Nama fail</label><input id="eName" value="${esc(e.name)}"></div>
@@ -1714,8 +1849,8 @@ function teamBadges(p){
   const t=teamOf(p); if(!t.length) return '';
   return `<span class="pcteam" title="Team">`+TEAM_ROLES.map(r=>{ const n=t.filter(m=>m.role===r[0]).length; return n?`<i style="--rc:${r[3]}" title="${n} ${r[1]}">${n}${r[2]}</i>`:''; }).join('')+`</span>`;
 }
-function openProject(isNew){
-  const p=isNew?{name:'',master:'',type:'photo'}:cur();
+function openProject(isNew, preset, onCreated){
+  const p=isNew?{name:'',master:'',type:'photo',...(preset||{})}:cur();
   let type=p.type||'photo';
   const canType = isNew || !entriesAll.length;
   openModal(isNew?'Projek Baru':'Tetapan projek', `
@@ -1761,7 +1896,7 @@ function openProject(isNew){
     $('pMasterHint').textContent = type==='video' ? 'Pilihan.' : '';
     if($('pType')){
       $('pType').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.type===type)));
-      $('pTypeHint').textContent = (!isNew?'Jenis boleh ditukar kerana projek ini belum ada data. ':'') + (type==='both' ? 'Dua senarai dalam satu projek: fail photo dan episod video. Tukar antara keduanya dengan tab Photo / Video dalam projek.' : type==='video' ? 'Senarai episod: item, status, ammend, location folder, script page, notes dan production feedback.' : 'Senarai nama fail ikut hari penggambaran: bilik, status, link footage dan link output.');
+      $('pTypeHint').textContent = (!isNew?'Jenis boleh ditukar kerana projek ini belum ada data. ':'') + (type==='both' ? 'Satu senarai acara. Setiap baris ada link output photo dan link output video.' : type==='video' ? 'Senarai episod: item, status, ammend, location folder, script page, notes dan production feedback.' : 'Senarai nama fail ikut hari penggambaran: bilik, status, link footage dan link output.');
     }
   };
   if($('pType')) $('pType').onclick=e=>{ const b=e.target.closest('[data-type]'); if(b){ type=b.dataset.type; syncType(); } };
@@ -1771,7 +1906,7 @@ function openProject(isNew){
     const extra = type!=='photo' ? {label:$('pLabel').value.trim().toUpperCase(), cancelled:$('pCancel').value==='1'} : {};
     $('pSave').disabled=true;
     try{
-      if(isNew){ const ref=db.collection('projects').doc(); await ref.set({name, master:normLink($('pMaster').value), type, year:yearVal(), team:teamVal(), ...extra, createdAt:Date.now()}); selectProject(ref.id); }
+      if(isNew){ const ref=db.collection('projects').doc(); await ref.set({name, master:normLink($('pMaster').value), type, year:yearVal(), team:teamVal(), ...extra, ...(preset?.event?{event:preset.event}:{}), createdAt:Date.now()}); if(onCreated) await onCreated(ref.id); selectProject(ref.id); }
       else await db.collection('projects').doc(curPid).update({name, master:normLink($('pMaster').value), year:yearVal(), team:teamVal(), ...(canType?{type}:{}), ...extra});
       closeModal(); if(isNew) setView('project'); toast(isNew?'Projek dicipta':'Projek disimpan');
     }catch(err){ $('pSave').disabled=false; $('pErr').textContent=writeErr(err); }
@@ -1809,7 +1944,7 @@ function renderVideo(){
   const ro=canWrite?'':' ro', done=entries.filter(e=>e.status==='DONE').length;
   const allSel=list.every(e=>selected.has(e.id));
   let html = p.cancelled ? '<div class="cancelbar">PROJEK INI CANCEL</div>' : '';
-  html+=`<section class="track"><div class="track-h">
+  html+=`<section class="track${list.some(e=>e.date)?' evtrack':''}"><div class="track-h">
     <span class="daytag">${p.label?esc(p.label):'VIDEO'}</span>
     <h2 translate="no">${esc(p.name)}</h2><span class="meta">${entries.length} episod</span>
     <span class="mini"><span class="mono">${done}/${entries.length} done</span><span class="bar"><i class="ok" style="width:${entries.length?done/entries.length*100:0}%"></i></span>
@@ -1981,7 +2116,7 @@ function planVideo(rows, existing, authoritative){
   return {adds, updates, same};
 }
 function openVideoImport(secs, f, isPdf){
-  const vps=projects.filter(hasVideoT);
+  const vps=projects.filter(p=>ptype(p)==='video');
   const allRows=secs.flatMap(s=>s.rows), total=epCount(allRows), totSc=allRows.filter(r=>sceneKey(r.scene)).length;
   const defTarget=s=>{ const m=vps.find(p=>keyOf(p.name)===keyOf(s.name)||keyOf(p.name)===keyOf(s.title)); return m?m.id:(isVid()&&secs.length===1?curPid:'new'); };
   openModal('Upload sheet video', `
@@ -2038,7 +2173,7 @@ async function videoEntriesOf(pid){
   const s=await kcol(pid,'video').get(); return s.docs.map(d=>({id:d.id,...d.data()}));
 }
 function openVideoExport(){
-  const p=cur(), vps=projects.filter(hasVideoT);
+  const p=cur(), vps=projects.filter(x=>ptype(x)==='video');
   openModal('Download sheet video', `
     <div class="f"><label>Kandungan fail Excel</label>
       <label class="radio"><input type="radio" name="vx" value="one" checked> Projek ini sahaja: ${esc(p.name)}</label>
@@ -2488,7 +2623,7 @@ function addVideoSheet(wb, p, rows, X){
   let k=2; while(wb.SheetNames.includes(nm)) nm=nm.slice(0,28)+' '+(k++);
   X.utils.book_append_sheet(wb,ws,nm);
 }
-function sortVideo(list){ return list.slice().sort((a,b)=>epNum(a.item)-epNum(b.item) || String(a.item).localeCompare(String(b.item)) || (a.order||0)-(b.order||0)); }
+function sortVideo(list){ return list.slice().sort((a,b)=>((a.date&&b.date)?(a.date<b.date?-1:a.date>b.date?1:((timeInfo(a.time).start??9999)-(timeInfo(b.time).start??9999))):0) || (epNum(a.item)-epNum(b.item)) || String(a.item).localeCompare(String(b.item)) || (a.order||0)-(b.order||0)); }
 
 /* video PDF: one table per section; title/label above each ITEM/STATUS header.
    Handles wrapped cells and tables whose columns continue on the next page. */
@@ -2990,12 +3125,7 @@ async function saveWb(wb, fname){
 }
 async function addProjectSheet(wb, p){
   const list=await entriesOf(p.id);
-  if(isBoth(p)){
-    const ph=list.filter(e=>(e.kind||'photo')==='photo'), vi=list.filter(e=>e.kind==='video');
-    if(ph.length||!vi.length) buildWorkbook(p, sortPhoto(ph), dayMapOf(ph), XLSX, wb);
-    if(vi.length) addVideoSheet(wb, p, sortVideo(vi));
-  }
-  else if(ptype(p)==='video') addVideoSheet(wb, p, sortVideo(list));
+  if(ptype(p)==='video') addVideoSheet(wb, p, sortVideo(list));
   else buildWorkbook(p, sortPhoto(list), dayMapOf(list), XLSX, wb);
 }
 const safeName = s => (String(s||'').replace(/[^\w\- &]+/g,'').trim()||'projek');
@@ -3070,12 +3200,13 @@ $('projsel').onchange=e=>selectProject(e.target.value);
 $('btnProjNew').onclick=()=>openProject(true);
 $('rail').addEventListener('click',e=>{ const b=e.target.closest('[data-nav]'); if(!b) return; const n=b.dataset.nav;
   if(n==='home'){ closeAct(); closeSearch(); setView('home'); }
+  else if(n==='sched'){ closeAct(); closeSearch(); setView('sched'); }
   else if(n==='search') ($('searchOv').hidden?openSearch():closeSearch());
   else if(n==='activity') ($('actPanel').hidden?openAct():closeAct());
   else if(n==='archive'){ closeAct(); closeSearch(); openArchive(); }
   else if(n==='new'){ closeAct(); closeSearch(); openProject(true); } });
 $('rAvatar').addEventListener('click',e=>{ e.stopPropagation(); toggleUser(); });
-const MI={"xls": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"18\" rx=\"2\"/><path d=\"M4 9h16M4 15h16M10 3v18\"/></svg>", "pdf": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z\"/><path d=\"M14 3v5h5M8 13h8M8 17h5\"/></svg>", "both": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"5\" width=\"13\" height=\"15\" rx=\"2\"/><path d=\"M8 5V4a1 1 0 011-1h11a1 1 0 011 1v13a1 1 0 01-1 1h-4\"/></svg>", "plus": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\"><path d=\"M12 5v14M5 12h14\"/></svg>", "up": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 15V3M7 8l5-5 5 5M5 21h14\"/></svg>", "gear": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z\"/></svg>", "arc": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"5\" rx=\"1\"/><path d=\"M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4\"/></svg>"};
+const MI={"paste": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"6\" y=\"4\" width=\"12\" height=\"17\" rx=\"2\"/><path d=\"M9 4V3h6v1M9 10h6M9 14h6M9 18h3\"/></svg>", "xls": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"18\" rx=\"2\"/><path d=\"M4 9h16M4 15h16M10 3v18\"/></svg>", "pdf": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z\"/><path d=\"M14 3v5h5M8 13h8M8 17h5\"/></svg>", "both": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"5\" width=\"13\" height=\"15\" rx=\"2\"/><path d=\"M8 5V4a1 1 0 011-1h11a1 1 0 011 1v13a1 1 0 01-1 1h-4\"/></svg>", "plus": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\"><path d=\"M12 5v14M5 12h14\"/></svg>", "up": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 15V3M7 8l5-5 5 5M5 21h14\"/></svg>", "gear": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z\"/></svg>", "arc": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"5\" rx=\"1\"/><path d=\"M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4\"/></svg>"};
 let menuEl=null, menuBtn=null;
 function closeMenu(){ if(menuEl){ menuEl.remove(); menuEl=null; } if(menuBtn){ menuBtn.setAttribute('aria-expanded','false'); menuBtn=null; } }
 function openMenu(btn, items){
@@ -3104,16 +3235,17 @@ async function exportFullBoth(){
 }
 $('btnDl').onclick=()=>{
   const p=cur(); if(!p) return; const both=isBoth(p), tab=sub==='video'?'Video':'Photo';
-  const items=[{icon:'xls', label: both?`Sheet Excel (${tab})`:'Sheet Excel', desc: isVid()?'Format asal sheet video (.xlsx)':'Format asal jadual (.xlsx)', run:()=>doExport()}];
-  if(both) items.push({icon:'both', label:'Sheet penuh Photo + Video', desc:'Satu fail Excel, dua tab', run:()=>exportFullBoth()});
+  const items=[{icon:'xls', label:'Sheet Excel', desc: isVid()?'Format asal sheet video (.xlsx)':'Format asal jadual (.xlsx)', run:()=>doExport()}];
   items.push({icon:'pdf', label:'Report PDF', desc:'Senarai dan komen untuk editor', run:()=>openReport()});
   openMenu($('btnDl'), items);
 };
 $('btnUp').onclick=()=>{
   const V=isVid();
   openMenu($('btnUp'), [
-    {icon:'plus', label: V?'Tambah episod':'Tambah fail', desc:'Isi secara manual', run:()=>openAdd()},
+    {icon:'plus', label: V?'Tambah episod':isBoth(cur())?'Tambah acara':'Tambah fail', desc:'Isi secara manual', run:()=>openAdd()},
     {icon:'up', label:'Upload sheet', desc:'Excel atau PDF, dikemas kini automatik', run:()=>openImport()},
+    '-',
+    {icon:'paste', label:'Tampal jadual WhatsApp', desc:'Acara masuk ke senarai projek ini', run:()=>openProjSchedImport()},
   ]);
 };
 $('btnProjMenu').onclick=()=>{
@@ -3123,6 +3255,292 @@ $('btnProjMenu').onclick=()=>{
     {icon:'plus', label:'Projek baru', desc:'Cipta projek lain', run:()=>openProject(true)},
     {icon:'arc', label: na?`Arkib (${na})`:'Arkib', desc:'Projek yang sudah selesai', run:()=>openArchive()},
   ]);
+};
+/* ---------- schedule (Jadual) ---------- */
+let events = [], crew = {}, sRange = 'up', sMonth = null, evErr = false;
+const nkey = n => String(n||'').trim().replace(/\s+/g,' ').toLowerCase();
+const crewRole = n => crew[nkey(n)]?.role || '';
+const DAYN = {ahad:0,isnin:1,selasa:2,rabu:3,khamis:4,jumaat:5,sabtu:6,sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6,
+  ahd:0,isn:1,sel:2,rab:3,kha:4,jum:5,sab:6,sun:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6};
+const MONN = {jan:1,januari:1,january:1,feb:2,februari:2,february:2,mac:3,mar:3,march:3,apr:4,april:4,mei:5,may:5,jun:6,june:6,jul:7,julai:7,july:7,
+  ogo:8,ogos:8,aug:8,august:8,sep:9,sept:9,september:9,okt:10,oct:10,oktober:10,october:10,nov:11,november:11,dis:12,dec:12,disember:12,december:12};
+const DAYRE = '(ahad|isnin|selasa|rabu|khamis|jumaat|sabtu|sunday|monday|tuesday|wednesday|thursday|friday|saturday|ahd|isn|sel|rab|kha|jum|sab|sun|mon|tue|wed|thu|fri|sat)';
+const iso3 = (y,m,d) => `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+function guessYearFor(m){ const n=new Date(), y=n.getFullYear(), diff=m-(n.getMonth()+1); return diff< -6 ? y+1 : diff>6 ? y-1 : y; }
+function timeInfo(t){
+  const label=String(t||'').trim().replace(/\s*(?:[-–—]|hingga|sampai|to)\s*/i,'–').replace(/\s*(am|pm)\b/gi,(m,x)=>x.toLowerCase());
+  const s=String(t||'').toLowerCase().replace(/\s+/g,'').replace(/hingga|sampai|to/,'-').replace(/[–—]/,'-');
+  const [a,b]=s.split('-');
+  const P=x=>{ const m=x&&x.match(/^(\d{1,2})(?:[.:](\d{2}))?(am|pm|pg|ptg|mlm|tgh)?$/); if(!m) return null; return {h:+m[1], mi:+(m[2]||0), sf:m[3]?(/am|pg/.test(m[3])?'am':'pm'):null}; };
+  const A=P(a), B=b?P(b):null;
+  if(!A) return {label, start:null};
+  let sf=A.sf;
+  if(!sf && B && B.sf){ sf=B.sf; if(B.sf==='pm' && A.h!==12 && B.h!==12 && A.h>B.h) sf='am'; }
+  const h = sf ? (A.h%12)+(sf==='pm'?12:0) : A.h;
+  return {label, start:h*60+A.mi};
+}
+function parseSchedule(text){
+  const out=[], warn=[]; let date=null, dayGiven=null, last=null;
+  const lines=String(text||'').split(/\r?\n/).map(l=>l.replace(/[*_~`]/g,'').replace(/ /g,' ').replace(/\s+/g,' ').trim());
+  const dateNum=new RegExp(`^(?:${DAYRE}\\s*,?\\s*)?(\\d{1,2})\\s*[\\/.-]\\s*(\\d{1,2})(?:\\s*[\\/.-]\\s*(\\d{2,4}))?\\s*[,(-]?\\s*${DAYRE}?\\s*\\)?\\s*:?$`,'i');
+  const dateTxt=new RegExp(`^(?:${DAYRE}\\s*,?\\s*)?(\\d{1,2})\\s+([a-z]+)(?:\\s+(\\d{4}))?\\s*[,(-]?\\s*${DAYRE}?\\s*\\)?\\s*:?$`,'i');
+  const TP='\\d{1,2}(?:[.:]\\d{2})?\\s*(?:am|pm|pg|ptg|mlm|tgh)?';
+  const evRe=new RegExp(`^(${TP}\\s*(?:[-–—]|hingga|sampai|to)\\s*${TP}|${TP})\\s*[:\\-–]\\s*(.+)$`,'i');
+  for(const line of lines){
+    if(!line) continue;
+    let m;
+    if((m=line.match(dateNum)) && +m[3]<=12 && +m[3]>=1){
+      const d=+m[2], mo=+m[3]; let y=m[4]?+m[4]:guessYearFor(mo); if(y<100) y+=2000;
+      date=iso3(y,mo,d); dayGiven=(m[1]||m[5]||'').toLowerCase(); last=null;
+      if(dayGiven && DAYN[dayGiven]!==undefined && new Date(y,mo-1,d).getDay()!==DAYN[dayGiven]) warn.push({date, msg:'dayMismatch', day:dayGiven});
+      continue;
+    }
+    if((m=line.match(dateTxt)) && MONN[(m[3]||'').toLowerCase()]){
+      const d=+m[2], mo=MONN[m[3].toLowerCase()]; const y=m[4]?+m[4]:guessYearFor(mo);
+      date=iso3(y,mo,d); dayGiven=(m[1]||m[5]||'').toLowerCase(); last=null;
+      if(dayGiven && DAYN[dayGiven]!==undefined && new Date(y,mo-1,d).getDay()!==DAYN[dayGiven]) warn.push({date, msg:'dayMismatch', day:dayGiven});
+      continue;
+    }
+    if((m=line.match(/^\((.+)\)$/))){
+      if(last){ last.team=splitNames(m[1]); }
+      continue;
+    }
+    if((m=line.match(evRe))){
+      if(!date){ warn.push({msg:'noDate', line}); continue; }
+      let rest=m[2].trim(), team=[];
+      const tm=rest.match(/\(([^()]+)\)\s*$/); if(tm && /[a-z]/i.test(tm[1]) && tm[1].split(/,|&|\//).length>1){ team=splitNames(tm[1]); rest=rest.slice(0,tm.index).trim(); }
+      const ci=rest.indexOf(',');
+      const title=(ci<0?rest:rest.slice(0,ci)).trim(), location=(ci<0?'':rest.slice(ci+1)).trim().replace(/[.;]$/,'');
+      const ti=timeInfo(m[1]);
+      last={date, time:ti.label, start:ti.start, title, location, team, notes:''};
+      out.push(last); continue;
+    }
+    if(last && !/^(salam|assalam|update|terima kasih|thanks|tq)/i.test(line)) last.notes = (last.notes?last.notes+' · ':'')+line;
+  }
+  return {events:out, warn};
+}
+function splitNames(s){ return String(s||'').split(/\s*(?:,|&|\/|\+|\bdan\b|\band\b)\s*/i).map(x=>x.trim()).filter(Boolean); }
+const evKey = e => e.date+'|'+nkey(e.title).replace(/[^a-z0-9]/g,'');
+const evSort = (a,b) => a.date<b.date?-1:a.date>b.date?1:((a.start??9999)-(b.start??9999));
+const roleChip = n => { const r=crewRole(n); const R=r?roleOf(r):null; return `<span class="tchip sm" style="--rc:${R?R[3]:'#8A8A8A'}" title="${esc(R?R[1]:'Peranan belum ditetapkan')}"><i>${esc(R?R[2]:String(n).charAt(0).toUpperCase())}</i><span translate="no">${esc(n)}</span></span>`; };
+function relDay(iso){ const t=todayISO(); if(iso===t) return 'Hari ini'; const d=new Date(t); d.setDate(d.getDate()+1); if(iso===iso3(d.getFullYear(),d.getMonth()+1,d.getDate())) return 'Esok'; return ''; }
+function renderSched(){
+  if(!$('sched') || $('sched').hidden) return;
+  const t=todayISO();
+  if(!sMonth) sMonth=t.slice(0,7);
+  document.querySelectorAll('#sRange [data-sr]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.sr===sRange)));
+  $('sMonthNav').hidden = sRange!=='month';
+  const [yy,mm]=sMonth.split('-').map(Number);
+  $('sMonth').textContent = `${(LANG==='en'?MON_EN:BULAN)[mm-1]} ${yy}`;
+  $('sUp').hidden = !canWrite; $('sCrew').hidden = !canWrite;
+  let list = events.slice().sort(evSort);
+  list = sRange==='up' ? list.filter(e=>e.date>=t) : list.filter(e=>e.date.slice(0,7)===sMonth);
+  const up=events.filter(e=>e.date>=t).length;
+  $('sSub').textContent = `${up} Acara Akan Datang`;
+  if(evErr){ $('sList').innerHTML='<div class="empty"><h3>Jadual belum boleh dibaca</h3><p>Tampal peraturan Firestore yang baru (dengan bahagian events dan crew), kemudian refresh.</p></div>'; return; }
+  if(!list.length){ $('sList').innerHTML=`<div class="empty"><h3>${sRange==='up'?'Tiada acara akan datang':'Tiada acara bulan ini'}</h3><p>${canWrite?'Tekan <strong>Upload</strong> dan tampal jadual dari WhatsApp.':'Jadual akan dipaparkan di sini.'}</p></div>`; return; }
+  const days=new Map(); list.forEach(e=>{ if(!days.has(e.date)) days.set(e.date,[]); days.get(e.date).push(e); });
+  $('sList').innerHTML=[...days].map(([d,evs])=>{ const rd=relDay(d);
+    return `<section class="sday${d<t?' past':''}${d===t?' today':''}"><div class="sday-h"><h3>${fmtDate(d,true)}</h3>${rd?`<span class="sbadge">${rd}</span>`:''}<span class="meta">${evs.length} acara</span></div>
+    ${evs.map(e=>{ const lp=e.pid && projects.find(p=>p.id===e.pid);
+      return `<article class="ev" data-ev="${esc(e.id)}">
+        <div class="ev-time" translate="no">${esc(e.time||'—')}</div>
+        <div class="ev-main"><h4 translate="no">${esc(e.title)}</h4>
+          ${e.location?`<p class="ev-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span translate="no">${esc(e.location)}</span></p>`:''}
+          ${e.notes?`<p class="ev-note" translate="no">${esc(e.notes)}</p>`:''}
+          ${(e.team||[]).length?`<div class="ev-team">${e.team.map(roleChip).join('')}</div>`:''}
+        </div>
+        <div class="ev-act">${lp?`<button class="btn sm" data-ev-open="${esc(lp.id)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg>Buka projek</button>`:(canWrite?`<button class="btn sm" data-ev-proj="${esc(e.id)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Jadikan projek</button>`:'')}
+          ${canWrite?`<button class="iconbtn" data-ev-edit="${esc(e.id)}" title="Edit acara" aria-label="Edit acara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></button>`:''}</div>
+      </article>`; }).join('')}</section>`; }).join('');
+}
+function evToProject(e, onDone){
+  const [y,m,d]=e.date.split('-').map(Number);
+  openProject(true, { name:String(e.title||'').toUpperCase(), label:`${d} ${BULAN[m-1].toUpperCase()}`, year:y,
+    team:(e.team||[]).map(n=>({role:crewRole(n)||'photo', name:n})),
+    event:{eid:e.id, date:e.date, time:e.time||'', location:e.location||''} },
+    async pid=>{ await db.collection('events').doc(e.id).update({pid, updatedAt:Date.now()}); onDone?.(pid); });
+}
+function openEvent(e){
+  const isNew=!e; e=e||{date:todayISO(), time:'', title:'', location:'', team:[], notes:''};
+  openModal(isNew?'Tambah acara':'Edit acara', `
+    <div class="grid2"><div class="f"><label for="evD">Tarikh</label><input id="evD" type="date" value="${esc(e.date)}"></div>
+      <div class="f"><label for="evT">Masa</label><input id="evT" value="${esc(e.time||'')}" placeholder="Cth: 3.30-4.30pm"></div></div>
+    <div class="f"><label for="evN">Acara</label><input id="evN" value="${esc(e.title||'')}" placeholder="Cth: Majlis Perasmian KL Festival" translate="no"></div>
+    <div class="f"><label for="evL">Lokasi</label><input id="evL" value="${esc(e.location||'')}" placeholder="Cth: Else Hotel, Jln Tun HS Lee" translate="no"></div>
+    <div class="f"><label for="evC">Team</label><input id="evC" value="${esc((e.team||[]).join(', '))}" placeholder="Cth: Iyman, Pijot, Aima" translate="no"><span class="hint">Asingkan nama dengan koma.</span></div>
+    <div class="f"><label for="evO">Nota</label><input id="evO" value="${esc(e.notes||'')}" translate="no"></div>
+    <div class="err" id="evErr"></div>`,
+    `${isNew?'':'<div class="left"><button class="btn danger" id="evDel">Padam</button></div>'}<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="evSave">${isNew?'Tambah':'Simpan'}</button>`);
+  $('evSave').onclick=async()=>{
+    const title=$('evN').value.trim(), date=$('evD').value; if(!title||!date){ $('evErr').textContent='Isi tarikh dan nama acara.'; return; }
+    const ti=timeInfo($('evT').value);
+    const d={date, time:ti.label, start:ti.start, title, location:$('evL').value.trim(), team:splitNames($('evC').value), notes:$('evO').value.trim(), updatedAt:Date.now()};
+    $('evSave').disabled=true;
+    try{ if(isNew) await db.collection('events').doc().set({...d, pid:null, createdAt:Date.now()}); else await db.collection('events').doc(e.id).update(d);
+      closeModal(); toast(isNew?'Acara ditambah':'Acara disimpan'); }catch(err){ $('evSave').disabled=false; $('evErr').textContent=writeErr(err); }
+  };
+  if(!isNew) $('evDel').onclick=async()=>{ const b=$('evDel'); if(!b.dataset.armed){ b.dataset.armed='1'; b.textContent='Tekan lagi untuk padam'; b.classList.add('solid'); return; }
+    b.disabled=true; try{ await db.collection('events').doc(e.id).delete(); closeModal(); toast('Acara dipadam'); }catch(err){ b.disabled=false; $('evErr').textContent=writeErr(err); } };
+}
+const ROLE_OPTS = (cur) => `<option value="">— Pilih —</option>`+TEAM_ROLES.map(r=>`<option value="${r[0]}" ${cur===r[0]?'selected':''}>${r[1]}</option>`).join('');
+function openCrew(){
+  const names=new Map(); Object.values(crew).forEach(c=>names.set(nkey(c.name),c.name)); events.forEach(e=>(e.team||[]).forEach(n=>{ if(!names.has(nkey(n))) names.set(nkey(n),n); }));
+  projects.forEach(p=>(p.team||[]).forEach(m=>{ if(m.name && !names.has(nkey(m.name))) names.set(nkey(m.name),m.name); }));
+  const list=[...names].sort((a,b)=>a[1].localeCompare(b[1]));
+  openModal('Peranan crew', `
+    <p style="margin:0">Tetapkan peranan setiap orang sekali. Bila acara dijadikan projek, team diisi ikut peranan ini.</p>
+    ${list.length?`<div class="crew-list">${list.map(([k,n])=>`<div class="crew-row"><span class="crew-n" translate="no">${esc(n)}</span><select data-crew="${esc(k)}" data-name="${esc(n)}" aria-label="Peranan ${esc(n)}">${ROLE_OPTS(crew[k]?.role||'')}</select></div>`).join('')}</div>`:'<p class="hint" style="margin:0">Belum ada nama. Nama akan muncul selepas anda tampal jadual.</p>'}
+    <div class="f"><label for="crewNew">Tambah nama</label><div style="display:flex;gap:8px"><input id="crewNew" placeholder="Nama" autocomplete="off" translate="no"><button class="btn" id="crewAdd" type="button">Tambah</button></div></div>
+    <div class="err" id="crewErr"></div>`,
+    `<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="crewSave">Simpan</button>`);
+  $('crewAdd').onclick=()=>{ const n=$('crewNew').value.trim(); if(!n) return; const k=nkey(n); if(!document.querySelector(`[data-crew="${CSS.escape(k)}"]`)){ let wrap=document.querySelector('.crew-list'); if(!wrap){ wrap=document.createElement('div'); wrap.className='crew-list'; $('crewNew').closest('.f').before(wrap); } wrap.insertAdjacentHTML('beforeend',`<div class="crew-row"><span class="crew-n" translate="no">${esc(n)}</span><select data-crew="${esc(k)}" data-name="${esc(n)}">${ROLE_OPTS('')}</select></div>`); } $('crewNew').value=''; };
+  $('crewNew').onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); $('crewAdd').click(); } };
+  $('crewSave').onclick=async()=>{ $('crewSave').disabled=true;
+    try{ for(const s of document.querySelectorAll('[data-crew]')){ const k=s.dataset.crew, role=s.value; if((crew[k]?.role||'')===role && crew[k]) continue; if(!role && !crew[k]) continue;
+        const id=k.replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'x'; await db.collection('crew').doc(id).set({name:s.dataset.name, role, updatedAt:Date.now()}); }
+      closeModal(); toast('Peranan crew disimpan'); }catch(err){ $('crewSave').disabled=false; $('crewErr').textContent=writeErr(err); } };
+}
+function openSchedImport(){
+  if(view!=='sched') setView('sched');
+  openModal('Tampal jadual WhatsApp', `
+    <p style="margin:0">Salin mesej jadual dari WhatsApp dan tampal di bawah. Tarikh, masa, acara, lokasi dan team dibaca automatik.</p>
+    <div class="f"><label for="siText">Mesej jadual</label><textarea id="siText" style="min-height:150px;font-size:13px" placeholder="19/11, Khamis:&#10;3.30-4.30pm: PC PPR Hiliran Ampang&#10;(Iyman, Pijot, Aima)" translate="no"></textarea></div>
+    <div id="siPrev"></div>
+    <div id="siCrew"></div>
+    <div class="f" id="siProjF" hidden><label class="radio"><input type="checkbox" id="siProj"><span>Cipta projek juga untuk setiap acara baru</span></label>
+      <div class="seg" id="siType" role="group" aria-label="Jenis projek" hidden style="align-self:flex-start"><button type="button" data-t="photo" aria-pressed="true">Photo</button><button type="button" data-t="video" aria-pressed="false">Video</button><button type="button" data-t="both" aria-pressed="false">Photo &amp; Video</button></div></div>
+    <div class="err" id="siErr"></div>`,
+    `<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="siGo" disabled>Simpan</button>`, true);
+  let plan=null, ptype2='photo';
+  const run=()=>{
+    const {events:evs, warn}=parseSchedule($('siText').value);
+    const byKey=new Map(events.map(e=>[evKey(e),e]));
+    const seen=new Set();
+    plan=evs.filter(e=>{ const k=evKey(e); if(seen.has(k)) return false; seen.add(k); return true; }).map(e=>{ const ex=byKey.get(evKey(e));
+      if(!ex) return {e, kind:'new'};
+      const patch={}; for(const f of ['time','location','notes']) if((e[f]||'')!==(ex[f]||'') && (f!=='notes'||e.notes)) patch[f]=e[f];
+      if(e.start!==ex.start && 'time' in patch) patch.start=e.start;
+      if(e.team.length && e.team.join('|')!==(ex.team||[]).join('|')) patch.team=e.team;
+      return {e, ex, kind:Object.keys(patch).length?'upd':'same', patch}; });
+    const nN=plan.filter(x=>x.kind==='new').length, nU=plan.filter(x=>x.kind==='upd').length, nS=plan.filter(x=>x.kind==='same').length;
+    if(!$('siText').value.trim()){ $('siPrev').innerHTML=''; $('siCrew').innerHTML=''; $('siGo').disabled=true; $('siGo').textContent='Simpan'; $('siProjF').hidden=true; return; }
+    const W=warn.map(w=>w.msg==='dayMismatch'?`<li>${fmtDate(w.date,true)}: hari dalam mesej ialah "${esc(w.day)}". Sila semak tarikh.</li>`:`<li>Baris tanpa tarikh diabaikan: <span translate="no">${esc(w.line)}</span></li>`).join('');
+    $('siPrev').innerHTML = !plan.length ? '<p class="hint" style="margin:0">Belum jumpa acara. Pastikan ada baris tarikh (cth 19/11) dan baris masa (cth 3.30-4.30pm: Nama acara).</p>' :
+      `<div class="chips" style="margin-bottom:8px"><span class="chip s-ok" style="border:0">${nN} baru</span><span class="chip s-run" style="border:0">${nU} dikemaskini</span><span class="chip s-idle" style="border:0">${nS} tiada perubahan</span></div>
+      ${W?`<ul class="siwarn">${W}</ul>`:''}
+      <div class="sitbl"><table><thead><tr><th>Tarikh</th><th>Masa</th><th>Acara</th><th>Lokasi</th><th>Team</th><th></th></tr></thead><tbody>${plan.map(({e,kind})=>`<tr><td class="nw">${fmtDate(e.date)}</td><td class="nw" translate="no">${esc(e.time)}</td><td translate="no"><b>${esc(e.title)}</b></td><td translate="no">${esc(e.location||'—')}</td><td translate="no">${esc(e.team.join(', ')||'—')}</td><td><span class="chip ${kind==='new'?'s-ok':kind==='upd'?'s-run':'s-idle'}" style="border:0;height:24px;font-size:11px;padding:0 8px">${kind==='new'?'Baru':kind==='upd'?'Kemaskini':'Sama'}</span></td></tr>`).join('')}</tbody></table></div>`;
+    const unknown=[...new Map(plan.flatMap(x=>x.e.team).filter(n=>!crew[nkey(n)]?.role).map(n=>[nkey(n),n]))];
+    const keep={}; document.querySelectorAll('#siCrew [data-crew]').forEach(s=>keep[s.dataset.crew]=s.value);
+    $('siCrew').innerHTML = unknown.length ? `<div class="f"><label>Nama baru: tetapkan peranan sekali</label><div class="crew-list">${unknown.map(([k,n])=>`<div class="crew-row"><span class="crew-n" translate="no">${esc(n)}</span><select data-crew="${esc(k)}" data-name="${esc(n)}">${ROLE_OPTS(keep[k]||'')}</select></div>`).join('')}</div><span class="hint">App akan ingat peranan ini untuk upload seterusnya.</span></div>` : '';
+    $('siProjF').hidden = !nN;
+    const n=nN+nU; $('siGo').disabled=!n && !unknown.length; $('siGo').textContent = n ? `Simpan ${n} acara` : 'Simpan';
+  };
+  $('siText').addEventListener('input', run);
+  $('siProj').onchange=()=>{ $('siType').hidden=!$('siProj').checked; };
+  $('siType').onclick=e=>{ const b=e.target.closest('[data-t]'); if(!b) return; ptype2=b.dataset.t; $('siType').querySelectorAll('[data-t]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); };
+  $('siGo').onclick=async()=>{
+    const b=$('siGo'); b.disabled=true; $('siErr').textContent='';
+    try{
+      for(const s of document.querySelectorAll('#siCrew [data-crew]')){ if(!s.value) continue; const k=s.dataset.crew; const id=k.replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'x'; await db.collection('crew').doc(id).set({name:s.dataset.name, role:s.value, updatedAt:Date.now()}); crew[k]={name:s.dataset.name, role:s.value}; }
+      const mk=$('siProj').checked; let i=0, nP=0; const tot=plan.filter(x=>x.kind!=='same').length;
+      for(const x of plan){
+        if(x.kind==='same') continue; b.textContent=`Menyimpan ${++i}/${tot}…`;
+        if(x.kind==='upd'){ await db.collection('events').doc(x.ex.id).update({...x.patch, updatedAt:Date.now()}); continue; }
+        const ref=db.collection('events').doc(); const now=Date.now();
+        let pid=null;
+        if(mk){ const [y,m,d]=x.e.date.split('-').map(Number); const pref=db.collection('projects').doc();
+          await pref.set({name:x.e.title.toUpperCase(), master:'', type:ptype2, year:y, label:`${d} ${BULAN[m-1].toUpperCase()}`, cancelled:false,
+            team:x.e.team.map(n=>({role:crewRole(n)||'photo', name:n})), event:{eid:ref.id, date:x.e.date, time:x.e.time, location:x.e.location}, createdAt:now});
+          pid=pref.id; nP++; }
+        await ref.set({date:x.e.date, time:x.e.time, start:x.e.start, title:x.e.title, location:x.e.location, team:x.e.team, notes:x.e.notes||'', pid, createdAt:now, updatedAt:now});
+      }
+      closeModal(); toast(`Jadual dikemaskini${nP?`, ${nP} projek dicipta`:''}`);
+    }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('siErr').textContent=writeErr(err); }
+  };
+  setTimeout(()=>$('siText').focus(),30);
+}
+function openProjSchedImport(){
+  const p=cur(); if(!p) return;
+  const kind=curKind(), V=kind==='video', pid=p.id;
+  const tabTxt = '';
+  openModal('Tampal jadual WhatsApp', `
+    <p style="margin:0">Acara akan dimasukkan ke senarai projek <strong translate="no">${esc(p.name)}</strong>${tabTxt}, dan juga dipaparkan dalam Jadual.</p>
+    <div class="f"><label for="piText">Mesej jadual</label><textarea id="piText" style="min-height:150px;font-size:13px" placeholder="19/11, Khamis:&#10;3.30-4.30pm: PC PPR Hiliran Ampang&#10;(Iyman, Pijot, Aima)" translate="no"></textarea></div>
+    <div id="piPrev"></div><div id="piCrew"></div>
+    <div class="err" id="piErr"></div>`,
+    `<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="piGo" disabled>Simpan</button>`, true);
+  let plan=[];
+  const keyOfE = e => V ? nkey(e.item) : (e.date||'')+'|'+nkey(e.name);
+  const keyOfEv = e => V ? nkey(e.title) : e.date+'|'+nkey(e.title);
+  const vNotes = e => [fmtDate(e.date), e.time, e.location, e.team.length?'Team: '+e.team.join(', '):''].filter(Boolean).join(' · ');
+  const run=()=>{
+    const txt=$('piText').value;
+    if(!txt.trim()){ $('piPrev').innerHTML=''; $('piCrew').innerHTML=''; $('piGo').disabled=true; $('piGo').textContent='Simpan'; return; }
+    const {events:evs, warn}=parseSchedule(txt);
+    const have=new Map(entries.map(e=>[keyOfE(e),e])); const seen=new Set();
+    plan=evs.filter(e=>{ const k=keyOfEv(e); if(seen.has(k)) return false; seen.add(k); return true; }).map(e=>{
+      const ex=have.get(keyOfEv(e)); if(!ex) return {e, kind:'new'};
+      const patch={};
+      if((e.time||'')!==(ex.time||'')) patch.time=e.time;
+      if(V){ if((e.location||'')!==(ex.evloc||'')) patch.evloc=e.location; if(e.date!==ex.date) patch.date=e.date; }
+      else if((e.location||'')!==(ex.location||'')) patch.location=e.location;
+      if(e.team.length && e.team.join('|')!==(ex.team||[]).join('|')) patch.team=e.team;
+      if(V && Object.keys(patch).length) patch.notes=vNotes(e);
+      return {e, ex, kind:Object.keys(patch).length?'upd':'same', patch}; });
+    const nN=plan.filter(x=>x.kind==='new').length, nU=plan.filter(x=>x.kind==='upd').length, nS=plan.filter(x=>x.kind==='same').length;
+    const W=warn.map(w=>w.msg==='dayMismatch'?`<li>${fmtDate(w.date,true)}: hari dalam mesej ialah "${esc(w.day)}". Sila semak tarikh.</li>`:`<li>Baris tanpa tarikh diabaikan: <span translate="no">${esc(w.line)}</span></li>`).join('');
+    $('piPrev').innerHTML = !plan.length ? '<p class="hint" style="margin:0">Belum jumpa acara. Pastikan ada baris tarikh (cth 19/11) dan baris masa (cth 3.30-4.30pm: Nama acara).</p>' :
+      `<div class="chips" style="margin-bottom:8px"><span class="chip s-ok" style="border:0">${nN} baru</span><span class="chip s-run" style="border:0">${nU} dikemaskini</span><span class="chip s-idle" style="border:0">${nS} tiada perubahan</span></div>
+      ${W?`<ul class="siwarn">${W}</ul>`:''}
+      <div class="sitbl"><table><thead><tr><th>Tarikh</th><th>Masa</th><th>Acara</th><th>Lokasi</th><th>Team</th><th></th></tr></thead><tbody>${plan.map(({e,kind})=>`<tr><td class="nw">${fmtDate(e.date)}</td><td class="nw" translate="no">${esc(e.time)}</td><td translate="no"><b>${esc(e.title)}</b></td><td translate="no">${esc(e.location||'—')}</td><td translate="no">${esc(e.team.join(', ')||'—')}</td><td><span class="chip ${kind==='new'?'s-ok':kind==='upd'?'s-run':'s-idle'}" style="border:0;height:24px;font-size:11px;padding:0 8px">${kind==='new'?'Baru':kind==='upd'?'Kemaskini':'Sama'}</span></td></tr>`).join('')}</tbody></table></div>`;
+    const unknown=[...new Map(plan.flatMap(x=>x.e.team).filter(n=>!crew[nkey(n)]?.role).map(n=>[nkey(n),n]))];
+    const keep={}; document.querySelectorAll('#piCrew [data-crew]').forEach(s=>keep[s.dataset.crew]=s.value);
+    $('piCrew').innerHTML = unknown.length ? `<div class="f"><label>Nama baru: tetapkan peranan sekali</label><div class="crew-list">${unknown.map(([k,n])=>`<div class="crew-row"><span class="crew-n" translate="no">${esc(n)}</span><select data-crew="${esc(k)}" data-name="${esc(n)}">${ROLE_OPTS(keep[k]||'')}</select></div>`).join('')}</div><span class="hint">App akan ingat peranan ini untuk upload seterusnya.</span></div>` : '';
+    const n=nN+nU; $('piGo').disabled=!n; $('piGo').textContent = n ? `Simpan ${n} acara` : 'Simpan';
+  };
+  $('piText').addEventListener('input', run);
+  $('piGo').onclick=async()=>{
+    const b=$('piGo'); b.disabled=true; $('piErr').textContent='';
+    try{
+      for(const s of document.querySelectorAll('#piCrew [data-crew]')){ if(!s.value) continue; const k=s.dataset.crew; const id=k.replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'x'; await db.collection('crew').doc(id).set({name:s.dataset.name, role:s.value, updatedAt:Date.now()}); crew[k]={name:s.dataset.name, role:s.value}; }
+      const col=kcol(pid, kind); let order=entries.reduce((m,e)=>Math.max(m,e.order||0),0);
+      const evByKey=new Map(events.map(e=>[evKey(e),e]));
+      const todo=plan.filter(x=>x.kind!=='same'); let i=0;
+      for(const x of todo){
+        b.textContent=`Menyimpan ${++i}/${todo.length}…`; const e=x.e, now=Date.now();
+        if(x.kind==='upd') await col.doc(x.ex.id).update({...x.patch, updatedAt:now});
+        else if(V) await col.doc().set({item:e.title, scene:'', duration:'', sceneStatus:'', status:'NOT START', ammend:'', location:'', page:'', notes:vNotes(e), feedback:'', stage:'', pp:false, date:e.date, time:e.time, evloc:e.location, team:e.team, order:++order, createdAt:now, updatedAt:now});
+        else await col.doc().set({name:e.title, date:e.date, room:'', status:isBoth(p)?'ON GOING':'BELUM MULA', voutput:'', footage:'', output:'', notes:'', editor:'', time:e.time, location:e.location, team:e.team, order:++order, createdAt:now, updatedAt:now});
+        const ev=evByKey.get(evKey(e));
+        if(ev) await db.collection('events').doc(ev.id).update({time:e.time, start:e.start, location:e.location, ...(e.team.length?{team:e.team}:{}), ...(ev.pid&&projects.find(q=>q.id===ev.pid)?{}:{pid}), updatedAt:now});
+        else await db.collection('events').doc().set({date:e.date, time:e.time, start:e.start, title:e.title, location:e.location, team:e.team, notes:e.notes||'', pid, createdAt:now, updatedAt:now});
+      }
+      const names=[...new Map(plan.flatMap(x=>x.e.team).map(n=>[nkey(n),n]))];
+      const team=(p.team||[]).slice(); const have=new Set(team.map(m=>nkey(m.name)));
+      for(const [k,n] of names) if(!have.has(k)) team.push({role:crewRole(n)||(V?'video':'photo'), name:n});
+      if(team.length!==(p.team||[]).length) await db.collection('projects').doc(pid).update({team});
+      closeModal(); toast(`${todo.length} acara dimasukkan ke projek`);
+    }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('piErr').textContent=writeErr(err); }
+  };
+  setTimeout(()=>$('piText').focus(),30);
+}
+function renderEvBar(p){
+  const el=$('evBar'); if(!el) return; const ev=p?.event;
+  el.hidden=!ev; if(!ev) return;
+  el.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>${fmtDate(ev.date,true)}</span>${ev.time?`<span class="dot">·</span><span translate="no">${esc(ev.time)}</span>`:''}${ev.location?`<span class="dot">·</span><span translate="no">${esc(ev.location)}</span>`:''}`;
+}
+$('sRange').onclick=e=>{ const b=e.target.closest('[data-sr]'); if(!b) return; sRange=b.dataset.sr; renderSched(); };
+$('sMonthNav').onclick=e=>{ const b=e.target.closest('[data-sm]'); if(!b) return; let [y,m]=sMonth.split('-').map(Number); m+=+b.dataset.sm; if(m<1){m=12;y--;} if(m>12){m=1;y++;} sMonth=`${y}-${String(m).padStart(2,'0')}`; renderSched(); };
+$('sCrew').onclick=()=>openCrew();
+$('sUp').onclick=()=>openMenu($('sUp'), [
+  {icon:'paste', label:'Tampal jadual WhatsApp', desc:'Tarikh, masa, acara, lokasi, team', run:()=>openSchedImport()},
+  {icon:'plus', label:'Tambah acara', desc:'Isi secara manual', run:()=>openEvent(null)},
+]);
+$('sList').onclick=e=>{
+  const o=e.target.closest('[data-ev-open]'); if(o){ openProjectView(o.dataset.evOpen); return; }
+  const p=e.target.closest('[data-ev-proj]'); if(p){ const ev=events.find(x=>x.id===p.dataset.evProj); if(ev) evToProject(ev); return; }
+  const ed=e.target.closest('[data-ev-edit]'); if(ed){ const ev=events.find(x=>x.id===ed.dataset.evEdit); if(ev) openEvent(ev); }
 };
 $('subTabs').onclick=e=>{ const b=e.target.closest('[data-sub]'); if(b) setSub(b.dataset.sub); };
 $('uSignIn').onclick=()=>{ toggleUser(false); window.ESC?.signIn?.(); };
