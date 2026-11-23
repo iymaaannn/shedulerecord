@@ -11,7 +11,7 @@
   --ok:#0A0A0A; --ok-bg:#0A0A0A; --run:#0A0A0A; --run-bg:#DCDCDC; --rev:#0A0A0A; --rev-bg:#FFFFFF; --idle:#6E6E6E; --idle-bg:#F0F0F0;
   --sent:#5C5C5C; --runbar:#A8A8A8;
   --c-ok:#12805C; --c-ok-bg:#E4F5EC; --c-run:#B45309; --c-run-bg:#FFF1DC; --c-sent:#2F55D4; --c-sent-bg:#E9EEFF;
-  --c-rev:#C8322C; --c-rev-bg:#FDEBEA; --c-idle:#5F6368; --c-idle-bg:#F0F0F1; --c-pp:#0E7490; --c-pp-bg:#D9F6FB;
+  --c-rev:#C8322C; --c-rev-bg:#FDEBEA; --c-idle:#5F6368; --c-idle-bg:#F0F0F1; --c-todo:#DC2626; --c-todo-bg:#FEE2E2; --c-pp:#0E7490; --c-pp-bg:#D9F6FB;
   --c-off:#C2410C; --c-off-bg:#FFEBDD;
   --danger:#0A0A0A; --shadow:0 24px 60px rgba(0,0,0,.16);
   --pp:#0A0A0A; --pp-bg:#0A0A0A;
@@ -25,7 +25,7 @@
   --ok:#F5F5F5; --ok-bg:#F5F5F5; --run:#F5F5F5; --run-bg:#333333; --rev:#F5F5F5; --rev-bg:#0E0E0E; --idle:#8F8F8F; --idle-bg:#1A1A1A;
   --sent:#B0B0B0; --runbar:#5A5A5A;
   --c-ok:#4CD597; --c-ok-bg:#0F2A1F; --c-run:#F5B454; --c-run-bg:#2E2210; --c-sent:#8EA8FF; --c-sent-bg:#18213D;
-  --c-rev:#F58A84; --c-rev-bg:#341716; --c-idle:#A3A3A3; --c-idle-bg:#1D1D1D; --c-pp:#5FD7EA; --c-pp-bg:#0F2C31;
+  --c-rev:#F58A84; --c-rev-bg:#341716; --c-idle:#A3A3A3; --c-idle-bg:#1D1D1D; --c-todo:#FF7070; --c-todo-bg:#3A1111; --c-pp:#5FD7EA; --c-pp-bg:#0F2C31;
   --c-off:#FB9A5B; --c-off-bg:#33190B;
   --danger:#F5F5F5; --shadow:0 24px 60px rgba(0,0,0,.6); --pp:#F5F5F5; --pp-bg:#F5F5F5; color-scheme:dark}}
 :root[data-theme="dark"]{
@@ -34,7 +34,7 @@
   --ok:#F5F5F5; --ok-bg:#F5F5F5; --run:#F5F5F5; --run-bg:#333333; --rev:#F5F5F5; --rev-bg:#0E0E0E; --idle:#8F8F8F; --idle-bg:#1A1A1A;
   --sent:#B0B0B0; --runbar:#5A5A5A;
   --c-ok:#4CD597; --c-ok-bg:#0F2A1F; --c-run:#F5B454; --c-run-bg:#2E2210; --c-sent:#8EA8FF; --c-sent-bg:#18213D;
-  --c-rev:#F58A84; --c-rev-bg:#341716; --c-idle:#A3A3A3; --c-idle-bg:#1D1D1D; --c-pp:#5FD7EA; --c-pp-bg:#0F2C31;
+  --c-rev:#F58A84; --c-rev-bg:#341716; --c-idle:#A3A3A3; --c-idle-bg:#1D1D1D; --c-todo:#FF7070; --c-todo-bg:#3A1111; --c-pp:#5FD7EA; --c-pp-bg:#0F2C31;
   --c-off:#FB9A5B; --c-off-bg:#33190B;
   --danger:#F5F5F5; --shadow:0 24px 60px rgba(0,0,0,.6); --pp:#F5F5F5; --pp-bg:#F5F5F5; color-scheme:dark}
 
@@ -316,6 +316,18 @@ span.pill{padding:5px 12px 5px 22px;background-image:radial-gradient(circle,curr
 .s-run{background-color:var(--c-run-bg);color:var(--c-run)}
 .s-rev{background-color:var(--c-rev-bg);color:var(--c-rev)}
 .s-idle{background-color:var(--c-idle-bg);color:var(--c-idle)}
+.s-todo{background-color:var(--c-todo-bg);color:var(--c-todo)}
+.chip.st{border-color:transparent}
+.chip.st .mono{opacity:.75}
+.chip.st.s-ok[aria-pressed="true"]{background:var(--c-ok);border-color:var(--c-ok);color:var(--bg)}
+.chip.st.s-run[aria-pressed="true"]{background:var(--c-run);border-color:var(--c-run);color:var(--bg)}
+.chip.st.s-rev[aria-pressed="true"]{background:var(--c-rev);border-color:var(--c-rev);color:var(--bg)}
+.chip.st.s-idle[aria-pressed="true"]{background:var(--c-idle);border-color:var(--c-idle);color:var(--bg)}
+.chip.st.s-sent[aria-pressed="true"]{background:var(--c-sent);border-color:var(--c-sent);color:var(--bg)}
+.chip.st.s-todo[aria-pressed="true"]{background:var(--c-todo);border-color:var(--c-todo);color:var(--bg)}
+.chip.st.s-off[aria-pressed="true"]{background:var(--c-off);border-color:var(--c-off);color:var(--bg)}
+.chip.st.s-pp[aria-pressed="true"]{background:var(--c-pp);border-color:var(--c-pp);color:var(--bg)}
+.chip.st[aria-pressed="true"] .mono{opacity:.85}
 .pill option{background:var(--surface);color:var(--ink)}
 .tag{border-radius:99px;font-weight:600;padding:2px 9px;letter-spacing:.05em}
 .t-off{background:var(--c-off-bg);color:var(--c-off)}
@@ -330,6 +342,19 @@ span.pill{padding:5px 12px 5px 22px;background-image:radial-gradient(circle,curr
 .sheet header h3{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em}
 .sheet footer{border-radius:0 0 18px 18px}
 .f label{font-size:10.5px;font-weight:500;letter-spacing:.1em}
+.f label.radio{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:13.5px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink);line-height:1.35;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.f label.radio:hover{border-color:var(--line2)}
+.f label.radio:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.f label.radio:has(input:disabled){opacity:.45;cursor:not-allowed}
+.f label.radio>span{flex:1;min-width:0}
+.f .radio input[type=radio]{appearance:none;-webkit-appearance:none;flex:none;width:18px;height:18px;min-width:0;padding:0;margin:0;border:1.5px solid var(--line2);border-radius:50%;background:var(--surface);box-shadow:none;cursor:inherit}
+.f .radio input[type=radio]:checked{border-color:var(--ink);background:radial-gradient(circle,var(--ink) 0 4px,transparent 4.5px)}
+.f .radio input[type=radio]:focus-visible{box-shadow:0 0 0 3px var(--accent-soft)}
+.f .radio .rcount{flex:none;min-width:26px;text-align:center;font-size:12px;font-weight:600;padding:3px 8px;border-radius:99px;background:var(--surface2);color:var(--muted)}
+.f .radio:has(input:checked) .rcount{background:var(--ink);color:var(--bg)}
+.f .radio input[type=checkbox]{flex:none;width:16px;height:16px;padding:0;margin:0}
+.ropts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.ropts{grid-template-columns:1fr}}
 .f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px var(--accent-soft)}
 .err,.confirm{color:var(--c-rev);font-weight:500}
 .toast{background:var(--ink);color:var(--bg);border-radius:99px;padding:10px 18px}
@@ -407,6 +432,43 @@ body{padding-left:68px}
 .pcpct{font-size:11px;font-weight:600;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);border-radius:99px;padding:3px 9px}
 .pctitle strong{display:block;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.25;overflow-wrap:anywhere;text-shadow:0 1px 8px rgba(0,0,0,.25)}
 .pctitle small{display:block;font-size:11.5px;opacity:.85;margin-top:2px}
+.team-list{display:flex;flex-direction:column;gap:8px}
+.team-row{display:grid;grid-template-columns:170px minmax(0,1fr) 40px;gap:8px;align-items:center}
+.team-row .btn{padding:0;justify-content:center;height:40px}
+.team-add{align-self:flex-start}
+.team-empty{font-size:12.5px;color:var(--muted);padding:2px 0}
+.gone{display:none!important}
+.btn .chev{width:14px;height:14px;margin-left:2px;margin-right:-2px;opacity:.7;transition:transform .15s}
+.btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.dmenu{position:absolute;z-index:60;min-width:250px;max-width:calc(100vw - 16px);padding:6px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:0 14px 40px rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;gap:2px;animation:dmIn .12s ease-out}
+@keyframes dmIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.dmenu button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;color:var(--ink);font:inherit;text-align:left;padding:9px 10px;border-radius:9px;cursor:pointer}
+.dmenu button:hover,.dmenu button:focus-visible{background:var(--surface2);outline:none}
+.dmenu .mi-ico{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--surface)}
+.dmenu .mi-ico svg{width:16px;height:16px}
+.dmenu .mi-tx{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.dmenu .mi-tx b{font-size:13.5px;font-weight:600}
+.dmenu .mi-tx small{font-size:11.5px;color:var(--muted)}
+.dmenu hr{border:0;border-top:1px solid var(--line);margin:4px 6px}
+.subtabs{display:flex;gap:8px;margin:0 0 18px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--surface);width:fit-content;max-width:100%}
+.subtabs button{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:var(--muted);font:inherit;padding:8px 16px 8px 12px;border-radius:10px;cursor:pointer;text-align:left}
+.subtabs button svg{width:18px;height:18px;flex:none}
+.subtabs button span{display:flex;flex-direction:column;line-height:1.25}
+.subtabs button b{font-size:13.5px;font-weight:600;color:inherit}
+.subtabs button small{font-size:11.5px;opacity:.8}
+.subtabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.subtabs button:not([aria-selected="true"]):hover{background:var(--surface2);color:var(--ink)}
+@media (max-width:560px){.subtabs{width:100%}.subtabs button{flex:1}}
+.teambar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-4px 0 18px}
+.teambar .tlab{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.tchip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px 5px 6px;font-size:12.5px;color:var(--ink);line-height:1.2}
+.tchip i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:9.5px;font-weight:700;letter-spacing:.02em;color:#fff;background:var(--rc)}
+.tchip small{color:var(--muted);font-size:11.5px}
+.pcfoot>span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.pcteam{display:inline-flex;align-items:center;gap:3px;margin-left:auto;flex:none}
+.pcteam+.pcbar{width:36px;flex:none}
+.pcteam i{font-style:normal;display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:99px;font-size:9.5px;font-weight:700;color:#fff;background:var(--rc)}
+@media (max-width:560px){.team-row{grid-template-columns:1fr 40px}.team-row select{grid-column:1/-1}}
 .pcfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;font-size:12px;color:var(--muted)}
 .pcbar{width:64px;height:5px;border-radius:99px;background:var(--idle-bg);overflow:hidden;display:flex;flex:none}
 .pcbar i{display:block;height:100%}
@@ -515,7 +577,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
       <div class="hleft"><h1>Semua Projek</h1><p class="hsub" id="hSub"></p></div>
       <div class="htools">
         <div class="seg" id="hFilter" role="group" aria-label="Tapis jenis"><button type="button" data-hf="all" aria-pressed="true">Semua</button><button type="button" data-hf="photo" aria-pressed="false">Photo</button><button type="button" data-hf="video" aria-pressed="false">Video</button></div>
-        <select class="sel" id="hSort" aria-label="Susunan"><option value="upd">Terkini dikemaskini</option><option value="name">Nama A-Z</option></select>
+        <select class="sel" id="hSort" aria-label="Susunan"><option value="upd">Terkini</option><option value="name">Nama A-Z</option></select>
         <div class="seg" id="hView" role="group" aria-label="Paparan"><button type="button" data-hv="grid" aria-pressed="true" title="Grid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></button><button type="button" data-hv="list" aria-pressed="false" title="Senarai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg></button></div>
       </div>
     </div>
@@ -532,11 +594,19 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
       <div class="seg" id="modesw" role="group" aria-label="Mod" hidden><button id="mView" aria-pressed="false">Lihat</button><button id="mEdit" aria-pressed="true">Edit</button></div>
       <select class="sel" id="projsel" aria-label="Pilih projek"></select>
       <button class="btn" id="btnPublish" hidden>Terbitkan ke public</button>
-      <button class="btn" id="btnShare" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Kongsi ke client</button>
-      <button class="btn" id="btnProjEdit" title="Tetapan projek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Projek</button>
-      <button class="btn" id="btnArchive" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4"/></svg>Arkib</button>
-      <button class="btn" id="btnProjNew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Projek Baru</button>
+      <button class="btn" id="btnShare" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Kongsi Pautan</button>
+      <button class="btn" id="btnProjMenu" aria-haspopup="menu" aria-expanded="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Projek<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+      <button class="btn gone" id="btnProjEdit" title="Tetapan projek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Projek</button>
+      <button class="btn gone" id="btnArchive" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4"/></svg>Arkib</button>
+      <button class="btn gone" id="btnProjNew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Projek Baru</button>
     </div>
+  </div>
+
+  <div class="teambar" id="teamBar" hidden></div>
+
+  <div class="subtabs" id="subTabs" role="tablist" aria-label="Senarai" hidden>
+    <button type="button" role="tab" data-sub="photo" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span><b>Photo</b><small id="subNP"></small></span></button>
+    <button type="button" role="tab" data-sub="video" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg><span><b>Video</b><small id="subNV"></small></span></button>
   </div>
 
   <div id="ronote" class="notice" hidden>Mod Lihat: inilah paparan yang dilihat oleh public. Tukar ke <strong>Edit</strong> untuk tambah atau ubah data.</div>
@@ -561,10 +631,12 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
     <select class="sel" id="fdate" aria-label="Tapis tarikh"></select>
     <select class="sel" id="feditor" aria-label="Tapis editor" hidden></select>
     <span class="spacer"></span>
-    <button class="btn" id="btnImport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Upload sheet</button>
-    <button class="btn" id="btnExport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download sheet</button>
-    <button class="btn" id="btnReport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></svg>Report PDF</button>
-    <button class="btn primary" id="btnAdd" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>Tambah fail</button>
+    <button class="btn gone" id="btnImport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Upload sheet</button>
+    <button class="btn gone" id="btnExport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download sheet</button>
+    <button class="btn gone" id="btnReport" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></svg>Report PDF</button>
+    <button class="btn primary gone" id="btnAdd" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>Tambah fail</button>
+    <button class="btn" id="btnDl" aria-haspopup="menu" aria-expanded="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
+    <button class="btn primary" id="btnUp" aria-haspopup="menu" aria-expanded="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Upload<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>
     <input type="file" id="fileIn" accept=".xlsx,.xls,.csv,.pdf,application/pdf" hidden>
   </div>
 
@@ -690,9 +762,31 @@ const STATUSES = [
   {v:'REVISION', c:'rev'},
   {v:'SUBMIT', c:'ok'},
 ];
-const isVid = p => ((p===undefined ? cur() : p) || {}).type === 'video';
+let sub = 'photo';
+const ptype = p => (p && p.type) || 'photo';
+const isBoth = p => ptype(p) === 'both';
+const hasPhotoT = p => ptype(p) !== 'video';
+const hasVideoT = p => ptype(p) !== 'photo';
+const curKind = () => { const p = cur(); return isBoth(p) ? sub : ptype(p); };
+const isVid = p => { p = p===undefined ? cur() : p; if(!p) return false; return isBoth(p) ? (p.id===curPid && sub==='video') : p.type==='video'; };
+const entV = (p,e) => isBoth(p) ? e.kind==='video' : ptype(p)==='video';
+const typeLabel = p => isBoth(p) ? 'PHOTO & VIDEO' : ptype(p)==='video' ? 'VIDEO' : 'PHOTO';
+/* Photo & Video projects keep both lists in one entries collection, told apart by `kind`. */
+function kcol(pid, kind){
+  const col = db.collection(`projects/${pid}/entries`);
+  const p = projects.find(x=>x.id===pid);
+  if(!isBoth(p)) return col;
+  const keep = d => ((d.data().kind)||'photo') === kind;
+  const wrap = s => { const docs = s.docs.filter(keep); return {docs, size:docs.length, empty:!docs.length}; };
+  return {
+    doc: id => { const r = id ? col.doc(id) : col.doc(); return { id:r.id, set:d=>r.set({...d, kind}), update:d=>r.update(d), delete:()=>r.delete() }; },
+    get: async () => wrap(await col.get()),
+    onSnapshot: (cb, er) => col.onSnapshot(s=>cb(wrap(s)), er)
+  };
+}
 const stList = () => isVid() ? VSTATUSES : STATUSES;
 const sClass = v => (stList().find(s => s.v === v) || {c:'idle'}).c;
+const dClass = v => v==='BELUM MULA' ? 'todo' : sClass(v);
 const HARI = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
 const BULAN = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis'];
 const $ = id => document.getElementById(id);
@@ -706,7 +800,7 @@ let db = null, dl = null, canWrite = false, isAdmin = false, mode = 'edit';
 const APP_URL = location.origin + location.pathname;
 const hashPid = () => { const m=(location.hash||'').match(/^#p-([A-Za-z0-9_~.\-]+)$/); return m?m[1]:null; };
 let clientPid = hashPid();
-let projects = [], curPid = null, entries = [], unsubEntries = null, entriesLoaded = false;
+let projects = [], curPid = null, entries = [], entriesAll = [], unsubEntries = null, entriesLoaded = false;
 let filt = { q:'', status:'ALL', date:'ALL', editor:'ALL' };
 let selected = new Set();
 
@@ -726,7 +820,7 @@ const EN = {
   // top bar, modes, header
   'Mod':'Mode', 'Pilih projek':'Select project', 'Tetapan projek':'Project settings', 'Tutup':'Close',
   'Jadual Editor ·':'Editor Schedule ·', 'Jadual Editor':'Editor Schedule', 'Paparan public':'Public view',
-  'Lihat':'View', 'Terbitkan ke public':'Publish to public', 'Kongsi ke client':'Share with client',
+  'Lihat':'View', 'Terbitkan ke public':'Publish to public', 'Kongsi ke client':'Share with client', 'Kongsi Pautan':'Share Link',
   'Projek':'Project', 'Arkib':'Archive', 'Arkib ({0})':'Archive ({0})', 'Arkib {0}':'Archive {0}', 'Projek Baru':'New Project', 'Projek baru':'New project',
   'Mod Lihat: inilah paparan yang dilihat oleh public. Tukar ke':'View mode: this is exactly what the public sees. Switch to',
   'untuk tambah atau ubah data.':'to add or change data.',
@@ -874,6 +968,26 @@ const EN = {
   'Client tidak perlu akaun Claude. Mereka nampak versi terakhir yang anda tekan':"Clients don't need a Claude account. They see the version from the last time you pressed",
   ', jadi tekan butang itu selepas setiap kemaskini. Link ini membuka projek ini sahaja, tetapi pengguna yang tahu menukar link masih boleh melihat projek lain dalam apps yang sama.':', so press that button after every update. This link opens this project only, but someone who knows how to change the link can still see other projects in the same app.',
   'Buka paparan client ↗':'Open client view ↗', 'Disalin ✓':'Copied ✓', 'Link disalin':'Link copied', 'Tekan Ctrl+C / Salin untuk menyalin':'Press Ctrl+C / Copy to copy',
+  // chips
+  'Belum Mula':'Not Started', 'On Going':'On Going',
+  // menus
+  'Upload':'Upload', 'Download':'Download', 'Sheet Excel':'Excel sheet', 'Sheet Excel (Photo)':'Excel sheet (Photo)', 'Sheet Excel (Video)':'Excel sheet (Video)',
+  'Format asal jadual (.xlsx)':'Original schedule format (.xlsx)', 'Format asal sheet video (.xlsx)':'Original video sheet format (.xlsx)',
+  'Sheet penuh Photo + Video':'Full sheet, Photo + Video', 'Satu fail Excel, dua tab':'One Excel file, two tabs',
+  'Senarai dan komen untuk editor':'List and comments for editors', 'Isi secara manual':'Fill in by hand',
+  'Excel atau PDF, dikemas kini automatik':'Excel or PDF, updated automatically', 'Tetapan projek':'Project settings',
+  'Nama, jenis, team, link, arkib':'Name, type, team, link, archive', 'Projek baru':'New project', 'Cipta projek lain':'Create another project',
+  'Projek yang sudah selesai':'Finished projects',
+  // photo & video
+  'Hanya item yang ada komen':'Only items with comments', 'Semua item':'All items',
+  '{0} fail · {1} episod':a=>`${a[0]} ${pl(a[0],'file','files')} · ${a[1]} ${pl(a[1],'episode','episodes')}`,
+  '{0} fail · {1} episod · {2} scene':a=>`${a[0]} ${pl(a[0],'file','files')} · ${a[1]} ${pl(a[1],'episode','episodes')} · ${a[2]} ${pl(a[2],'scene','scenes')}`,
+  'Photo & Video':'Photo & Video', 'Senarai':'Lists', 'baris':'rows',
+  'Dua senarai dalam satu projek: fail photo dan episod video. Tukar antara keduanya dengan tab Photo / Video dalam projek.':'Two lists in one project: photo files and video episodes. Switch between them with the Photo / Video tabs inside the project.',
+  'Cth: MAJLIS PERKAHWINAN ALI & SITI':'e.g. ALI & SITI WEDDING',
+  // team
+  'Tambah ahli':'Add member', 'Nama ahli':'Member name', 'Peranan':'Role', 'Belum ada ahli team.':'No team members yet.',
+  'Pilih peranan setiap orang. Bilangan ikut keperluan client.':"Choose each person's role. Numbers follow what the client needs.",
   // firebase
   'Tiada kebenaran. Log masuk dengan email admin, atau semak peraturan Firestore.':'No permission. Sign in with an admin email, or check the Firestore rules.',
   'Log masuk admin (Google)':'Admin sign-in (Google)', 'Log keluar':'Sign out', 'Urus admin':'Manage admins', 'Tetamu · paparan public':'Guest · public view',
@@ -888,7 +1002,7 @@ const EN = {
   // shell
   'Profil':'Profile', 'Bahasa':'Language', 'Pemilik · Admin':'Owner · Admin', 'Admin · boleh edit':'Admin · can edit', 'Lihat sahaja':'View only', 'Tetamu':'Guest', 'Pengguna':'User',
   'Utama':'Home', 'Carian':'Search', 'Notifikasi':'Notifications', 'Semua Projek':'All Projects', 'Semua projek':'All projects', 'Tapis jenis':'Filter by type', 'Susunan':'Sort',
-  'Terkini dikemaskini':'Recently updated', 'Nama A-Z':'Name A-Z', 'Paparan':'View', 'Senarai':'List', '{0} Projek Aktif':a=>`${a[0]} Active ${pl(a[0],'Project','Projects')}`,
+  'Terkini dikemaskini':'Recently updated', 'Terkini':'Latest', 'Nama A-Z':'Name A-Z', 'Paparan':'View', 'Senarai':'List', '{0} Projek Aktif':a=>`${a[0]} Active ${pl(a[0],'Project','Projects')}`,
   'Nama projek':'Project name', 'Jenis':'Type', 'Progres':'Progress', 'Kandungan':'Contents', 'Dikemaskini':'Updated',
   'Belum dibaca':'Unread', 'Tandakan semua dibaca':'Mark all as read', 'Tiada kemaskini baru.':'No new updates.', 'Belum ada aktiviti.':'No activity yet.',
   'Cari status, editor, scene, nota…':'Search status, editor, scene, notes…', 'Cari status, editor, kata kunci dan lain-lain':'Search for status, editor, keywords and more',
@@ -1013,7 +1127,7 @@ function guessYear(p, list){ const ds=(list||[]).map(e=>e.date).filter(Boolean).
 const BULAN_FULL = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sep','Okt','Nov','Dis'];
 const fmtTs = t => { const d=new Date(t); return `${d.getDate()} ${(LANG==='en'?MON_EN:BULAN_FULL)[d.getMonth()]} ${d.getFullYear()}`; };
 const cur = () => projects.find(p=>p.id===curPid);
-const entriesCol = () => db.collection(`projects/${curPid}/entries`);
+const entriesCol = () => kcol(curPid, curKind());
 
 
 /* ---------- shell: home grid, activity, global search ---------- */
@@ -1038,7 +1152,7 @@ async function loadAll(force){
   allAt=Date.now();
   const ps=visibleProjects();
   await Promise.all(ps.map(async p=>{
-    if(p.id===curPid && entriesLoaded){ allEnt[p.id]=entries; return; }
+    if(p.id===curPid && entriesLoaded){ allEnt[p.id]=entriesAll; return; }
     if(!db){ allEnt[p.id]=SNAP?.entries?.[p.id]||[]; return; }
     try{ const s=await db.collection(`projects/${p.id}/entries`).get(); allEnt[p.id]=s.docs.map(d=>({id:d.id,...d.data()})); }catch{ allEnt[p.id]=allEnt[p.id]||[]; }
   }));
@@ -1048,11 +1162,12 @@ async function loadAll(force){
 }
 function statsOf(p){
   const list=allEnt[p.id]; if(!list) return null;
-  const V=(p.type||'photo')==='video', c={ok:0,sent:0,run:0,rev:0,idle:0};
-  list.forEach(e=>{ const k=((V?VSTATUSES:STATUSES).find(s=>s.v===e.status)||{c:'idle'}).c; c[k]=(c[k]||0)+1; });
+  const c={ok:0,sent:0,run:0,rev:0,idle:0};
+  list.forEach(e=>{ const k=((entV(p,e)?VSTATUSES:STATUSES).find(s=>s.v===e.status)||{c:'idle'}).c; c[k]=(c[k]||0)+1; });
   const n=list.length, upd=Math.max(p.createdAt||0,...list.map(e=>e.updatedAt||0));
-  const sc=V&&hasScenes(list);
-  const label = !V ? `${n} fail` : sc ? `${epCount(list)} episod · ${n} scene` : `${n} episod`;
+  const vl=list.filter(e=>entV(p,e)), pl=list.length-vl.length;
+  const vLabel = hasScenes(vl) ? `${epCount(vl)} episod · ${vl.length} scene` : `${vl.length} episod`;
+  const label = isBoth(p) ? `${pl} fail · ${vLabel}` : ptype(p)!=='video' ? `${n} fail` : vLabel;
   return {n,c,pct:n?Math.round(c.ok/n*100):0,upd,label};
 }
 const barHtml=(st)=>st&&st.n?['ok','sent','run','rev'].map(k=>`<i class="${k}" style="width:${(st.c[k]||0)/st.n*100}%"></i>`).join(''):'';
@@ -1064,7 +1179,7 @@ function setView(v){
 }
 function renderHome(){
   if(!$('home') || $('home').hidden) return;
-  let ps=visibleProjects().filter(p=>hf==='all'||(p.type||'photo')===hf);
+  let ps=visibleProjects().filter(p=>hf==='all'||(hf==='photo'?hasPhotoT(p):hasVideoT(p)));
   const st=new Map(ps.map(p=>[p.id,statsOf(p)]));
   ps=ps.slice().sort((a,b)=> hs==='name' ? String(a.name).localeCompare(String(b.name)) : ((st.get(b.id)?.upd||b.createdAt||0)-(st.get(a.id)?.upd||a.createdAt||0)));
   const tot=visibleProjects().length;
@@ -1077,15 +1192,18 @@ function renderHome(){
   if(!ps.length && !newCard){ g.innerHTML='<div class="empty"><h3>Belum ada projek</h3><p>Tiada projek untuk dipaparkan.</p></div>'; return; }
   if(hv==='list'){
     g.innerHTML=`<div class="prow head"><span></span><span>Nama projek</span><span>Jenis</span><span>Progres</span><span>Kandungan</span><span>Dikemaskini</span></div>`+ps.map(p=>{ const s=st.get(p.id);
-      return `<button class="prow" data-open="${esc(p.id)}" style="${gradVars(p.name)}"><span class="pav" translate="no">${esc(initials(p.name))}</span><strong translate="no">${esc(p.name||'Projek tanpa nama')}</strong><span class="m">${isVid(p)?'VIDEO':'PHOTO'}</span><span class="pcbar">${barHtml(s)}</span><span class="m">${s?s.label:'…'}</span><span class="m">${s?ago(s.upd):''}</span></button>`; }).join('')
+      return `<button class="prow" data-open="${esc(p.id)}" style="${gradVars(p.name)}"><span class="pav" translate="no">${esc(initials(p.name))}</span><strong translate="no">${esc(p.name||'Projek tanpa nama')}</strong><span class="m">${typeLabel(p)}</span><span class="pcbar">${barHtml(s)}</span><span class="m">${s?s.label:'…'}</span><span class="m">${s?ago(s.upd):''}</span></button>`; }).join('')
       +(canWrite?`<button class="prow" data-act="newproj"><span class="pav" style="background:var(--surface2);color:var(--ink)">+</span><strong>Projek Baru</strong></button>`:'');
     return;
   }
   g.innerHTML=ps.map(p=>{ const s=st.get(p.id);
-    return `<button class="pcard" data-open="${esc(p.id)}"><div class="pcov" style="${gradVars(p.name)}"><div class="pctop"><span class="pctype">${isVid(p)?'VIDEO':'PHOTO'}</span>${s&&s.n?`<span class="pcpct">${s.pct}%</span>`:''}</div><div class="pctitle"><strong translate="no">${esc(p.name||'Projek tanpa nama')}</strong><small>${s?s.label:'…'}${p.label?' · '+esc(p.label):''}${p.cancelled?' · CANCEL':''}</small></div></div><div class="pcfoot"><span>${s?ago(s.upd):'&nbsp;'}</span><span class="pcbar">${barHtml(s)}</span></div></button>`; }).join('')+newCard;
+    return `<button class="pcard" data-open="${esc(p.id)}"><div class="pcov" style="${gradVars(p.name)}"><div class="pctop"><span class="pctype">${typeLabel(p)}</span>${s&&s.n?`<span class="pcpct">${s.pct}%</span>`:''}</div><div class="pctitle"><strong translate="no">${esc(p.name||'Projek tanpa nama')}</strong><small>${s?s.label:'…'}${p.label?' · '+esc(p.label):''}${p.cancelled?' · CANCEL':''}</small></div></div><div class="pcfoot"><span>${s?ago(s.upd):'&nbsp;'}</span>${teamBadges(p)}<span class="pcbar">${barHtml(s)}</span></div></button>`; }).join('')+newCard;
 }
 function openProjectView(pid, eid){
+  const tp=projects.find(x=>x.id===pid);
+  if(eid && isBoth(tp)){ const e=(allEnt[pid]||[]).find(x=>x.id===eid); if(e) store.set('je.sub.'+pid, e.kind==='video'?'video':'photo'); }
   if(pid!==curPid) selectProject(pid);
+  else if(eid && isBoth(tp)){ const e=entriesAll.find(x=>x.id===eid); if(e) setSub(e.kind==='video'?'video':'photo'); }
   setView('project');
   window.scrollTo(0,0);
   if(!eid) return;
@@ -1102,7 +1220,7 @@ function feed(){
   return out.sort((a,b)=>b.e.updatedAt-a.e.updatedAt).slice(0,120);
 }
 function renderActDot(){ const n=feed().filter(x=>x.e.updatedAt>seenTs).length; $('actDot').hidden=!n; }
-const entTitle=(p,e)=>(p.type||'photo')==='video' ? [e.item,e.scene].filter(Boolean).join(' · ') : (e.name||'');
+const entTitle=(p,e)=>entV(p,e) ? [e.item,e.scene].filter(Boolean).join(' · ') : (e.name||'');
 function renderAct(){
   document.querySelectorAll('#actPanel [data-at]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.at===actTab)));
   let list=feed(); if(actTab==='unread') list=list.filter(x=>x.e.updatedAt>seenTs);
@@ -1111,9 +1229,9 @@ function renderAct(){
   for(const {p,e} of list){
     const d=new Date(e.updatedAt), iso=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     if(iso!==day){ day=iso; html+=`<div class="dday">${fmtDate(iso,true)}</div>`; }
-    const V=(p.type||'photo')==='video', k=((V?VSTATUSES:STATUSES).find(s=>s.v===e.status)||{c:'idle'}).c;
+    const V=entV(p,e), k=((V?VSTATUSES:STATUSES).find(s=>s.v===e.status)||{c:'idle'}).c;
     const note=[e.notes,e.feedback].filter(Boolean).join(' · ');
-    html+=`<button class="ait${e.updatedAt>seenTs?' unread':''}" data-goto="${esc(p.id)}" data-eid="${esc(e.id)}"><span class="pav" style="${gradVars(p.name)}" translate="no">${esc(initials(p.name))}</span><span class="atx"><span class="l1"><b translate="no">${esc(entTitle(p,e))}</b> <span class="pill s-${k}">${esc(e.status||'')}</span></span>${note?`<span class="note" translate="no">#${esc(note)}</span>`:''}<small><span translate="no">${esc(p.name)}</span> · ${d.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'})}</small></span></button>`;
+    html+=`<button class="ait${e.updatedAt>seenTs?' unread':''}" data-goto="${esc(p.id)}" data-eid="${esc(e.id)}"><span class="pav" style="${gradVars(p.name)}" translate="no">${esc(initials(p.name))}</span><span class="atx"><span class="l1"><b translate="no">${esc(entTitle(p,e))}</b> <span class="pill s-${e.status==='BELUM MULA'?'todo':k}">${esc(e.status||'')}</span></span>${note?`<span class="note" translate="no">#${esc(note)}</span>`:''}<small><span translate="no">${esc(p.name)}</span> · ${d.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'})}</small></span></button>`;
   }
   $('actList').innerHTML=html;
 }
@@ -1167,9 +1285,9 @@ function renderSearch(){
   const words=t.text.filter(w=>w.length>1);
   const hl=s=>{ let h=esc(s); for(const w of words){ const i=h.toLowerCase().indexOf(esc(w)); if(i>=0) h=h.slice(0,i)+'<mark>'+h.slice(i,i+esc(w).length)+'</mark>'+h.slice(i+esc(w).length); } return h; };
   body.innerHTML=`<div class="sres"><div class="scount">${out.length} hasil</div>`+[...groups.values()].map(({p,hits})=>`<div class="sgrp"><div class="sgh"><span class="pav" style="${gradVars(p.name)}" translate="no">${esc(initials(p.name))}</span><b translate="no">${esc(p.name)}</b><span>${hits.length} hasil</span></div>${hits.slice(0,60).map(({e})=>{
-      const V=(p.type||'photo')==='video', k=((V?VSTATUSES:STATUSES).find(s=>s.v===e.status)||{c:'idle'}).c;
+      const V=entV(p,e), k=((V?VSTATUSES:STATUSES).find(s=>s.v===e.status)||{c:'idle'}).c;
       const meta=V?[e.location,e.duration,e.notes,e.feedback]:[e.date?fmtDate(e.date):'', e.room?('Bilik '+e.room):'', normEd(e.editor), e.notes];
-      return `<button class="shit" data-goto="${esc(p.id)}" data-eid="${esc(e.id)}"><b translate="no">${hl(entTitle(p,e))}</b><span class="pill s-${k}">${esc(e.status||'')}</span><span class="m" translate="no">${hl(meta.filter(Boolean).join(' · '))}</span></button>`; }).join('')}</div>`).join('')+'</div>';
+      return `<button class="shit" data-goto="${esc(p.id)}" data-eid="${esc(e.id)}"><b translate="no">${hl(entTitle(p,e))}</b><span class="pill s-${e.status==='BELUM MULA'?'todo':k}">${esc(e.status||'')}</span><span class="m" translate="no">${hl(meta.filter(Boolean).join(' · '))}</span></button>`; }).join('')}</div>`).join('')+'</div>';
 }
 function openSearch(){ closeAct(); $('searchOv').hidden=false; document.querySelector('.rail [data-nav="search"]').setAttribute('aria-current','true'); renderSearch(); loadAll(); setTimeout(()=>$('gq').focus(),30); }
 function closeSearch(){ $('searchOv').hidden=true; document.querySelector('.rail [data-nav="search"]')?.setAttribute('aria-current','false'); }
@@ -1215,7 +1333,7 @@ async function boot(){
     try{ if(u){ me=await u.me(); amOwner=!!me?.isOwner; renderUser(); } }catch{}
     maybeMigrate();
   });
-  window.claude.use('downloads').then(d=>{ dl=d; $('btnExport').hidden=!d; $('btnReport').hidden=!d; });
+  window.claude.use('downloads').then(d=>{ dl=d; $('btnExport').hidden=!d; $('btnReport').hidden=!d; $('btnDl').hidden=!d; });
   db.collection('projects').onSnapshot(snap=>{
     projects = snap.docs.map(d=>({id:d.id, ...d.data()})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
     const first=!booted; booted=true;
@@ -1253,7 +1371,7 @@ function maybeMigrate(){
 }
 function snapMode(){
   db=null;
-  window.claude?.use?.('downloads').then(d=>{ dl=d; $('btnExport').hidden=!d; $('btnReport').hidden=!d; });
+  window.claude?.use?.('downloads').then(d=>{ dl=d; $('btnExport').hidden=!d; $('btnReport').hidden=!d; $('btnDl').hidden=!d; });
   if(!SNAP||!SNAP.projects?.length) return noDb();
   projects=SNAP.projects.filter(p=>!p.archived);
   if(!projects.length) return noDb();
@@ -1283,23 +1401,35 @@ function applyMode(){
   $('mEdit').setAttribute('aria-pressed', String(mode==='edit'));
   $('modeLbl').textContent = !isAdmin ? 'Paparan public' : mode==='edit' ? 'Mod Edit · Admin' : 'Mod Lihat · Admin';
   $('ronote').hidden = !(isAdmin && mode==='view');
-  ['btnAdd','btnImport','btnProjEdit','btnProjNew','btnArchive'].forEach(id=>$(id).hidden=!canWrite);
+  ['btnAdd','btnImport','btnProjEdit','btnProjNew','btnArchive','btnUp','btnProjMenu'].forEach(id=>$(id).hidden=!canWrite);
   if(!canWrite && !$('modal').hidden) closeModal();
   applyShell(); renderHeader(); render(); renderHome();
 }
 function setMode(m){ if(!isAdmin) return; mode=m; store.set('je.mode', m); applyMode(); toast(m==='edit'?'Mod Edit aktif':'Mod Lihat: paparan public'); }
 
+function applySub(){
+  const p=cur();
+  entries = isBoth(p) ? entriesAll.filter(e=>(e.kind||'photo')===sub) : entriesAll;
+}
+function setSub(k){
+  if(sub===k) return;
+  sub=k; store.set('je.sub.'+curPid, k); selected.clear();
+  filt.date='ALL'; filt.status='ALL'; filt.editor='ALL'; filt.q=''; if($('q')) $('q').value='';
+  applySub(); renderHeader(); render();
+}
 function selectProject(pid){
   i18nReady=true;
   curPid = pid; selected.clear(); filt.date='ALL'; filt.status='ALL'; filt.editor='ALL';
   if(pid) store.set('je.pid', pid);
   if(unsubEntries){ unsubEntries(); unsubEntries=null; }
-  entries=[]; entriesLoaded=false;
+  entries=[]; entriesAll=[]; entriesLoaded=false;
+  sub = store.get('je.sub.'+pid)==='video' ? 'video' : 'photo';
   renderHeader(); render();
   if(!pid) return;
-  if(!db){ entries=(SNAP?.entries?.[pid]||[]).slice(); entriesLoaded=true; render(); return; }
-  unsubEntries = entriesCol().onSnapshot(snap=>{
-    entries = snap.docs.map(d=>({id:d.id, ...d.data()}));
+  if(!db){ entriesAll=(SNAP?.entries?.[pid]||[]).slice(); applySub(); entriesLoaded=true; render(); return; }
+  unsubEntries = db.collection(`projects/${pid}/entries`).onSnapshot(snap=>{
+    entriesAll = snap.docs.map(d=>({id:d.id, ...d.data()}));
+    applySub();
     entriesLoaded = true;
     for(const id of [...selected]) if(!entries.find(e=>e.id===id)) selected.delete(id);
     render();
@@ -1313,25 +1443,35 @@ function renderHeader(){
   $('pname').textContent = p ? (p.name||'Projek tanpa nama') : 'Work Record';
   const opt=x=>`<option translate="no" value="${esc(x.id)}" ${x.id===curPid?'selected':''}>${esc(x.name||'Projek tanpa nama')}</option>`;
   const act=active();
-  const groups=[['photo','Photo'],['video','Video']].map(([t,l])=>[l,act.filter(x=>(x.type||'photo')===t)]).filter(g=>g[1].length);
+  const groups=[['photo','Photo'],['video','Video'],['both','Photo & Video']].map(([t,l])=>[l,act.filter(x=>ptype(x)===t)]).filter(g=>g[1].length);
   if(p && p.archived && isAdmin) groups.push([`Arkib ${projYear(p)}`,[p]]);
   $('projsel').innerHTML = !groups.length ? '<option value="">Tiada projek aktif</option>' : groups.length>1 ? groups.map(([l,ps])=>`<optgroup label="${esc(l)}">${ps.map(opt).join('')}</optgroup>`).join('') : groups[0][1].map(opt).join('');
   const na=archivedList().length; $('btnArchive').lastChild.textContent = na ? `Arkib (${na})` : 'Arkib';
   $('arcnote').hidden = !(p && p.archived && isAdmin);
   if(p && p.archived && isAdmin) $('arcnote').innerHTML = `Projek ini diarkib (${projYear(p)}) dan tidak dipaparkan kepada public.${canWrite?'<button class="btn" data-act="unarchive">Pulihkan</button>':''}`;
-  $('ptype').hidden = !p; $('ptype').textContent = isVid(p) ? 'VIDEO' : 'PHOTO';
+  $('ptype').hidden = !p; $('ptype').textContent = p ? typeLabel(p) : '';
+  renderTeamBar(p);
+  renderSubTabs();
   $('projsel').disabled = !groups.length;
   $('projsel').hidden = !!clientPid && !isAdmin;
   $('btnProjEdit').hidden = !canWrite || !p;
   $('btnProjNew').hidden = !canWrite;
+  $('btnProjMenu').hidden = !canWrite;
+}
+function renderSubTabs(){
+  const p=cur(), both=isBoth(p); $('subTabs').hidden=!both;
+  if(both){ const np=entriesAll.filter(e=>(e.kind||'photo')==='photo').length, vl=entriesAll.filter(e=>e.kind==='video');
+    $('subTabs').querySelectorAll('[data-sub]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.sub===sub)));
+    $('subNP').textContent=`${np} fail`; $('subNV').textContent= hasScenes(vl) ? `${epCount(vl)} episod · ${vl.length} scene` : `${vl.length} episod`; }
 }
 function render(){
   const p=cur();
-  if(p && entriesLoaded){ allEnt[p.id]=entries; }
+  if(p && entriesLoaded){ allEnt[p.id]=entriesAll; }
+  renderSubTabs();
   $('crumbName').textContent = p ? (p.name||'') : '';
   const has = !!p;
   $('strip').hidden = !has; $('tools').hidden = !has;
-  $('btnAdd').hidden = !canWrite; $('btnImport').hidden = !canWrite;
+  $('btnAdd').hidden = !canWrite; $('btnImport').hidden = !canWrite; $('btnUp').hidden = !canWrite; $('btnDl').hidden = !dl;
   $('btnAdd').lastChild.textContent = isVid() ? 'Tambah episod' : 'Tambah fail';
   if(!projects.length){
     $('bulk').hidden=true;
@@ -1405,9 +1545,9 @@ async function publishPublic(){
 function renderFilters(){
   const counts={ALL:entries.length}; STATUSES.forEach(s=>counts[s.v]=0); entries.forEach(e=>counts[e.status]=(counts[e.status]||0)+1);
   $('fdate').hidden = isVid(); $('q').placeholder = isVid() ? 'Cari episod, lokasi, nota…' : 'Cari nama fail…';
-  $('chips').innerHTML = [{v:'ALL',l:'Semua'}, ...stList().map(s=>({v:s.v,l:sentence(s.v)}))]
+  $('chips').innerHTML = [{v:'ALL',l:'Semua'}, ...stList().map(s=>({v:s.v,l:titleCase(s.v)}))]
     .filter(s=>s.v==='ALL'||counts[s.v]||filt.status===s.v)
-    .map(s=>`<button class="chip" data-status="${s.v}" aria-pressed="${filt.status===s.v}">${esc(s.l)} <span class="mono">${counts[s.v]||0}</span></button>`).join('');
+    .map(s=>`<button class="chip${s.v==='ALL'?'':' st s-'+dClass(s.v)}" data-status="${s.v}" aria-pressed="${filt.status===s.v}"><span>${esc(s.l)}</span> <span class="mono">${counts[s.v]||0}</span></button>`).join('');
   const dm=dayMap();
   const opts=['<option value="ALL">Semua tarikh</option>', ...Object.keys(dm).map(d=>`<option value="${d}" ${filt.date===d?'selected':''}>Hari ${dm[d]} · ${fmtDate(d)}</option>`)];
   if(entries.some(e=>!e.date)) opts.push(`<option value="" ${filt.date===''?'selected':''}>Tiada tarikh</option>`);
@@ -1419,12 +1559,13 @@ function renderFilters(){
   if(filt.date!=='ALL' && filt.date!=='' && !dm[filt.date]) filt.date='ALL';
   $('fdate').value=filt.date;
 }
+const titleCase=v=>String(v||'').toLowerCase().replace(/(^|[\s/(-])([a-z])/g,(m,a,b)=>a+b.toUpperCase());
 const sentence=v=>{ const t=String(v||'').toLowerCase(); return t.charAt(0).toUpperCase()+t.slice(1); };
 function statusSelect(e){
   const L=stList(); const extra = e.status && !L.some(s=>s.v===e.status) ? `<option selected>${esc(e.status)}</option>` : '';
-  return `<select class="pill s-${sClass(e.status)}" data-status-of="${esc(e.id)}" aria-label="Status ${esc(e.name||e.item)}">${extra}${L.map(s=>`<option value="${s.v}" ${s.v===e.status?'selected':''}>${s.v}</option>`).join('')}</select>`;
+  return `<select class="pill s-${dClass(e.status)}" data-status-of="${esc(e.id)}" aria-label="Status ${esc(e.name||e.item)}">${extra}${L.map(s=>`<option value="${s.v}" ${s.v===e.status?'selected':''}>${s.v}</option>`).join('')}</select>`;
 }
-function statusView(e){ return canWrite ? statusSelect(e) : `<span class="pill s-${sClass(e.status)}">${esc(e.status||stList()[0].v)}</span>`; }
+function statusView(e){ return canWrite ? statusSelect(e) : `<span class="pill s-${dClass(e.status)}">${esc(e.status||stList()[0].v)}</span>`; }
 function linkBtn(url,label){ return url ? `<a class="lnk" href="${esc(url)}" target="_blank" rel="noopener">${ICON_LINK}${label}</a>` : `<span class="nolnk">—</span>`; }
 function renderDays(){
   if(isVid()) return renderVideo();
@@ -1561,14 +1702,26 @@ function openEdit(id){
     try{ await entriesCol().doc(id).delete(); selected.delete(id); closeModal(); toast('Fail dipadam'); }catch(err){ $('eErr').textContent=writeErr(err); b.disabled=false; }
   };
 }
+const TEAM_ROLES=[['pm','Project Manager','PM','#0CA678'],['photo','Photographer','P','#E8590C'],['video','Videographer','V','#7048E8']];
+const roleOf=k=>TEAM_ROLES.find(r=>r[0]===k)||TEAM_ROLES[1];
+const teamOf=p=>(Array.isArray(p?.team)?p.team:[]).filter(m=>m&&String(m.name||'').trim()).slice().sort((a,b)=>TEAM_ROLES.findIndex(r=>r[0]===a.role)-TEAM_ROLES.findIndex(r=>r[0]===b.role));
+function renderTeamBar(p){
+  const t=teamOf(p), el=$('teamBar'); if(!el) return;
+  el.hidden=!t.length;
+  el.innerHTML = t.length ? `<span class="tlab">Team</span>`+t.map(m=>{ const r=roleOf(m.role); return `<span class="tchip" style="--rc:${r[3]}" title="${esc(r[1])}"><i>${r[2]}</i><span translate="no">${esc(m.name)}</span><small>${r[1]}</small></span>`; }).join('') : '';
+}
+function teamBadges(p){
+  const t=teamOf(p); if(!t.length) return '';
+  return `<span class="pcteam" title="Team">`+TEAM_ROLES.map(r=>{ const n=t.filter(m=>m.role===r[0]).length; return n?`<i style="--rc:${r[3]}" title="${n} ${r[1]}">${n}${r[2]}</i>`:''; }).join('')+`</span>`;
+}
 function openProject(isNew){
   const p=isNew?{name:'',master:'',type:'photo'}:cur();
   let type=p.type||'photo';
-  const canType = isNew || !entries.length;
+  const canType = isNew || !entriesAll.length;
   openModal(isNew?'Projek Baru':'Tetapan projek', `
     <div class="f"><label>Jenis projek</label>
-      ${canType?`<div class="seg" id="pType" role="group" aria-label="Jenis projek" style="align-self:flex-start"><button type="button" data-type="photo" aria-pressed="${type==='photo'}">Photo</button><button type="button" data-type="video" aria-pressed="${type==='video'}">Video</button></div>
-      <span class="hint" id="pTypeHint"></span>`:`<span class="typetag">${type==='video'?'VIDEO':'PHOTO'}</span>`}</div>
+      ${canType?`<div class="seg" id="pType" role="group" aria-label="Jenis projek" style="align-self:flex-start"><button type="button" data-type="photo" aria-pressed="${type==='photo'}">Photo</button><button type="button" data-type="video" aria-pressed="${type==='video'}">Video</button><button type="button" data-type="both" aria-pressed="${type==='both'}">Photo &amp; Video</button></div>
+      <span class="hint" id="pTypeHint"></span>`:`<span class="typetag">${type==='both'?'PHOTO &amp; VIDEO':type==='video'?'VIDEO':'PHOTO'}</span>`}</div>
     <div class="grid3" style="grid-template-columns:minmax(0,1fr) 110px">
       <div class="f"><label for="pName">Nama projek</label><input id="pName" value="${esc(p.name||'')}"></div>
       <div class="f"><label for="pYear">Tahun</label><input id="pYear" inputmode="numeric" value="${isNew?new Date().getFullYear():(p.year||guessYear(p, entries))}"></div>
@@ -1578,8 +1731,21 @@ function openProject(isNew){
       <div class="f"><label for="pCancel">Status projek</label><select id="pCancel"><option value="">Aktif</option><option value="1" ${p.cancelled?'selected':''}>CANCEL</option></select></div>
     </div>
     <div class="f"><label for="pMaster">Link master folder</label><input id="pMaster" type="url" value="${esc(p.master||'')}" placeholder="https://drive.google.com/drive/folders/…"><span class="hint" id="pMasterHint"></span></div>
+    <div class="f"><label>Team</label><div class="team-list" id="pTeam"></div>
+      <button type="button" class="btn sm team-add" id="pTeamAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Tambah ahli</button>
+      <span class="hint">Pilih peranan setiap orang. Bilangan ikut keperluan client.</span></div>
     <div class="err" id="pErr"></div>`,
     `${isNew?'':`<div class="left"><button class="btn danger" id="pDel">Padam projek</button><button class="btn" id="pArc">${p.archived?'Pulihkan dari arkib':'Arkibkan'}</button></div>`}<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="pSave">${isNew?'Cipta projek':'Simpan'}</button>`);
+  let team=(Array.isArray(p.team)?p.team:[]).map(m=>({role:roleOf(m.role)[0], name:String(m.name||'')}));
+  const drawTeam=()=>{
+    $('pTeam').innerHTML = team.length ? team.map((m,i)=>`<div class="team-row"><select data-ti="${i}" data-tf="role" aria-label="Peranan">${TEAM_ROLES.map(r=>`<option value="${r[0]}" ${m.role===r[0]?'selected':''}>${r[1]}</option>`).join('')}</select><input data-ti="${i}" data-tf="name" value="${esc(m.name)}" placeholder="Nama ahli" aria-label="Nama ahli" translate="no"><button type="button" class="btn ghost" data-tdel="${i}" title="Buang" aria-label="Buang">✕</button></div>`).join('') : '<div class="team-empty">Belum ada ahli team.</div>';
+  };
+  drawTeam();
+  $('pTeam').addEventListener('input',e=>{ const f=e.target.closest('[data-ti]'); if(f) team[+f.dataset.ti][f.dataset.tf]=f.value; });
+  $('pTeam').addEventListener('change',e=>{ const f=e.target.closest('[data-ti]'); if(f) team[+f.dataset.ti][f.dataset.tf]=f.value; });
+  $('pTeam').onclick=e=>{ const b=e.target.closest('[data-tdel]'); if(b){ team.splice(+b.dataset.tdel,1); drawTeam(); } };
+  $('pTeamAdd').onclick=()=>{ const last=team[team.length-1]; team.push({role: last?last.role:(type==='video'?'video':'photo'), name:''}); drawTeam(); const ins=$('pTeam').querySelectorAll('input'); ins[ins.length-1]?.focus(); };
+  const teamVal=()=>team.map(m=>({role:m.role, name:m.name.trim()})).filter(m=>m.name);
   const yearVal=()=>{ const y=parseInt($('pYear').value,10); return y>1990&&y<2200 ? y : new Date().getFullYear(); };
   if(!isNew) $('pArc').onclick=async()=>{
     $('pArc').disabled=true;
@@ -1590,30 +1756,30 @@ function openProject(isNew){
     }catch(err){ $('pArc').disabled=false; $('pErr').textContent=writeErr(err); }
   };
   const syncType=()=>{
-    $('pVideoF').hidden = type!=='video';
-    $('pName').placeholder = type==='video' ? 'Cth: HAMZAH & MIMI' : 'Cth: KONVOKESYEN 2026';
+    $('pVideoF').hidden = type==='photo';
+    $('pName').placeholder = type==='video' ? 'Cth: HAMZAH & MIMI' : type==='both' ? 'Cth: MAJLIS PERKAHWINAN ALI & SITI' : 'Cth: KONVOKESYEN 2026';
     $('pMasterHint').textContent = type==='video' ? 'Pilihan.' : '';
     if($('pType')){
       $('pType').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.type===type)));
-      $('pTypeHint').textContent = (!isNew?'Jenis boleh ditukar kerana projek ini belum ada data. ':'') + (type==='video' ? 'Senarai episod: item, status, ammend, location folder, script page, notes dan production feedback.' : 'Senarai nama fail ikut hari penggambaran: bilik, status, link footage dan link output.');
+      $('pTypeHint').textContent = (!isNew?'Jenis boleh ditukar kerana projek ini belum ada data. ':'') + (type==='both' ? 'Dua senarai dalam satu projek: fail photo dan episod video. Tukar antara keduanya dengan tab Photo / Video dalam projek.' : type==='video' ? 'Senarai episod: item, status, ammend, location folder, script page, notes dan production feedback.' : 'Senarai nama fail ikut hari penggambaran: bilik, status, link footage dan link output.');
     }
   };
   if($('pType')) $('pType').onclick=e=>{ const b=e.target.closest('[data-type]'); if(b){ type=b.dataset.type; syncType(); } };
   syncType();
   $('pSave').onclick=async()=>{
     const name=$('pName').value.trim(); if(!name){ $('pErr').textContent='Beri nama projek.'; return; }
-    const extra = type==='video' ? {label:$('pLabel').value.trim().toUpperCase(), cancelled:$('pCancel').value==='1'} : {};
+    const extra = type!=='photo' ? {label:$('pLabel').value.trim().toUpperCase(), cancelled:$('pCancel').value==='1'} : {};
     $('pSave').disabled=true;
     try{
-      if(isNew){ const ref=db.collection('projects').doc(); await ref.set({name, master:normLink($('pMaster').value), type, year:yearVal(), ...extra, createdAt:Date.now()}); selectProject(ref.id); }
-      else await db.collection('projects').doc(curPid).update({name, master:normLink($('pMaster').value), year:yearVal(), ...(canType?{type}:{}), ...extra});
+      if(isNew){ const ref=db.collection('projects').doc(); await ref.set({name, master:normLink($('pMaster').value), type, year:yearVal(), team:teamVal(), ...extra, createdAt:Date.now()}); selectProject(ref.id); }
+      else await db.collection('projects').doc(curPid).update({name, master:normLink($('pMaster').value), year:yearVal(), team:teamVal(), ...(canType?{type}:{}), ...extra});
       closeModal(); if(isNew) setView('project'); toast(isNew?'Projek dicipta':'Projek disimpan');
     }catch(err){ $('pSave').disabled=false; $('pErr').textContent=writeErr(err); }
   };
   if(!isNew) $('pDel').onclick=async()=>{
     const b=$('pDel');
-    if(!b.dataset.armed){ b.dataset.armed='1'; b.textContent=`Padam ${entries.length} ${isVid()?'episod':'fail'} & projek? Tekan lagi`; b.classList.add('solid'); return; }
-    b.disabled=true; const pid=curPid, col=entriesCol(), ids=entries.map(e=>e.id);
+    if(!b.dataset.armed){ b.dataset.armed='1'; b.textContent=`Padam ${entriesAll.length} ${isBoth(p)?'baris':isVid()?'episod':'fail'} & projek? Tekan lagi`; b.classList.add('solid'); return; }
+    b.disabled=true; const pid=curPid, col=db.collection(`projects/${pid}/entries`), ids=entriesAll.map(e=>e.id);
     try{
       for(let i=0;i<ids.length;i++){ b.textContent=`Memadam ${i+1}/${ids.length}…`; await col.doc(ids[i]).delete(); }
       await db.collection('projects').doc(pid).delete();
@@ -1771,7 +1937,7 @@ function openEditVideo(id){
     <div class="f"><label for="eFb">Production feedback</label><textarea id="eFb" style="min-height:64px">${esc(e.feedback||'')}</textarea></div>
     <div class="grid2">
       <div class="f"><label for="eStage">Penanda</label><select id="eStage"><option value="">Tiada</option><option value="OFFLINE" ${e.stage==='OFFLINE'?'selected':''}>OFFLINE (oren)</option><option value="ONLINE" ${e.stage==='ONLINE'?'selected':''}>ONLINE (hijau)</option></select></div>
-      <div class="f"><label for="ePP">Product placement</label><label class="radio" style="padding-top:8px"><input type="checkbox" id="ePP" ${e.pp?'checked':''}> Ada product placement (cyan)</label></div>
+      <div class="f"><label for="ePP">Product placement</label><label class="radio"><input type="checkbox" id="ePP" ${e.pp?'checked':''}> Ada product placement (cyan)</label></div>
     </div>
     <div class="err" id="eErr"></div>`,
     `<div class="left"><button class="btn danger" id="eDel">Padam</button></div><button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="eSave">Simpan</button>`);
@@ -1815,7 +1981,7 @@ function planVideo(rows, existing, authoritative){
   return {adds, updates, same};
 }
 function openVideoImport(secs, f, isPdf){
-  const vps=projects.filter(p=>(p.type||'photo')==='video');
+  const vps=projects.filter(hasVideoT);
   const allRows=secs.flatMap(s=>s.rows), total=epCount(allRows), totSc=allRows.filter(r=>sceneKey(r.scene)).length;
   const defTarget=s=>{ const m=vps.find(p=>keyOf(p.name)===keyOf(s.name)||keyOf(p.name)===keyOf(s.title)); return m?m.id:(isVid()&&secs.length===1?curPid:'new'); };
   openModal('Upload sheet video', `
@@ -1832,7 +1998,7 @@ function openVideoImport(secs, f, isPdf){
     `<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="iGo" disabled>Kemaskini</button>`);
   const plans=[], exist=[];
   const cache={};
-  const getEntries=async pid=>{ if(pid==='new') return []; if(pid===curPid) return entries; if(cache[pid]) return cache[pid]; try{ const s=await db.collection(`projects/${pid}/entries`).get(); return cache[pid]=s.docs.map(d=>({id:d.id,...d.data()})); }catch{ return []; } };
+  const getEntries=async pid=>{ if(pid==='new') return []; if(pid===curPid && curKind()==='video') return entries; if(cache[pid]) return cache[pid]; try{ const s=await kcol(pid,'video').get(); return cache[pid]=s.docs.map(d=>({id:d.id,...d.data()})); }catch{ return []; } };
   const refreshBtn=()=>{ let n=0, any=false; secs.forEach((s,i)=>{ if($('vi'+i)?.checked && plans[i]){ any=true; n+=plans[i].adds.length+plans[i].updates.length+(plans[i].proj?1:0); } }); $('iGo').disabled=!any; $('iGo').textContent= n?`Kemaskini (${n} perubahan)`:'Kemaskini'; };
   const sync=async i=>{
     const pid=$('vt'+i).value; $('vnf'+i).hidden = pid!=='new'; plans[i]=null; refreshBtn();
@@ -1854,12 +2020,12 @@ function openVideoImport(secs, f, isPdf){
         if(pid==='new'){ const ref=db.collection('projects').doc(); await ref.set({name:$('vn'+i).value.trim()||s.name, master:'', type:'video', label:s.label||'', cancelled:!!s.cancelled, createdAt:Date.now()}); pid=ref.id; }
         else if(plans[i].proj) await db.collection('projects').doc(pid).update(plans[i].proj);
         firstPid=firstPid||pid;
-        const col=db.collection(`projects/${pid}/entries`);
+        const col=kcol(pid,'video');
         let order=(exist[i]||[]).reduce((m,e)=>Math.max(m,e.order||0),0);
         for(const u of plans[i].updates){ b.textContent=`${s.name}: ${++updated}…`; await col.doc(u.id).update({...u.patch, updatedAt:Date.now()}); }
         for(const r of plans[i].adds){ b.textContent=`${s.name}: ${++added}…`; await col.doc().set({...r, order:++order, createdAt:Date.now(), updatedAt:Date.now()}); }
       }
-      if(firstPid && firstPid!==curPid) selectProject(firstPid);
+      if(firstPid && firstPid!==curPid){ if(isBoth(projects.find(x=>x.id===firstPid))) store.set('je.sub.'+firstPid,'video'); selectProject(firstPid); } else if(firstPid && isBoth(cur())) setSub('video');
       closeModal(); toast(`Siap: ${added} baru, ${updated} dikemaskini`);
     }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('iErr').textContent=writeErr(err); }
   };
@@ -1867,12 +2033,12 @@ function openVideoImport(secs, f, isPdf){
 
 /* ---------- video: download ---------- */
 async function videoEntriesOf(pid){
-  if(pid===curPid) return entries;
-  if(!db) return SNAP?.entries?.[pid]||[];
-  const s=await db.collection(`projects/${pid}/entries`).get(); return s.docs.map(d=>({id:d.id,...d.data()}));
+  if(pid===curPid && curKind()==='video') return entries;
+  if(!db){ const l=SNAP?.entries?.[pid]||[]; return isBoth(projects.find(x=>x.id===pid)) ? l.filter(e=>e.kind==='video') : l; }
+  const s=await kcol(pid,'video').get(); return s.docs.map(d=>({id:d.id,...d.data()}));
 }
 function openVideoExport(){
-  const p=cur(), vps=projects.filter(x=>(x.type||'photo')==='video');
+  const p=cur(), vps=projects.filter(hasVideoT);
   openModal('Download sheet video', `
     <div class="f"><label>Kandungan fail Excel</label>
       <label class="radio"><input type="radio" name="vx" value="one" checked> Projek ini sahaja: ${esc(p.name)}</label>
@@ -2533,13 +2699,13 @@ async function handleFile(f){
     if(!(vids&&vids.length) && !(res&&res.rows.length)){ toast('Tidak jumpa jadual dalam fail ini. Sheet photo perlu lajur "FILE NAME"; sheet video perlu lajur "ITEM" dan "STATUS".'); return; }
   }
   if(vids&&vids.length) return openVideoImport(vids, f, isPdf);
-  const photoPs=projects.filter(p=>(p.type||'photo')==='photo');
+  const photoPs=projects.filter(hasPhotoT);
   const match=photoPs.find(p=>keyOf(p.name)===keyOf(res.title));
   const def = match ? match.id : (curPid && !isVid() ? curPid : (photoPs[photoPs.length-1]?.id || 'new'));
   openModal('Upload sheet', `
     <p style="margin:0">Jumpa <strong>${res.rows.length} fail</strong> dalam <span class="mono">${esc(f.name)}</span>. Nama fail yang sudah ada akan dikemaskini, nama baru akan ditambah.</p>
     <div class="f"><label for="iTarget">Projek</label><select id="iTarget">
-      ${projects.filter(p=>(p.type||'photo')==='photo').map(p=>`<option value="${esc(p.id)}" ${p.id===def?'selected':''}>${esc(p.name)}</option>`).join('')}
+      ${projects.filter(hasPhotoT).map(p=>`<option value="${esc(p.id)}" ${p.id===def?'selected':''}>${esc(p.name)}</option>`).join('')}
       <option value="new" ${def==='new'?'selected':''}>+ Projek photo baru</option></select></div>
     <div class="f" id="iNameF"><label for="iName">Nama projek baru</label><input id="iName" value="${esc(res.title)}"></div>
     ${isPdf?`<div class="f"><label>Semak bacaan PDF</label><div style="overflow-x:auto;border:1px solid var(--line);border-radius:8px"><table style="border-collapse:collapse;font-size:12px;width:100%">
@@ -2553,8 +2719,8 @@ async function handleFile(f){
   const sync=async()=>{
     const pid=$('iTarget').value; $('iNameF').hidden = pid!=='new'; $('iGo').disabled=true;
     if(pid==='new') existing=[];
-    else if(pid===curPid) existing=entries;
-    else { try{ const s=await db.collection(`projects/${pid}/entries`).get(); existing=s.docs.map(d=>({id:d.id,...d.data()})); }catch{ existing=[]; } }
+    else if(pid===curPid && curKind()==='photo') existing=entries;
+    else { try{ const s=await kcol(pid,'photo').get(); existing=s.docs.map(d=>({id:d.id,...d.data()})); }catch{ existing=[]; } }
     if($('iTarget')?.value!==pid) return;
     plan=planImport(res.rows, existing);
     const ex=plan.updates.slice(0,6).map(u=>`<li><strong>${esc(u.name)}</strong>: ${Object.keys(u.patch).map(k=>k==='status'?`${esc(u.old.status||'—')} → ${esc(u.patch.status)}`:k==='footage'||k==='output'?`link ${k} ${u.old[k]?'ditukar':'ditambah'}`:k==='date'?`tarikh → ${fmtDate(u.patch.date)}`:k==='room'?`bilik → ${esc(u.patch.room)}`:k==='editor'?`editor → ${esc(u.patch.editor)}`:'catatan').join(', ')}</li>`).join('');
@@ -2574,12 +2740,12 @@ async function handleFile(f){
       } else if(res.master){
         const p=projects.find(x=>x.id===pid); if(p && p.master!==res.master) await db.collection('projects').doc(pid).update({master:res.master});
       }
-      const col=db.collection(`projects/${pid}/entries`);
+      const col=kcol(pid,'photo');
       let order=existing.reduce((m,e)=>Math.max(m,e.order||0),0);
       const total=plan.adds.length+plan.updates.length; let i=0;
       for(const u of plan.updates){ b.textContent=`Mengemaskini ${++i}/${total}…`; await col.doc(u.id).update({...u.patch, updatedAt:Date.now()}); }
       for(const r of plan.adds){ b.textContent=`Mengemaskini ${++i}/${total}…`; await col.doc().set({...r, order:++order, createdAt:Date.now(), updatedAt:Date.now()}); }
-      if(pid!==curPid) selectProject(pid);
+      if(pid!==curPid){ if(isBoth(projects.find(x=>x.id===pid))) store.set('je.sub.'+pid,'photo'); selectProject(pid); } else if(isBoth(cur())) setSub('photo');
       closeModal(); toast(`Siap: ${plan.adds.length} baru, ${plan.updates.length} dikemaskini`);
     }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('iErr').textContent=writeErr(err); }
   };
@@ -2675,8 +2841,8 @@ function loadJsPdf(){
 }
 const hasComment = (e, video) => video ? !!(String(e.notes||'').trim()||String(e.feedback||'').trim()) : !!String(e.notes||'').trim();
 const pdfText = s => String(s??'').replace(/[​-‏⁠﻿]/g,'').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,'-').replace(/…/g,'...').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g,'').trim();
-const RPT_STATUS = {ok:[228,245,236], run:[255,241,220], rev:[253,235,234], idle:[240,240,241], sent:[233,238,255]};
-const RPT_STATUS_INK = {ok:[18,128,92], run:[180,83,9], rev:[200,50,44], idle:[95,99,104], sent:[47,85,212]};
+const RPT_STATUS = {todo:[254,226,226], ok:[228,245,236], run:[255,241,220], rev:[253,235,234], idle:[240,240,241], sent:[233,238,255]};
+const RPT_STATUS_INK = {todo:[220,38,38], ok:[18,128,92], run:[180,83,9], rev:[200,50,44], idle:[95,99,104], sent:[47,85,212]};
 function buildReport(JsPDF, p, rows, o){
   // o: {video, onlyComments, note, statusOf(status)->class, dayOf(date)->n, fmtDate(date)->text, total, generatedAt}
   const doc=new JsPDF({orientation:'landscape', unit:'pt', format:'a4'});
@@ -2766,8 +2932,10 @@ function openReport(){
   openModal('Report PDF untuk editor', `
     <p style="margin:0">Senarai ${V?'episod':'fail'} <strong>${esc(p.name)}</strong> beserta ${V?'notes dan production feedback':'komen / catatan'} setiap item, dalam format PDF untuk diberi kepada editor.</p>
     <div class="f"><label>Kandungan</label>
-      <label class="radio"><input type="radio" name="rpOnly" value="1" ${withC?'checked':''} ${withC?'':'disabled'}> Hanya item yang ada komen (${withC})</label>
-      <label class="radio"><input type="radio" name="rpOnly" value="0" ${withC?'':'checked'}> Semua item (${all.length})</label>
+      <div class="ropts">
+      <label class="radio"><input type="radio" name="rpOnly" value="1" ${withC?'checked':''} ${withC?'':'disabled'}><span>Hanya item yang ada komen</span><span class="rcount">${withC}</span></label>
+      <label class="radio"><input type="radio" name="rpOnly" value="0" ${withC?'':'checked'}><span>Semua item</span><span class="rcount">${all.length}</span></label>
+      </div>
     </div>
     ${!V&&editorsOf(all).length?`<div class="f"><label for="rpEd">Editor</label><select id="rpEd"><option value="ALL">Semua editor</option>${editorsOf(all).map(n=>`<option ${filt.editor===n?'selected':''}>${esc(n)}</option>`).join('')}</select><span class="hint">Pilih editor untuk jana report khusus untuk dia sahaja.</span></div>`:''}
     <div class="f"><label for="rpStatus">Status</label><select id="rpStatus"><option value="ALL">Semua status</option>${stList().map(s=>`<option value="${s.v}" ${filt.status===s.v?'selected':''}>${s.v}</option>`).join('')}</select></div>
@@ -2788,7 +2956,7 @@ function openReport(){
       const JsPDF=await loadJsPdf();
       const rows=pick(), dm=dayMap();
       const only=document.querySelector('input[name=rpOnly]:checked')?.value==='1';
-      const doc=buildReport(JsPDF, p, rows, {video:V, onlyComments:only, note:$('rpNote').value, statusFilter:$('rpStatus').value, editorFilter:$('rpEd')?.value||'ALL', statusOf:sClass, dayOf:d=>dm[d], fmtDate:d=>fmtDate(d), total:all.length});
+      const doc=buildReport(JsPDF, p, rows, {video:V, onlyComments:only, note:$('rpNote').value, statusFilter:$('rpStatus').value, editorFilter:$('rpEd')?.value||'ALL', statusOf:dClass, dayOf:d=>dm[d], fmtDate:d=>fmtDate(d), total:all.length});
       const blob=doc.output('blob');
       const d=new Date(), ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
       const edSel=$('rpEd')?.value||'ALL';
@@ -2811,7 +2979,7 @@ async function restoreProject(pid){
   toast(`"${p.name}" dipulihkan`);
 }
 async function entriesOf(pid){
-  if(pid===curPid && entriesLoaded) return entries;
+  if(pid===curPid && entriesLoaded) return entriesAll;
   if(!db) return SNAP?.entries?.[pid]||[];
   const s=await db.collection(`projects/${pid}/entries`).get(); return s.docs.map(d=>({id:d.id,...d.data()}));
 }
@@ -2822,7 +2990,12 @@ async function saveWb(wb, fname){
 }
 async function addProjectSheet(wb, p){
   const list=await entriesOf(p.id);
-  if((p.type||'photo')==='video') addVideoSheet(wb, p, sortVideo(list));
+  if(isBoth(p)){
+    const ph=list.filter(e=>(e.kind||'photo')==='photo'), vi=list.filter(e=>e.kind==='video');
+    if(ph.length||!vi.length) buildWorkbook(p, sortPhoto(ph), dayMapOf(ph), XLSX, wb);
+    if(vi.length) addVideoSheet(wb, p, sortVideo(vi));
+  }
+  else if(ptype(p)==='video') addVideoSheet(wb, p, sortVideo(list));
   else buildWorkbook(p, sortPhoto(list), dayMapOf(list), XLSX, wb);
 }
 const safeName = s => (String(s||'').replace(/[^\w\- &]+/g,'').trim()||'projek');
@@ -2835,7 +3008,7 @@ function openArchive(){
     const years=[...new Set(list.map(projYear))].sort((a,b)=>b-a);
     $('arList').innerHTML=years.map(y=>{
       const inY=list.filter(p=>projYear(p)===y);
-      const types=[['photo','PHOTO'],['video','VIDEO']].map(([t,l])=>[t,l,inY.filter(p=>(p.type||'photo')===t).sort((a,b)=>String(a.name).localeCompare(String(b.name)))]).filter(x=>x[2].length);
+      const types=[['photo','PHOTO'],['video','VIDEO'],['both','PHOTO & VIDEO']].map(([t,l])=>[t,l,inY.filter(p=>ptype(p)===t).sort((a,b)=>String(a.name).localeCompare(String(b.name)))]).filter(x=>x[2].length);
       return `<section><div class="ayear-h"><h4>${y}</h4><span class="meta">${inY.length} projek</span></div>
         ${types.map(([t,l,ps])=>`<div class="atype"><div class="atype-h"><span class="typetag">${l}</span><span class="meta">${ps.length} projek</span>${dl?`<button class="btn sm" data-arc-dlgroup="${y}|${t}">Download semua ${l.toLowerCase()} ${y}</button>`:''}</div>
           ${ps.map(p=>`<div class="aitem"><div class="aname"><strong translate="no">${esc(p.name)}</strong><small>${p.archivedAt?'Diarkib '+fmtTs(p.archivedAt):'Diarkib'}${p.label?' · '+esc(p.label):''}${p.cancelled?' · CANCEL':''}</small></div>
@@ -2890,7 +3063,7 @@ document.addEventListener('click',async ev=>{
 });
 document.addEventListener('change',async ev=>{
   const s=ev.target.closest('[data-status-of]'); if(!s) return;
-  const id=s.dataset.statusOf; s.className='pill s-'+sClass(s.value);
+  const id=s.dataset.statusOf; s.className='pill s-'+dClass(s.value);
   try{ await entriesCol().doc(id).update({status:s.value, updatedAt:Date.now()}); toast('Status: '+s.value); }catch(err){ toast(writeErr(err)); render(); }
 });
 $('projsel').onchange=e=>selectProject(e.target.value);
@@ -2902,6 +3075,56 @@ $('rail').addEventListener('click',e=>{ const b=e.target.closest('[data-nav]'); 
   else if(n==='archive'){ closeAct(); closeSearch(); openArchive(); }
   else if(n==='new'){ closeAct(); closeSearch(); openProject(true); } });
 $('rAvatar').addEventListener('click',e=>{ e.stopPropagation(); toggleUser(); });
+const MI={"xls": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"18\" rx=\"2\"/><path d=\"M4 9h16M4 15h16M10 3v18\"/></svg>", "pdf": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8z\"/><path d=\"M14 3v5h5M8 13h8M8 17h5\"/></svg>", "both": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"5\" width=\"13\" height=\"15\" rx=\"2\"/><path d=\"M8 5V4a1 1 0 011-1h11a1 1 0 011 1v13a1 1 0 01-1 1h-4\"/></svg>", "plus": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\"><path d=\"M12 5v14M5 12h14\"/></svg>", "up": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 15V3M7 8l5-5 5 5M5 21h14\"/></svg>", "gear": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z\"/></svg>", "arc": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"5\" rx=\"1\"/><path d=\"M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4\"/></svg>"};
+let menuEl=null, menuBtn=null;
+function closeMenu(){ if(menuEl){ menuEl.remove(); menuEl=null; } if(menuBtn){ menuBtn.setAttribute('aria-expanded','false'); menuBtn=null; } }
+function openMenu(btn, items){
+  if(menuBtn===btn){ closeMenu(); return; }
+  closeMenu();
+  const m=document.createElement('div'); m.className='dmenu'; m.setAttribute('role','menu');
+  m.innerHTML=items.map((it,i)=>it==='-'?'<hr>':`<button type="button" role="menuitem" data-mi="${i}"><span class="mi-ico">${MI[it.icon]||''}</span><span class="mi-tx"><b>${esc(it.label)}</b>${it.desc?`<small>${esc(it.desc)}</small>`:''}</span></button>`).join('');
+  document.body.appendChild(m); menuEl=m; menuBtn=btn; btn.setAttribute('aria-expanded','true');
+  const r=btn.getBoundingClientRect(), w=m.offsetWidth, h=m.offsetHeight;
+  let left = r.left+w <= innerWidth-8 ? r.left : r.right-w;
+  left=Math.max(8, Math.min(left, innerWidth-w-8));
+  const below=r.bottom+6, top = (below+h>innerHeight-8 && r.top-h-6>8) ? r.top-h-6 : below;
+  m.style.left=(left+scrollX)+'px'; m.style.top=(top+scrollY)+'px';
+  m.onclick=e=>{ const b=e.target.closest('[data-mi]'); if(!b) return; const it=items[+b.dataset.mi]; closeMenu(); it.run(); };
+  setTimeout(()=>m.querySelector('[data-mi]')?.focus({preventScroll:true}),0);
+}
+document.addEventListener('click',e=>{ if(menuEl && !menuEl.contains(e.target) && !(menuBtn && menuBtn.contains(e.target))) closeMenu(); });
+document.addEventListener('keydown',e=>{ if(!menuEl) return;
+  if(e.key==='Escape'){ const b=menuBtn; closeMenu(); b?.focus(); e.stopPropagation(); return; }
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); const bs=[...menuEl.querySelectorAll('[data-mi]')]; let i=bs.indexOf(document.activeElement); i=(i+(e.key==='ArrowDown'?1:-1)+bs.length)%bs.length; bs[i].focus(); } }, true);
+addEventListener('resize',closeMenu);
+async function exportFullBoth(){
+  if(!window.XLSX||!dl){ toast('Download tidak tersedia di sini.'); return; }
+  const p=cur(); const wb=XLSX.utils.book_new(); await addProjectSheet(wb,p);
+  await saveWb(wb, safeName(p.name)+'.xlsx');
+}
+$('btnDl').onclick=()=>{
+  const p=cur(); if(!p) return; const both=isBoth(p), tab=sub==='video'?'Video':'Photo';
+  const items=[{icon:'xls', label: both?`Sheet Excel (${tab})`:'Sheet Excel', desc: isVid()?'Format asal sheet video (.xlsx)':'Format asal jadual (.xlsx)', run:()=>doExport()}];
+  if(both) items.push({icon:'both', label:'Sheet penuh Photo + Video', desc:'Satu fail Excel, dua tab', run:()=>exportFullBoth()});
+  items.push({icon:'pdf', label:'Report PDF', desc:'Senarai dan komen untuk editor', run:()=>openReport()});
+  openMenu($('btnDl'), items);
+};
+$('btnUp').onclick=()=>{
+  const V=isVid();
+  openMenu($('btnUp'), [
+    {icon:'plus', label: V?'Tambah episod':'Tambah fail', desc:'Isi secara manual', run:()=>openAdd()},
+    {icon:'up', label:'Upload sheet', desc:'Excel atau PDF, dikemas kini automatik', run:()=>openImport()},
+  ]);
+};
+$('btnProjMenu').onclick=()=>{
+  const p=cur(), na=archivedList().length;
+  openMenu($('btnProjMenu'), [
+    ...(p?[{icon:'gear', label:'Tetapan projek', desc:'Nama, jenis, team, link, arkib', run:()=>openProject(false)}, '-']:[]),
+    {icon:'plus', label:'Projek baru', desc:'Cipta projek lain', run:()=>openProject(true)},
+    {icon:'arc', label: na?`Arkib (${na})`:'Arkib', desc:'Projek yang sudah selesai', run:()=>openArchive()},
+  ]);
+};
+$('subTabs').onclick=e=>{ const b=e.target.closest('[data-sub]'); if(b) setSub(b.dataset.sub); };
 $('uSignIn').onclick=()=>{ toggleUser(false); window.ESC?.signIn?.(); };
 $('uSignOut').onclick=()=>{ toggleUser(false); window.ESC?.signOut?.(); };
 $('uAdmins').onclick=()=>{ toggleUser(false); openAdmins(); };
@@ -2952,7 +3175,7 @@ window.addEventListener('hashchange',()=>{ clientPid=hashPid(); if(clientPid && 
 $('btnShare').onclick=()=>{
   const p=cur(); if(!p) return;
   const link=`${APP_URL}#p-${p.id}`;
-  openModal('Kongsi ke client', `
+  openModal('Kongsi Pautan', `
     <p style="margin:0">Link ini terus membuka <strong>${esc(p.name)}</strong> dalam Mod Lihat. Client hanya boleh melihat dan download sheet; mereka tidak boleh tambah, edit atau padam apa-apa.</p>
     <div class="f"><label for="shLink">Link untuk client</label>
       <div style="display:flex;gap:8px"><input id="shLink" readonly value="${esc(link)}" class="mono" style="font-size:12px"><button class="btn primary" id="shCopy">Salin</button></div></div>
