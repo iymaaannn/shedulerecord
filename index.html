@@ -1394,7 +1394,7 @@ const EN = {
   'Salin sebagai dokumen baru':'Copy as a new document',
   'Buang dokumen ini':'Remove this document',
   'Padam dokumen?':'Delete document?',
-  'Dokumen dipadam':'Document deleted', 'Resit {0} dijana untuk {1}':'Receipt {0} generated for {1}',
+  'Dokumen dipadam':'Document deleted', 'Jana Resit ({0})':a=>`Generate Receipts (${a[0]})`, '{0} resit dijana':a=>`${a[0]} ${pl(a[0],'receipt','receipts')} generated`, 'Transaksi disimpan · resit dijana':'Transaction saved · receipt generated', ' · {0} resit dijana':a=>` · ${a[0]} ${pl(a[0],'receipt','receipts')} generated`, 'Resit {0} dijana untuk {1}':'Receipt {0} generated for {1}',
   'Cetak / Simpan PDF':'Print / Save PDF',
   'Tutup':'Close',
   'Tarikh bayaran':'Payment date',
@@ -4588,7 +4588,7 @@ function renderLedger(el){
   for(const [k,list] of months){
     const [y,m]=k.split('-').map(Number); let lastDate='';
     list.forEach(r=>{ const [h,...rest]=String(r.cat||'').trim()?[r.cat, r.item]:[r.item]; 
-      body+=`<tr data-tx="${esc(r.id)}"><td class="nw">${r.date!==lastDate?esc(dmyS(r.date)):''}</td><td><b translate="no">${esc(r.cat||r.item||'-')}</b>${r.cat&&r.item?`<small translate="no">${esc(r.item)}</small>`:''}${r.src==='bigpay'?'<span class="lg-src">BigPay</span>':''}${pvLinked(r)?`<button class="lg-pv" data-pvdl="${esc(r.pvId)}" title="Download baucar bayaran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>PV ${esc(pvLinked(r).no.split('/').slice(2,3).join('')||'')}</button>`:''}</td>
+      body+=`<tr data-tx="${esc(r.id)}"><td class="nw">${r.date!==lastDate?esc(dmyS(r.date)):''}</td><td><b translate="no">${esc(r.cat||r.item||'-')}</b>${r.cat&&r.item?`<small translate="no">${esc(r.item)}</small>`:''}${r.src==='bigpay'?'<span class="lg-src">BigPay</span>':''}${pvLinked(r)?`<button class="lg-pv" data-pvdl="${esc(r.pvId)}" title="Download baucar bayaran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>PV ${esc(pvLinked(r).no.split('/').slice(2,3).join('')||'')}</button>`:''}${rcLinked(r)?`<button class="lg-pv" data-pvdl="${esc(r.rcId)}" title="Download resit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>RCPT ${esc(rcLinked(r).no.split('/').slice(2,3).join('')||'')}</button>`:''}</td>
         <td class="r mono in">${+r.in?fmtNum(r.in):'-'}</td><td class="r mono out">${+r.out?fmtNum(r.out):'-'}</td><td class="r mono">${fmtNum(r.bal)}</td><td class="lg-note" translate="no">${r.notes?(/^https?:\/\//.test(r.notes)?`<a href="${esc(r.notes)}" target="_blank" rel="noopener">Lihat lampiran ↗</a>`:esc(r.notes)):''}</td></tr>`; lastDate=r.date; });
     const endBal=list[list.length-1].bal, net=r2(endBal-prevBal);
     body+=`<tr class="lg-close"><td colspan="4">${MONTH_UP[m-1]} ${k<ym?'CLOSE':'(SEMASA)'}</td><td class="r mono">${fmtNum(endBal)}</td><td class="r mono ${net<0?'neg':''}">Net ${net<0?'-':'+'}${fmtRM(Math.abs(net))}</td></tr>`;
@@ -4600,7 +4600,7 @@ function renderLedger(el){
       <div class="hs-card glass"><span class="lab">Keluar Bulan Ini</span><b class="fbig">${fmtRM(mOut)}</b><small>Amount out</small></div>
       <div class="hs-card glass"><span class="lab">Net Bulan Ini</span><b class="fbig">${mIn-mOut<0?'-':''}${fmtRM(Math.abs(mIn-mOut))}</b><small>${MONTH_UP[+ym.slice(5)-1].toLowerCase()}</small></div></div></section>
     <div class="ftools"><span class="fsum">Baki awal <b>${fmtRM(open)}</b>${finLed.openingDate?` pada ${esc(dmyS(finLed.openingDate))}`:''} <button class="btn sm ghost" id="lgOpen">Ubah</button></span>
-      ${(()=>{ const n=finTx.filter(t=>isPayOut(t)&&!pvLinked(t)).length; return n?`<button class="btn" id="lgPV">Jana Baucar (${n})</button>`:''; })()}
+      ${(()=>{ const n=finTx.filter(t=>isPayOut(t)&&!pvLinked(t)).length; return n?`<button class="btn" id="lgPV">Jana Baucar (${n})</button>`:''; })()}${(()=>{ const n=finTx.filter(t=>isMoneyIn(t)&&!rcLinked(t)).length; return n?`<button class="btn" id="lgRC">Jana Resit (${n})</button>`:''; })()}
       <button class="btn" id="lgDl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download Excel</button>
       <button class="btn primary" id="lgUp" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Upload<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button></div>
     ${rows.length||open?`<div class="ftbl lg"><table><thead><tr><th>Tarikh</th><th>Item</th><th class="r">Amount In (RM)</th><th class="r">Amount Out (RM)</th><th class="r">Balance (RM)</th><th>Notes</th></tr></thead><tbody>${body}</tbody></table></div>`
@@ -4610,7 +4610,7 @@ function renderLedger(el){
     {icon:'xls', label:'Penyata bank (CSV)', desc:'Lajur tarikh, keterangan, amaun', run:()=>pickFile('.csv,text/csv', f=>importBank(f))},
     {icon:'xls', label:'Import Excel lama', desc:'Sheet "RECEIVE AND SPENT" sedia ada', run:()=>pickFile('.xlsx,.xls', f=>importOldLedger(f))},
     '-', {icon:'plus', label:'Tambah transaksi', desc:'Isi secara manual', run:()=>openTx(null)}]);
-  $('lgOpen').onclick=openOpening; $('lgDl').onclick=exportLedger; if($('lgPV')) $('lgPV').onclick=backfillPV;
+  $('lgOpen').onclick=openOpening; $('lgDl').onclick=exportLedger; if($('lgPV')) $('lgPV').onclick=backfillPV; if($('lgRC')) $('lgRC').onclick=backfillRC;
 }
 const dmyS=iso=>{ if(!iso) return ''; const [y,m,d]=iso.split('-'); return `${+d}/${m}/${y}`; };
 function pickFile(accept, fn){ const i=document.createElement('input'); i.type='file'; i.accept=accept; i.onchange=()=>{ if(i.files[0]) fn(i.files[0]); }; i.click(); }
@@ -4639,8 +4639,40 @@ function openTx(id){
     if(!(amt>0)){ $('txErr').textContent='Masukkan amaun.'; return; } if(!$('txDate').value){ $('txErr').textContent='Pilih tarikh.'; return; }
     const data={date:$('txDate').value, cat:$('txCat').value.trim(), item:$('txItem').value.trim(), in:d==='in'?amt:0, out:d==='out'?amt:0, notes:$('txNotes').value.trim(), updatedAt:Date.now()};
     try{ let tt; if(id){ await db.collection('fin_tx').doc(id).update(data); tt={...t, ...data, id}; } else { const ref=db.collection('fin_tx').doc(); const nd={...data, src:'manual', seq:Date.now(), createdAt:Date.now()}; await ref.set(nd); tt={...nd, id:ref.id}; }
-      const pv=await ensurePV(tt); closeModal(); toast(pv&&!pvLinked(t)?'Transaksi disimpan · baucar dijana':'Transaksi disimpan'); }catch(err){ $('txErr').textContent=writeErr(err); } };
-  if(id) $('txDel').onclick=async()=>{ const b=$('txDel'); if(!b.dataset.armed){ b.dataset.armed=1; b.textContent='Tekan lagi untuk padam'; b.classList.add('solid'); return; } try{ const pv=pvLinked(t); if(pv && pv.auto) await db.collection('fin_docs').doc(pv.id).delete(); await db.collection('fin_tx').doc(id).delete(); closeModal(); toast(pv&&pv.auto?'Transaksi & baucar dipadam':'Transaksi dipadam'); }catch(err){ $('txErr').textContent=writeErr(err); } };
+      const pv=await ensurePV(tt), rc=await ensureRC(tt); closeModal(); toast(pv&&!pvLinked(t)?'Transaksi disimpan · baucar dijana':rc&&!rcLinked(t)?'Transaksi disimpan · resit dijana':'Transaksi disimpan'); }catch(err){ $('txErr').textContent=writeErr(err); } };
+  if(id) $('txDel').onclick=async()=>{ const b=$('txDel'); if(!b.dataset.armed){ b.dataset.armed=1; b.textContent='Tekan lagi untuk padam'; b.classList.add('solid'); return; } try{ const pv=pvLinked(t), rc=rcLinked(t); if(pv && pv.auto) await db.collection('fin_docs').doc(pv.id).delete(); if(rc && rc.auto && rc.txId===id && !rc.invId) await db.collection('fin_docs').doc(rc.id).delete(); else if(rc) await db.collection('fin_docs').doc(rc.id).update({txId:''}); await db.collection('fin_tx').doc(id).delete(); closeModal(); toast(pv&&pv.auto?'Transaksi & baucar dipadam':'Transaksi dipadam'); }catch(err){ $('txErr').textContent=writeErr(err); } };
+}
+/* --- auto official receipts for money IN on the Akaun ledger --- */
+const RC_SKIP=/^(transfer|balance|baki|opening|refund|pindahan)$/i;
+const isMoneyIn = t => (+t.in||0)>0 && !RC_SKIP.test(String(t.cat||'').trim());
+const rcLinked = t => t.rcId && finDocs.find(d=>d.id===t.rcId);
+function rcNumberer(){ const issued=new Set();
+  const bump=no=>{ const m=no.match(/^(.*?\/[^/]+\/)(\d+)(\/.*)$/)||no.match(/^(.*-)(\d+)()$/); return m? m[1]+String(+m[2]+1).padStart(m[2].length,'0')+m[3] : no+'-1'; };
+  return date=>{ let no=nextNo('rcpt',date); const all=new Set(finDocs.filter(d=>d.type==='rcpt').map(d=>d.no)); while(issued.has(no)||all.has(no)) no=bump(no); issued.add(no); return no; }; }
+function rcFromTx(t, no){
+  const full=t.payee || (t.raw?String(t.raw).split(' · ')[0]:'') || '';
+  const cli=finClients.find(c=>full && String(c.name||'').toLowerCase()===full.toLowerCase());
+  const desc=[t.cat, t.item].filter(Boolean).map(x=>String(x).toUpperCase()).join('\n') || 'PAYMENT RECEIVED';
+  return {type:'rcpt', no, date:t.date, status:'Dikeluarkan', client:cli?{name:cli.name||'', attn:cli.attn||'', address:cli.address||'', phone:cli.phone||'', email:cli.email||''}:{name:full||t.item||'-', attn:'', address:'', phone:'', email:''}, clientId:cli?.id||'',
+    pid:'', title:'', items:[{desc, qty:1, unit:'', price:r2(t.in)}], discount:0, taxOn:false, taxRate:0, paidAmt:r2(t.in), balAfter:0, invId:'', invNo:'',
+    method:t.src==='bigpay'?'Pindahan Online (BigPay)':'Pindahan Online', ref:t.extId||'', notes:'', payments:[], txId:t.id, auto:true, total:r2(t.in), createdAt:Date.now(), updatedAt:Date.now()};
+}
+async function ensureRC(t, numberer){
+  if(!isMoneyIn(t)) return null;
+  const ex=rcLinked(t);
+  if(ex){ if(!ex.auto || ex.invId) return ex.id; const upd=rcFromTx(t, ex.no); await db.collection('fin_docs').doc(ex.id).set({...upd, no:ex.no, status:ex.status, createdAt:ex.createdAt||Date.now(), updatedAt:Date.now()}); return ex.id; }
+  // reuse a receipt already issued for an invoice payment of the same amount (±7 days) instead of making a second one
+  const near=(a,b)=>Math.abs(new Date(a)-new Date(b))<=7*864e5;
+  const m=finDocs.find(d=>d.type==='rcpt' && !d.txId && d.status!=='Batal' && Math.abs(docCalc(d).paid-r2(t.in))<0.005 && d.date && t.date && near(d.date,t.date) && !finTx.some(x=>x.rcId===d.id));
+  if(m){ await db.collection('fin_docs').doc(m.id).update({txId:t.id, updatedAt:Date.now()}); await db.collection('fin_tx').doc(t.id).update({rcId:m.id}); return m.id; }
+  const ref=db.collection('fin_docs').doc(); await ref.set(rcFromTx(t, (numberer||rcNumberer())(t.date)));
+  await db.collection('fin_tx').doc(t.id).update({rcId:ref.id}); return ref.id;
+}
+async function backfillRC(){
+  const miss=finTx.filter(t=>isMoneyIn(t) && !rcLinked(t)).sort(txSort); if(!miss.length) return;
+  const b=$('lgRC'); if(b){ b.disabled=true; } const num=rcNumberer(); let i=0;
+  try{ for(const t of miss){ if(b) b.textContent=`Menjana ${++i}/${miss.length}…`; await ensureRC(t, num); } toast(`${miss.length} resit dijana`); }
+  catch(err){ toast(writeErr(err)); }
 }
 /* --- auto official receipts: invoice paid, or linked project's work all SUBMIT / DONE --- */
 const WORK_DONE=new Set(['SUBMIT','DONE']), WORK_SKIP=new Set(['BATAL','CANCEL']);
@@ -4795,12 +4827,12 @@ async function importBank(file){
   $('biList').oninput=e=>{ const f=e.target.closest('[data-bf]'); if(f) plan[+f.dataset.bi][f.dataset.bf]=f.value; };
   $('biList').onchange=e=>{ const c=e.target.closest('[data-bk]'); if(c){ plan[+c.dataset.bk].keep=c.checked; draw(); } };
   $('biGo').onclick=async()=>{ const b=$('biGo'); b.disabled=true; const rules={...(finLed.rules||{})};
-    try{ let i=0, nPV=0; const now=Date.now(), num=pvNumberer(); for(const p of plan.filter(x=>x.keep)){ b.textContent=`Menyimpan ${++i}…`;
+    try{ let i=0, nPV=0, nRC=0; const now=Date.now(), num=pvNumberer(), rnum=rcNumberer(); for(const p of plan.filter(x=>x.keep)){ b.textContent=`Menyimpan ${++i}…`;
         const tref=db.collection('fin_tx').doc(); const tdata={date:p.date, cat:p.cat.trim(), item:p.item.trim(), in:p.in, out:p.out, notes:p.notes||'', src:/\.csv$/i.test(file.name)?'csv':'bigpay', extId:p.extId, raw:[titleName(p.name),p.catRaw,p.type].filter(Boolean).join(' · '), payee:titleName(p.name), payBank:p.bank||'', payAcc:p.acc||'', seq:now+i, createdAt:now, updatedAt:now};
-        await tref.set(tdata); if(isPayOut(tdata)){ await ensurePV({...tdata, id:tref.id}, num); nPV++; }
+        await tref.set(tdata); if(isPayOut(tdata)){ await ensurePV({...tdata, id:tref.id}, num); nPV++; } if(isMoneyIn(tdata)){ await ensureRC({...tdata, id:tref.id}, rnum); nRC++; }
         rules[nameKey(p.name)]={cat:p.cat.trim(), item:p.item.trim()}; }
       await db.collection('fin_settings').doc('ledger').set({...finLed, rules, updatedAt:Date.now()});
-      closeModal(); toast(`${i} transaksi dimasukkan${nPV?` · ${nPV} baucar dijana`:''}`); }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('biErr').textContent=writeErr(err); } };
+      closeModal(); toast(`${i} transaksi dimasukkan${nPV?` · ${nPV} baucar dijana`:''}${nRC?` · ${nRC} resit dijana`:''}`); }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('biErr').textContent=writeErr(err); } };
 }
 async function importOldLedger(file){
   if(!window.XLSX){ toast('Pembaca Excel belum dimuatkan.'); return; }
@@ -4831,7 +4863,7 @@ async function importOldLedger(file){
     `<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="oiGo">Import ${tx.length} transaksi</button>`);
   $('oiGo').onclick=async()=>{ const b=$('oiGo'); b.disabled=true; try{ const now=Date.now(); let i=0;
       if(!finTx.length && opening!==null) await db.collection('fin_settings').doc('ledger').set({...finLed, opening:r2(opening), openingDate:openingDate||tx[0].date, updatedAt:now});
-      const num=pvNumberer(); for(const t of tx){ b.textContent=`Menyimpan ${++i}/${tx.length}…`; const tref=db.collection('fin_tx').doc(); const td={...t, src:'excel', seq:now+i, createdAt:now, updatedAt:now}; await tref.set(td); if(isPayOut(td)) await ensurePV({...td, id:tref.id}, num); }
+      const num=pvNumberer(), rnum=rcNumberer(); for(const t of tx){ b.textContent=`Menyimpan ${++i}/${tx.length}…`; const tref=db.collection('fin_tx').doc(); const td={...t, src:'excel', seq:now+i, createdAt:now, updatedAt:now}; await tref.set(td); if(isPayOut(td)) await ensurePV({...td, id:tref.id}, num); if(isMoneyIn(td)) await ensureRC({...td, id:tref.id}, rnum); }
       closeModal(); toast(`${tx.length} transaksi diimport`); }catch(err){ b.disabled=false; $('oiErr').textContent=writeErr(err); } };
 }
 function exportLedger(){
