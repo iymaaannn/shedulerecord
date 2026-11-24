@@ -451,7 +451,9 @@ body{padding-left:68px}
 .dmenu .mi-tx small{font-size:11.5px;color:var(--muted)}
 .dmenu hr{border:0;border-top:1px solid var(--line);margin:4px 6px}
 @media (min-width:821px){.evtrack .vrow{grid-template-columns:28px minmax(170px,1.4fr) 140px 72px minmax(0,.6fr) 92px minmax(0,1.6fr) 36px}}
-@media (min-width:821px){.row.bo{grid-template-columns:28px 44px minmax(0,1fr) 140px 120px 120px 36px}}
+@media (min-width:821px){.row.bo{grid-template-columns:28px 40px minmax(0,1fr) 132px repeat(4,132px) 32px}.row.head.bo>span{white-space:normal;line-height:1.25}}
+@media (min-width:821px) and (max-width:1180px){.row.bo{grid-template-columns:28px 36px minmax(0,1fr) 124px repeat(4,108px) 32px}.row.bo .lk .lnk:not(.wa-out){padding:4px 6px;font-size:11px}}
+.lkw{display:inline-flex;align-items:center;gap:4px}.lnk.wa-out{padding:4px 6px;color:#25D366;cursor:pointer}.lnk.wa-out svg{width:13px;height:13px}.lnk.wa-out:hover{background:#25D366;color:#fff;border-color:#25D366}
 .rteam{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
 .rteam .tchip{padding:2px 8px 2px 3px;font-size:11px}
 .rteam .tchip i{width:16px;height:16px;font-size:8.5px}
@@ -781,9 +783,9 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
 <template id="tpl">
 <nav class="rail" id="rail">
   <button class="rail-logo" data-nav="home" title="escMedia" translate="no"><span class="logo">e</span></button>
-  <button class="rbtn" data-nav="home" title="Utama" aria-label="Utama"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg></button>
+  <button class="rbtn" data-nav="home" title="Rekod Kerja" aria-label="Rekod Kerja"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1a1 1 0 01-1 1h-4a1 1 0 01-1-1z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg></button>
   <button class="rbtn" data-nav="sched" title="Jadual" aria-label="Jadual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button>
-  <button class="rbtn" data-nav="fin" id="rFin" title="Finance" aria-label="Finance" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></button>
+  <button class="rbtn" data-nav="fin" id="rFin" title="Kewangan" aria-label="Kewangan" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></button>
   <button class="rbtn" data-nav="search" title="Carian" aria-label="Carian"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
   <button class="rbtn" data-nav="activity" title="Notifikasi" aria-label="Notifikasi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M18 16V11a6 6 0 10-12 0v5l-2 2h16z"/><path d="M10 21h4"/></svg><i class="rdot" id="actDot" hidden></i></button>
   <button class="rbtn" data-nav="archive" id="rArchive" title="Arkib" aria-label="Arkib" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9M10 13h4"/></svg></button>
@@ -823,7 +825,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
   </section>
   <section class="home fin" id="fin" hidden>
     <div class="hhead finhead">
-      <div class="hleft"><h1>Finance</h1><p class="hsub">Sebut harga, invois dan baucar bayaran</p></div>
+      <div class="hleft"><h1>Kewangan</h1><p class="hsub">Sebut Harga, Invois, Resit dan Baucar Bayaran</p></div>
       <div class="htools"><button class="btn primary" id="finNew" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Cipta<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button></div>
     </div>
     <nav class="ftabs" id="finTabs" role="tablist"><button type="button" role="tab" data-ft="dash" aria-selected="true">Ringkasan</button><button type="button" role="tab" data-ft="quo" aria-selected="false">Sebut Harga</button><button type="button" role="tab" data-ft="inv" aria-selected="false">Invois</button><button type="button" role="tab" data-ft="rcpt" aria-selected="false">Resit</button><button type="button" role="tab" data-ft="pv" aria-selected="false">Baucar Bayaran</button><button type="button" role="tab" data-ft="acc" aria-selected="false">Akaun</button><button type="button" role="tab" data-ft="cli" aria-selected="false">Pelanggan</button><button type="button" role="tab" data-ft="set" aria-selected="false">Tetapan</button></nav>
@@ -910,7 +912,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
     <div class="empty"><h3>Memuatkan jadual…</h3><p>Data projek anda sedang dibaca.</p></div>
   </div>
   </div>
-  <footer class="appfoot" translate="no"><span>© <span id="yr">2026</span> <b>escMedia</b>. All rights reserved.</span><span>escMedia Work Record</span></footer>
+  <footer class="appfoot" translate="no"><span>© <span id="yr">2026</span> <b>escMedia</b>. All rights reserved.</span><span class="prodname">escMedia Rekod Kerja</span></footer>
 </div>
 
 <div class="finEd" id="finEd" hidden role="dialog" aria-modal="true" aria-labelledby="feTitle">
@@ -931,7 +933,7 @@ mark{background:var(--c-run-bg);color:inherit;border-radius:3px;padding:0 1px}
   <div class="usec" id="uAdminSec" hidden><span class="ulab">Admin</span><button type="button" class="btn sm" id="uAdmins">Urus admin</button></div>
   <button type="button" class="btn primary ubtn" id="uSignIn" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="#fff" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 01-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3z"/><path fill="#fff" opacity=".85" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0012 22z"/><path fill="#fff" opacity=".7" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 000 9.2z"/><path fill="#fff" opacity=".55" d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 003.1 7.4L6.4 10c.8-2.3 3-4.1 5.6-4.1z"/></svg>Log masuk admin (Google)</button>
   <button type="button" class="btn ubtn" id="uSignOut" hidden>Log keluar</button>
-  <div class="ufoot" translate="no"><span class="logo">e</span><span><b>esc</b>Media Work Record</span></div>
+  <div class="ufoot" translate="no"><span class="logo">e</span><span><b>esc</b>Media <span class="prodname2">Rekod Kerja</span></span></div>
 </div>
 <aside class="drawer" id="actPanel" hidden aria-label="Notifikasi">
   <div class="dhead"><h3>Notifikasi</h3><button class="iconbtn" data-nav="close" aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
@@ -1250,7 +1252,7 @@ const EN = {
   'Acara masuk ke senarai projek ini':'Events go into this project\'s list', '{0} acara dimasukkan ke projek':a=>`${a[0]} ${pl(a[0],'event','events')} added to the project`,
   'Acara akan dimasukkan ke senarai projek':'Events will be added to the list of project', 'dan juga dipaparkan dalam Jadual.':'and also shown in the Schedule.',
   'BATAL':'CANCELLED', 'Batal':'Cancel', 'Jumlah acara':'Total events', 'Revision / batal':'Revision / cancelled', '{0} hari acara':a=>`${a[0]} event ${pl(a[0],'day','days')}`,
-  'Output photo':'Photo output', 'Output video':'Video output', 'Link output photo':'Photo output link', 'Link output video':'Video output link', 'Nama acara':'Event name',
+  'Output photo':'Photo output', 'Output video':'Video output', 'Output transkrip':'Transcript output', 'Output laporan':'Report output', 'Link output transkrip':'Transcript output link', 'Link output laporan':'Report output link', 'Transkrip':'Transcript', 'Laporan':'Report', 'Kongsi output ke WhatsApp':'Share output to WhatsApp', 'Bahasa mesej':'Message language', 'Link output photo':'Photo output link', 'Link output video':'Video output link', 'Nama acara':'Event name',
   'Nama acara tidak boleh kosong.':'Event name cannot be empty.', 'Satu senarai acara. Setiap baris ada link output photo dan link output video.':'One list of events. Each row has a photo output link and a video output link.',
   '{0} acara':a=>`${a[0]} ${pl(a[0],'event','events')}`, '{0}/{1} submit':'{0}/{1} submitted',
   'Cari acara…':'Search events…',
@@ -1279,7 +1281,7 @@ const EN = {
   'Jana resit rasmi untuk bayaran ini':'Generate an official receipt for this payment', 'Format nombor':'Number format', 'Awalan syarikat':'Company prefix', 'Kod sebut harga':'Quotation code',
   'Kod invois':'Invoice code', 'Kod resit':'Receipt code', 'Kod baucar':'Voucher code', 'Warna bar tajuk':'Header bar colour', 'Baru: Resit Rasmi':'New: Official Receipt', 'Edit: Resit Rasmi':'Edit: Official Receipt',
   'Finance':'Finance',
-  'Sebut harga, invois dan baucar bayaran':'Quotations, invoices and payment vouchers',
+  'Sebut Harga, Invois, Resit dan Baucar Bayaran':'Quotation, Invoice, Receipt and PV', 'Tekan':'Press', 'untuk mula.':'to start.', 'dan tampal jadual dari WhatsApp.':'and paste the schedule from WhatsApp.', 'untuk masukkan penyata bank (BigPay PDF), import fail Excel lama anda, atau tambah transaksi manual.':'to add a bank statement (BigPay PDF), import your old Excel file, or add a transaction manually.',
   'Cipta':'Create',
   'Ringkasan':'Overview',
   'Sebut Harga':'Quotation',
@@ -1394,7 +1396,22 @@ const EN = {
   'Salin sebagai dokumen baru':'Copy as a new document',
   'Buang dokumen ini':'Remove this document',
   'Padam dokumen?':'Delete document?',
-  'Dokumen dipadam':'Document deleted', 'Jana Resit ({0})':a=>`Generate Receipts (${a[0]})`, '{0} resit dijana':a=>`${a[0]} ${pl(a[0],'receipt','receipts')} generated`, 'Transaksi disimpan · resit dijana':'Transaction saved · receipt generated', ' · {0} resit dijana':a=>` · ${a[0]} ${pl(a[0],'receipt','receipts')} generated`, 'Resit {0} dijana untuk {1}':'Receipt {0} generated for {1}',
+  'Semak kategori dan item, kemudian tekan Masukkan. App akan ingat kategori untuk nama yang sama lain kali.':'Check the categories and items, then press Add. The app will remember the category for the same name next time.',
+  'dijumpai dalam':'found in', 'Masuk':'In', 'Keluar':'Out', 'Baki akhir':'Closing balance', 'Telah dibayar':'Paid', 'pada {0}':'on {0}',
+  '{0} Episod ditambah':'{0} episodes added', '{0} Scene ditambah':'{0} scenes added', '{0} daripada {1} baris ditunjukkan.':'Showing {0} of {1} rows.',
+  'Tiada transaksi dijumpai dalam fail ini.':'No transactions found in this file.', 'Tiada transaksi dijumpai.':'No transactions found.',
+  '{0} transaksi diimport':a=>`${a[0]} ${pl(a[0],'transaction','transactions')} imported`, '{0} transaksi dimasukkan':a=>`${a[0]} ${pl(a[0],'transaction','transactions')} added`,
+  'Padam {0} baris & projek? Tekan lagi':'Delete {0} rows & project? Press again', 'Menjana {0}/{1}…':'Generating {0}/{1}…', 'Menyimpan {0}…':'Saving {0}…',
+  'Excel belum dimuatkan.':'Excel is not loaded yet.', 'Pembaca Excel belum dimuatkan.':'The Excel reader is not loaded yet.', 'Pembaca PDF tidak dapat dimuatkan. Semak sambungan internet.':'The PDF reader could not be loaded. Check your internet connection.',
+  'Penyata tidak dapat dibaca.':'The statement could not be read.', 'Fail tidak dapat dibaca.':'The file could not be read.', 'Gambar tidak dapat dibaca':'The image could not be read', 'Lajur DATE tidak dijumpai.':'DATE column not found.', 'Tidak dapat membuka cetakan.':'Could not open printing.',
+  'Gagal ({0})':'Failed ({0})', 'Gagal menerbit ({0})':'Publish failed ({0})', 'Tidak dapat disimpan ({0})':'Could not be saved ({0})', 'Tidak dapat menyediakan fail ({0})':'Could not prepare the file ({0})', 'Log masuk gagal: {0}':'Sign-in failed: {0}',
+  'Baris tanpa tarikh diabaikan:':'Rows without a date are skipped:', 'Belum ada editor':'No editors yet', 'Cth: Bayaran freelance videographer':'e.g. Freelance videographer payment', 'Cth: Liputan Majlis Konvokesyen UMT':'e.g. UMT Convocation coverage',
+  'Jenis boleh ditukar kerana projek ini belum ada data.':'The type can be changed because this project has no data yet.', 'Kali terakhir diterbitkan:':'Last published:', 'Masukkan':'Add', 'Sheet "RECEIVE AND SPENT" sedia ada':'Existing "RECEIVE AND SPENT" sheet',
+  'Tampal peraturan Firestore baru (dengan bahagian fin_docs, fin_clients dan fin_settings) dan tekan Publish. App akan cuba semula secara automatik.':'Paste the new Firestore rules (with the fin_docs, fin_clients and fin_settings sections) and press Publish. The app will retry automatically.',
+  'ESC/RCPT/02/SEPT/2026 (kiraan ikut bulan)':'ESC/RCPT/02/SEPT/2026 (numbered by month)', 'INV-2026-001 (kiraan ikut tahun)':'INV-2026-001 (numbered by year)', 'Jadual dari PDF':'Schedule from PDF', 'Resit rasmi':'Official receipt',
+  'beserta':'with', 'komen / catatan':'comments / notes', 'setiap item, dalam format PDF untuk diberi kepada editor.':'for each item, as a PDF to hand to your editors.', 'notes dan production feedback':'notes and production feedback',
+  'Catatan':'Notes', 'Amaun Masuk':'Amount In', 'Amaun Keluar':'Amount Out', 'Waktu':'Time', 'Kewangan belum boleh dibaca':'Finance cannot be read yet',
+  'Dokumen dipadam':'Document deleted', 'Kewangan':'Finance', 'Rekod Kerja':'Work Record', 'Penyata akaun sedia untuk cetak':'Print-ready account statement', 'Sheet Receive & Spent (.xlsx)':'Receive & Spent sheet (.xlsx)', 'PDF akaun disimpan':'Account PDF saved', 'Tidak dapat memuatkan PDF. Cuba lagi.':'Could not load PDF. Please try again.', 'Jana Resit ({0})':a=>`Generate Receipts (${a[0]})`, '{0} resit dijana':a=>`${a[0]} ${pl(a[0],'receipt','receipts')} generated`, 'Transaksi disimpan · resit dijana':'Transaction saved · receipt generated', ' · {0} resit dijana':a=>` · ${a[0]} ${pl(a[0],'receipt','receipts')} generated`, 'Resit {0} dijana untuk {1}':'Receipt {0} generated for {1}',
   'Cetak / Simpan PDF':'Print / Save PDF',
   'Tutup':'Close',
   'Tarikh bayaran':'Payment date',
@@ -1415,7 +1432,7 @@ const EN = {
   'Butiran kerja / item':'Work / item description',
   'Tindakan':'Actions',
   'Buang baris':'Remove line',
-  'Finance belum boleh dibaca':'Finance cannot be read yet',
+  'Kewangan belum boleh dibaca':'Finance cannot be read yet',
   'Pindahan Online':'Online Transfer',
   'Tunai':'Cash',
   'Cek':'Cheque',
@@ -1512,7 +1529,7 @@ function trCore(c, depth){
     let hit=false; const out=c.split(sep).map(x=>{ const t=trCore(x,depth+1); if(t!=null) hit=true; return t==null?x:t; });
     if(hit) return out.join(sep);
   }
-  const lp=c.match(/^([:;,.]\s*)(.+)$/); if(lp){ const t=trCore(lp[2],depth+1); if(t!=null) return lp[1]+t; }
+  const lp=c.match(/^([:;,.·]\s*)(.+)$/); if(lp){ const t=trCore(lp[2],depth+1); if(t!=null) return lp[1]+t; }
   return null;
 }
 function tr(s){
@@ -1555,7 +1572,7 @@ function syncLangUI(){
 }
 function setLang(l){
   if(l===LANG) return;
-  LANG = l==='en' ? 'en' : 'ms'; store.set('je.lang', LANG); syncLangUI();
+  LANG = l==='en' ? 'en' : 'ms'; store.set('je.lang', LANG); syncLangUI(); try{ setProduct(); }catch{}
   trTree(document.body);
   if(i18nReady && !staticView){ renderHeader(); render(); renderHome(); renderSched(); if(!$('actPanel').hidden) renderAct(); if(!$('searchOv').hidden) renderSearch(); }
 }
@@ -1635,11 +1652,15 @@ function statsOf(p){
   return {n,c,pct:n?Math.round(c.ok/n*100):0,upd,label};
 }
 const barHtml=(st)=>st&&st.n?['ok','sent','run','rev'].map(k=>`<i class="${k}" style="width:${(st.c[k]||0)/st.n*100}%"></i>`).join(''):'';
+const WR = () => LANG==='en' ? 'Work Record' : 'Rekod Kerja';
+function setProduct(){ const pr=document.querySelector('.brandmark .product'); if(pr) pr.textContent = view==='fin' ? (LANG==='en'?'Finance':'Kewangan') : view==='sched' ? (LANG==='en'?'Schedule':'Jadual') : WR();
+  document.querySelectorAll('.prodname').forEach(x=>x.textContent='escMedia '+WR()); document.querySelectorAll('.prodname2').forEach(x=>x.textContent=WR());
+  const pn=document.getElementById('pname'); if(pn && /^(Work Record|Rekod Kerja)$/.test(pn.textContent)) pn.textContent=WR(); }
 function setView(v){
   view=v;
   $('home').hidden = v!=='home'; $('projview').hidden = v!=='project'; $('sched').hidden = v!=='sched'; $('fin').hidden = v!=='fin';
   document.querySelector('.rail [data-nav="fin"]')?.setAttribute('aria-current',String(v==='fin'));
-  { const pr=document.querySelector('.brandmark .product'); if(pr) pr.textContent = v==='fin' ? 'Finance' : 'Work Record'; }
+  setProduct();
   if(v==='fin'){ closeMenu?.(); finInit(); renderFin(); window.scrollTo(0,0); }
   document.querySelectorAll('.rail [data-nav="home"].rbtn').forEach(b=>b.setAttribute('aria-current',String(v==='home')));
   document.querySelector('.rail [data-nav="sched"]')?.setAttribute('aria-current',String(v==='sched'));
@@ -1872,12 +1893,12 @@ function snapMode(){
 }
 function goneView(){
   staticView=true; document.body.classList.add('solo');
-  $('pname').textContent='Work Record'; $('projbar').hidden=true; $('strip').hidden=true; $('tools').hidden=true;
+  $('pname').textContent=WR(); $('projbar').hidden=true; $('strip').hidden=true; $('tools').hidden=true;
   $('days').innerHTML='<div class="empty"><h3>Projek tidak lagi dipaparkan</h3><p>Projek ini sudah selesai dan diarkib oleh pemilik. Hubungi pemilik projek jika anda perlukan salinan jadual.</p></div>';
 }
 function noDb(){
   staticView=true; document.body.classList.add('solo');
-  $('pname').textContent='Work Record';
+  $('pname').textContent=WR();
   $('days').innerHTML='<div class="empty"><h3>Jadual belum diterbitkan</h3><p>Jadual ini belum diterbitkan untuk paparan public. Sila hubungi pemilik projek.</p></div>';
 }
 function fail(err){ toast('Ralat: '+(err?.message||err?.code||'tidak diketahui')); }
@@ -1932,7 +1953,7 @@ function selectProject(pid){
 function renderHeader(){
   const p=cur();
   $('projbar').hidden=false;
-  $('pname').textContent = p ? (p.name||'Projek tanpa nama') : 'Work Record';
+  $('pname').textContent = p ? (p.name||'Projek tanpa nama') : WR();
   const opt=x=>`<option translate="no" value="${esc(x.id)}" ${x.id===curPid?'selected':''}>${esc(x.name||'Projek tanpa nama')}</option>`;
   const act=active();
   const groups=[['photo','Photo'],['video','Video'],['both','Photo & Video']].map(([t,l])=>[l,act.filter(x=>ptype(x)===t)]).filter(g=>g[1].length);
@@ -2077,6 +2098,22 @@ function statusSelect(e){
   return `<select class="pill s-${dClass(e.status)}" data-status-of="${esc(e.id)}" aria-label="Status ${esc(e.name||e.item)}">${extra}${L.map(s=>`<option value="${s.v}" ${s.v===e.status?'selected':''}>${s.v}</option>`).join('')}</select>`;
 }
 function statusView(e){ return canWrite ? statusSelect(e) : `<span class="pill s-${dClass(e.status)}">${esc(e.status||stList()[0].v)}</span>`; }
+const OUTS=[{k:'output',lab:'Output photo',short:'Photo',ms:'Foto',en:'photos'},{k:'voutput',lab:'Output video',short:'Video',ms:'Video',en:'video'},{k:'toutput',lab:'Output transkrip',short:'Transkrip',ms:'Transkrip',en:'transcript'},{k:'routput',lab:'Output laporan',short:'Laporan',ms:'Laporan',en:'report'}];
+const waOutBtn=(e,o)=>`<button type="button" class="lnk wa-out" data-waout="${esc(e.id)}|${o.k}" title="Kongsi ke WhatsApp" aria-label="Kongsi ke WhatsApp">${WA_ICON}</button>`;
+const outCell=(e,o)=>e[o.k]?`<span class="lkw">${linkBtn(e[o.k],o.short)}${waOutBtn(e,o)}</span>`:'<span class="nolnk">—</span>';
+function waOutText(e, k, lang){
+  const o=OUTS.find(x=>x.k===k)||OUTS[0], url=e[o.k]||'', what=[e.name, e.location].filter(Boolean).join(', ');
+  return lang==='en'
+    ? `Hi,\n\nHere is the access link for the ${o.en} of ${what}\n\n${url}\n\nThank you.`
+    : `Hi,\n\nBerikut adalah link akses bagi ${o.ms} ${what}\n\n${url}\n\nTerima Kasih.`;
+}
+function waOutput(id, k){
+  const e=entriesAll.find(x=>x.id===id)||entries.find(x=>x.id===id); if(!e) return;
+  const have=OUTS.filter(o=>e[o.k]);
+  openWA('Kongsi output ke WhatsApp', `<div class="grid2"><div class="f"><label for="waOutK">Output</label><select id="waOutK">${have.map(o=>`<option value="${o.k}" ${o.k===k?'selected':''}>${o.lab}</option>`).join('')}</select></div>
+    <div class="f"><label>Bahasa mesej</label><div class="seg" id="waOutL"><button type="button" data-v="ms" aria-pressed="${LANG!=='en'}">BM</button><button type="button" data-v="en" aria-pressed="${LANG==='en'}">EN</button></div></div></div>`,
+    ()=>waOutText(e, $('waOutK').value, segVal('waOutL')));
+}
 function linkBtn(url,label){ return url ? `<a class="lnk" href="${esc(url)}" target="_blank" rel="noopener">${ICON_LINK}${label}</a>` : `<span class="nolnk">—</span>`; }
 function renderDays(){
   if(isVid()) return renderVideo();
@@ -2102,18 +2139,17 @@ function renderDays(){
       <span class="mini"><span class="mono">${ok}/${allDay.length} submit</span><span class="bar"><i class="ok" style="width:${allDay.length?ok/allDay.length*100:0}%"></i></span>
       ${canWrite?`<button class="btn addhere" data-act="addon" data-date="${d}">+ Tambah</button>`:''}</span>
     </div>
-    <div class="row head${ro}${BO?' bo':''}"><span class="chk">${canWrite?`<input type="checkbox" data-selall="${d}" ${allSel?'checked':''} aria-label="Pilih semua hari ini">`:''}</span><span>No</span>${BO?'<span>Acara</span><span>Status</span><span>Output photo</span><span>Output video</span>':'<span>Nama fail</span><span>Bilik</span><span>Status</span><span>Editor</span><span>Footage</span><span>Output</span>'}<span></span></div>`;
+    <div class="row head${ro}${BO?' bo':''}"><span class="chk">${canWrite?`<input type="checkbox" data-selall="${d}" ${allSel?'checked':''} aria-label="Pilih semua hari ini">`:''}</span><span>No</span>${BO?'<span>Acara</span><span>Status</span><span>Output photo</span><span>Output video</span><span>Output transkrip</span><span>Output laporan</span>':'<span>Nama fail</span><span>Bilik</span><span>Status</span><span>Editor</span><span>Footage</span><span>Output</span>'}<span></span></div>`;
     for(const e of rows){
       if(BO){ html+=`<div class="row bo${selected.has(e.id)?' sel':''}${ro}" data-id="${esc(e.id)}">
         <span class="chk">${canWrite?`<input type="checkbox" data-sel="${esc(e.id)}" ${selected.has(e.id)?'checked':''} aria-label="Pilih ${esc(e.name)}">`:''}</span>
         <span class="no mono">${noMap.get(e.id)}</span>
         <span class="name" translate="no">${esc(e.name)}${(e.time||e.location)?`<small class="evl">${[e.time,e.location].filter(Boolean).map(esc).join(' · ')}</small>`:''}${(e.team||[]).length?`<span class="rteam">${e.team.map(roleChip).join('')}</span>`:''}${e.notes?`<small>${esc(e.notes)}</small>`:''}</span>
         <span class="st">${statusView(e)}</span>
-        <span class="lk">${linkBtn(e.output,'Photo')}</span>
-        <span class="lk">${linkBtn(e.voutput,'Video')}</span>
+        ${OUTS.map(o=>`<span class="lk">${outCell(e,o)}</span>`).join('')}
         <span class="ed">${canWrite?`<button class="iconbtn" data-edit="${esc(e.id)}" aria-label="Edit ${esc(e.name)}">${ICON_EDIT}</button>`:''}</span>
         <span class="metaline"><span class="tag">#${noMap.get(e.id)}</span>${statusView(e)}</span>
-        <span class="links">${linkBtn(e.output,'Output photo')}${linkBtn(e.voutput,'Output video')}</span>
+        <span class="links">${OUTS.filter(o=>e[o.k]).map(o=>`<span class="lkw">${linkBtn(e[o.k],o.lab)}${waOutBtn(e,o)}</span>`).join('')}</span>
       </div>`; continue; }
       html+=`<div class="row${selected.has(e.id)?' sel':''}${ro}" data-id="${esc(e.id)}">
         <span class="chk">${canWrite?`<input type="checkbox" data-sel="${esc(e.id)}" ${selected.has(e.id)?'checked':''} aria-label="Pilih ${esc(e.name)}">`:''}</span>
@@ -2189,7 +2225,7 @@ function openAdd(date){
   };
 }
 function openEvRow(id, date){
-  const e = id ? entries.find(x=>x.id===id) : {name:'', date:date??lastDate(), time:'', location:'', team:[], status:'ON GOING', output:'', voutput:'', notes:''};
+  const e = id ? entries.find(x=>x.id===id) : {name:'', date:date??lastDate(), time:'', location:'', team:[], status:'ON GOING', output:'', voutput:'', toutput:'', routput:'', notes:''};
   if(!e) return;
   openModal(id?'Edit acara':'Tambah acara', `
     <div class="f"><label for="bName">Nama acara</label><input id="bName" value="${esc(e.name||'')}" placeholder="Cth: Majlis Perasmian KL Festival" translate="no"></div>
@@ -2203,6 +2239,8 @@ function openEvRow(id, date){
     <div class="grid2">
       <div class="f"><label for="bOut">Link output photo</label><input id="bOut" type="url" value="${esc(e.output||'')}" placeholder="https://drive.google.com/…"></div>
       <div class="f"><label for="bVOut">Link output video</label><input id="bVOut" type="url" value="${esc(e.voutput||'')}" placeholder="https://drive.google.com/…"></div>
+      <div class="f"><label for="bTOut">Link output transkrip</label><input id="bTOut" type="url" value="${esc(e.toutput||'')}" placeholder="https://drive.google.com/…"></div>
+      <div class="f"><label for="bROut">Link output laporan</label><input id="bROut" type="url" value="${esc(e.routput||'')}" placeholder="https://drive.google.com/…"></div>
     </div>
     <div class="f"><label for="bNotes">Komen / catatan</label><input id="bNotes" value="${esc(e.notes||'')}"></div>
     <div class="err" id="bErr"></div>`,
@@ -2210,7 +2248,7 @@ function openEvRow(id, date){
   $('bSave').onclick=async()=>{
     const name=$('bName').value.trim(); if(!name){ $('bErr').textContent='Nama acara tidak boleh kosong.'; return; }
     const d={name, date:$('bDate').value||'', time:timeInfo($('bTime').value).label, location:$('bLoc').value.trim(), team:splitNames($('bTeam').value), status:$('bStatus').value,
-      output:normLink($('bOut').value), voutput:normLink($('bVOut').value), notes:$('bNotes').value.trim(), updatedAt:Date.now()};
+      output:normLink($('bOut').value), voutput:normLink($('bVOut').value), toutput:normLink($('bTOut').value), routput:normLink($('bROut').value), notes:$('bNotes').value.trim(), updatedAt:Date.now()};
     $('bSave').disabled=true;
     try{
       if(id) await entriesCol().doc(id).update(d);
@@ -3592,6 +3630,7 @@ function openArchive(){
 
 /* ---------- events ---------- */
 document.addEventListener('click',async ev=>{
+  const wo=ev.target.closest('[data-waout]'); if(wo){ ev.preventDefault(); const [id,k]=wo.dataset.waout.split('|'); waOutput(id,k); return; }
   const t=ev.target.closest('[data-act],[data-edit],[data-status],[data-sel],[data-selall]'); if(!t) return;
   if(t.dataset.act){
     const a=t.dataset.act;
@@ -4013,7 +4052,7 @@ function waTasksText(p, list, opt){
     const meta=[e.status, !V&&!BO&&e.date?fmtDate(e.date):'', BO&&e.date?fmtDate(e.date)+(e.time?' '+e.time:''):'', !V&&!BO&&e.room?(en?'Room ':'Bilik ')+e.room:''].filter(Boolean).join(' · ');
     if(meta) bits.push(`   ${meta}`);
     if(e.notes) bits.push(`   📝 ${e.notes}`); if(e.feedback) bits.push(`   💬 ${e.feedback}`);
-    if(opt.links){ if(e.footage) bits.push(`   Footage: ${e.footage}`); if(e.output) bits.push(`   ${BO?'Output photo':'Output'}: ${e.output}`); if(e.voutput) bits.push(`   Output video: ${e.voutput}`); }
+    if(opt.links){ if(e.footage) bits.push(`   Footage: ${e.footage}`); if(e.output) bits.push(`   ${BO?'Output photo':'Output'}: ${e.output}`); if(e.voutput) bits.push(`   Output video: ${e.voutput}`); if(e.toutput) bits.push(`   Output transkrip: ${e.toutput}`); if(e.routput) bits.push(`   Output laporan: ${e.routput}`); }
     return bits.join('\n'); };
   let body;
   const eds=!V&&!BO?[...new Set(list.map(e=>normEd(e.editor)||''))]:[];
@@ -4339,7 +4378,7 @@ function renderFin(){
   if(!$('fin') || $('fin').hidden) return;
   document.querySelectorAll('#finTabs [data-ft]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.ft===finTab)));
   const el=$('finBody'); const t=todayISO(), ym=t.slice(0,7);
-  if(finErr){ el.innerHTML='<div class="empty"><h3>Finance belum boleh dibaca</h3><p>Tampal peraturan Firestore baru (dengan bahagian fin_docs, fin_clients dan fin_settings) dan tekan Publish. App akan cuba semula secara automatik.</p></div>'; return; }
+  if(finErr){ el.innerHTML='<div class="empty"><h3>Kewangan belum boleh dibaca</h3><p>Tampal peraturan Firestore baru (dengan bahagian fin_docs, fin_clients dan fin_settings) dan tekan Publish. App akan cuba semula secara automatik.</p></div>'; return; }
   const sorted=finDocs.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.no||'').localeCompare(a.no||''));
   if(finTab==='dash'){
     const invs=finDocs.filter(d=>d.type==='inv' && d.status!=='Batal' && d.status!=='Draf');
@@ -4601,7 +4640,7 @@ function renderLedger(el){
       <div class="hs-card glass"><span class="lab">Net Bulan Ini</span><b class="fbig">${mIn-mOut<0?'-':''}${fmtRM(Math.abs(mIn-mOut))}</b><small>${MONTH_UP[+ym.slice(5)-1].toLowerCase()}</small></div></div></section>
     <div class="ftools"><span class="fsum">Baki awal <b>${fmtRM(open)}</b>${finLed.openingDate?` pada ${esc(dmyS(finLed.openingDate))}`:''} <button class="btn sm ghost" id="lgOpen">Ubah</button></span>
       ${(()=>{ const n=finTx.filter(t=>isPayOut(t)&&!pvLinked(t)).length; return n?`<button class="btn" id="lgPV">Jana Baucar (${n})</button>`:''; })()}${(()=>{ const n=finTx.filter(t=>isMoneyIn(t)&&!rcLinked(t)).length; return n?`<button class="btn" id="lgRC">Jana Resit (${n})</button>`:''; })()}
-      <button class="btn" id="lgDl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download Excel</button>
+      <button class="btn" id="lgDl" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></button>
       <button class="btn primary" id="lgUp" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Upload<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button></div>
     ${rows.length||open?`<div class="ftbl lg"><table><thead><tr><th>Tarikh</th><th>Item</th><th class="r">Amount In (RM)</th><th class="r">Amount Out (RM)</th><th class="r">Balance (RM)</th><th>Notes</th></tr></thead><tbody>${body}</tbody></table></div>`
       :`<div class="empty"><h3>Belum ada transaksi</h3><p>Tekan <strong>Upload</strong> untuk masukkan penyata bank (BigPay PDF), import fail Excel lama anda, atau tambah transaksi manual.</p></div>`}`;
@@ -4610,7 +4649,7 @@ function renderLedger(el){
     {icon:'xls', label:'Penyata bank (CSV)', desc:'Lajur tarikh, keterangan, amaun', run:()=>pickFile('.csv,text/csv', f=>importBank(f))},
     {icon:'xls', label:'Import Excel lama', desc:'Sheet "RECEIVE AND SPENT" sedia ada', run:()=>pickFile('.xlsx,.xls', f=>importOldLedger(f))},
     '-', {icon:'plus', label:'Tambah transaksi', desc:'Isi secara manual', run:()=>openTx(null)}]);
-  $('lgOpen').onclick=openOpening; $('lgDl').onclick=exportLedger; if($('lgPV')) $('lgPV').onclick=backfillPV; if($('lgRC')) $('lgRC').onclick=backfillRC;
+  $('lgOpen').onclick=openOpening; $('lgDl').onclick=()=>openMenu($('lgDl'), [{icon:'xls', label:'Excel', desc:'Sheet Receive & Spent (.xlsx)', run:exportLedger},{icon:'pdf', label:'PDF', desc:'Penyata akaun sedia untuk cetak', run:exportLedgerPdf}]); if($('lgPV')) $('lgPV').onclick=backfillPV; if($('lgRC')) $('lgRC').onclick=backfillRC;
 }
 const dmyS=iso=>{ if(!iso) return ''; const [y,m,d]=iso.split('-'); return `${+d}/${m}/${y}`; };
 function pickFile(accept, fn){ const i=document.createElement('input'); i.type='file'; i.accept=accept; i.onchange=()=>{ if(i.files[0]) fn(i.files[0]); }; i.click(); }
@@ -4883,6 +4922,34 @@ function exportLedger(){
     if(typeof ws[ref].v==='number' && c>=2 && c<=4) ws[ref].z='#,##0.00';
     ws[ref].s=s; }
   const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'RECEIVE AND SPENT'); saveWb(wb, `escMedia Account - Receive and Spent ${todayISO()}.xlsx`);
+}
+async function exportLedgerPdf(){
+  let JsPDF; try{ JsPDF=await loadJsPdf(); }catch{ toast('Tidak dapat memuatkan PDF. Cuba lagi.'); return; }
+  const rows=ledgerRows(), open=r2(finLed.opening||0), co=CO();
+  const doc=new JsPDF({orientation:'portrait', unit:'pt', format:'a4'}), W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(), M=36;
+  doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.text(co.name||'escMedia', W/2, 46, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.text(String(co.address||'').split('\n').map(x=>x.trim()).filter(Boolean).join(' '), W/2, 60, {align:'center', maxWidth:W-2*M});
+  doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  const first=rows[0]?.date, last=rows[rows.length-1]?.date;
+  doc.text(`RECEIVE AND SPENT${first?`  ·  ${dmyS(first)} – ${dmyS(last)}`:''}`, W/2, 80, {align:'center'});
+  const body=[], styles=[];
+  body.push([finLed.openingDate?dmyS(finLed.openingDate):'', 'OPENING BALANCE', '', '', fmtNum(open)]); styles.push('open');
+  const ms=new Map(); rows.forEach(r=>{ const k=r.date.slice(0,7); if(!ms.has(k)) ms.set(k,[]); ms.get(k).push(r); });
+  let prev=open, tin=0, tout=0;
+  for(const [k,l] of ms){ let lastD=''; l.forEach(r=>{ tin+=+r.in||0; tout+=+r.out||0;
+      body.push([r.date!==lastD?dmyS(r.date):'', [r.cat,r.item].filter(Boolean).join('\n')+(r.notes&&!/^https?:/.test(r.notes)?`\n${r.notes}`:''), +r.in?fmtNum(r.in):'-', +r.out?fmtNum(r.out):'-', fmtNum(r.bal)]); styles.push(''); lastD=r.date; });
+    const end=l[l.length-1].bal; body.push([`${MONTH_UP[+k.slice(5)-1]} ${k.slice(0,4)} CLOSE`, `Net RM ${fmtNum(end-prev)}`, '', '', fmtNum(end)]); styles.push('close'); prev=end; }
+  body.push(['', 'TOTAL', fmtNum(tin), fmtNum(tout), fmtNum(prev)]); styles.push('total');
+  doc.autoTable({startY:92, margin:{left:M,right:M,bottom:40}, head:[['DATE','ITEM','IN (RM)','OUT (RM)','BALANCE (RM)']], body,
+    styles:{font:'helvetica', fontSize:8.5, cellPadding:4, lineColor:[0,0,0], lineWidth:.5, textColor:[0,0,0], valign:'middle'},
+    headStyles:{fillColor:[217,217,217], textColor:[0,0,0], fontStyle:'bold', halign:'center'},
+    columnStyles:{0:{cellWidth:62, halign:'center'}, 1:{cellWidth:'auto'}, 2:{cellWidth:72, halign:'right'}, 3:{cellWidth:72, halign:'right'}, 4:{cellWidth:84, halign:'right'}},
+    didParseCell:h=>{ if(h.section!=='body') return; const st=styles[h.row.index];
+      if(st==='close'){ h.cell.styles.fillColor=[255,242,153]; h.cell.styles.fontStyle='bold'; }
+      else if(st==='open'||st==='total'){ h.cell.styles.fillColor=[217,217,217]; h.cell.styles.fontStyle='bold'; }
+      else if(h.column.index===1){ /* first line bold */ } },
+    didDrawPage:()=>{ doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(110); doc.text(`escMedia Account  ·  ${dmyS(todayISO())}`, M, H-18); doc.text(`${doc.internal.getNumberOfPages()}`, W-M, H-18, {align:'right'}); doc.setTextColor(0); } });
+  await saveFile(`escMedia Account - Receive and Spent ${todayISO()}.pdf`, doc.output('blob'), 'PDF akaun disimpan');
 }
 /* wiring */
 $('finTabs').onclick=e=>{ const b=e.target.closest('[data-ft]'); if(b) setFinTab(b.dataset.ft); };
