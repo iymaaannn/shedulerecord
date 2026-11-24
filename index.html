@@ -620,6 +620,9 @@ body.noscroll{overflow:hidden}
 .ftbl.lg .lg-close td{background:#FFF59D;color:#111;font-weight:700;font-size:12.5px;letter-spacing:.04em}
 .ftbl.lg .lg-close .neg{color:#B42318}
 .ftbl.lg .lg-open td{background:var(--surface2);font-size:12.5px}
+.lg-pv{display:inline-flex;align-items:center;gap:4px;margin:3px 0 0 6px;font:inherit;font-size:10px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:99px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);cursor:pointer;vertical-align:middle}
+.lg-pv svg{width:11px;height:11px}
+.lg-pv:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .lg-src{display:inline-block;margin-top:3px;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:99px;background:var(--surface2);color:var(--muted)}
 .ftbl.bi{max-height:52vh}
 .ftbl.bi td{padding:7px 8px;vertical-align:top}
@@ -1263,6 +1266,7 @@ const EN = {
   '7 hari akan datang':'Next 7 days', 'Hari ini & 7 hari akan datang':'Today & next 7 days', 'Memo tugasan ke WhatsApp':'Task memo to WhatsApp', 'Memo':'Memo', 'Semua akan datang':'All upcoming', 'Hari ini sahaja':'Today only', 'Bulan {0}':'{0}', 'Kandungan':'Contents', 'Belum siap':'Not done',
   'Sertakan link footage / output':'Include footage / output links',
   // finance
+  'Jana Baucar ({0})':'Generate Vouchers ({0})', '{0} baucar bayaran dijana':'{0} payment vouchers generated', 'Download baucar bayaran':'Download payment voucher', 'Transaksi disimpan · baucar dijana':'Transaction saved · voucher generated', 'Transaksi & baucar dipadam':'Transaction & voucher deleted',
   'Akaun':'Account', 'Baki Semasa':'Current Balance', 'Masuk Bulan Ini':'In This Month', 'Keluar Bulan Ini':'Out This Month', 'Net Bulan Ini':'Net This Month', '{0} transaksi':a=>`${a[0]} ${pl(a[0],'transaction','transactions')}`,
   'Baki awal':'Opening balance', 'Baki Awal':'Opening Balance', 'Ubah':'Change', 'Download Excel':'Download Excel', 'Belum ada transaksi':'No transactions yet', 'Penyata BigPay (PDF)':'BigPay statement (PDF)',
   'Transaksi dibaca dan dimasukkan automatik':'Transactions are read and added automatically', 'Penyata bank (CSV)':'Bank statement (CSV)', 'Lajur tarikh, keterangan, amaun':'Date, description, amount columns',
@@ -1390,7 +1394,7 @@ const EN = {
   'Salin sebagai dokumen baru':'Copy as a new document',
   'Buang dokumen ini':'Remove this document',
   'Padam dokumen?':'Delete document?',
-  'Dokumen dipadam':'Document deleted',
+  'Dokumen dipadam':'Document deleted', 'Resit {0} dijana untuk {1}':'Receipt {0} generated for {1}',
   'Cetak / Simpan PDF':'Print / Save PDF',
   'Tutup':'Close',
   'Tarikh bayaran':'Payment date',
@@ -1916,6 +1920,7 @@ function selectProject(pid){
   if(!db){ entriesAll=(SNAP?.entries?.[pid]||[]).slice(); applySub(); entriesLoaded=true; render(); return; }
   unsubEntries = db.collection(`projects/${pid}/entries`).onSnapshot(snap=>{
     entriesAll = snap.docs.map(d=>({id:d.id, ...d.data()}));
+    if(!snap.metadata?.fromCache) schedAutoRc(pid);
     applySub();
     entriesLoaded = true;
     for(const id of [...selected]) if(!entries.find(e=>e.id===id)) selected.delete(id);
@@ -4176,40 +4181,40 @@ function docHTML(d){
   const NOL={quo:lg==='ms'?'NO. SEBUT HARGA':'QUOTATION NO', inv:lg==='ms'?'NO. INVOIS':'INVOICE NO', rcpt:lg==='ms'?'NO. RESIT':'RECEIPT NO', pv:lg==='ms'?'NO. BAUCAR':'VOUCHER NO'}[T];
   const up=s=>String(s).toUpperCase(), dmy=iso=>{ if(!iso) return '-'; const [y,m,dd]=iso.split('-').map(Number); return `${dd}/${m}/${y}`; };
   const meta=[[lg==='ms'?'TARIKH':'DATE', dmy(d.date)],[NOL, esc(d.no||'')], T==='quo'&&d.valid?[lg==='ms'?'SAH SEHINGGA':'VALID UNTIL', dmy(d.valid)]:null, T==='inv'&&d.due?[lg==='ms'?'TARIKH AKHIR':'DUE DATE', dmy(d.due)]:null,
-    T==='rcpt'&&d.invNo?[lg==='ms'?'NO. INVOIS':'INVOICE NO', esc(d.invNo)]:null, T==='pv'&&d.method?[lg==='ms'?'KAEDAH':'PAYMENT METHOD', esc(up(d.method))]:null, (T==='rcpt'||T==='pv')&&d.ref?[lg==='ms'?'NO. RUJUKAN':'REFERENCE NO', esc(d.ref)]:null].filter(Boolean);
+    T==='rcpt'&&d.invNo?[lg==='ms'?'NO. INVOIS':'INVOICE NO', esc(d.invNo)]:null, (T==='rcpt'||T==='pv')&&d.ref?[lg==='ms'?'NO. RUJUKAN':'REFERENCE NO', esc(d.ref)]:null].filter(Boolean);
   const partyBar = T==='pv' ? (lg==='ms'?'MAKLUMAT PENERIMA':'PAYEE INFORMATION') : (lg==='ms'?'MAKLUMAT PELANGGAN':'CUSTOMER INFORMATION');
   const party = T==='pv'
     ? [`<b><i>${esc(d.payee?.name||'-')}</i></b>`, d.payee?.ic?`<i>${L.ic}: ${esc(d.payee.ic)}</i>`:'', (d.payee?.bank||d.payee?.acc)?`<i>${esc(d.payee.bank||'')} ${esc(d.payee.acc||'')}</i>`:'']
     : [`<b><i>${esc(cl.name||'-')}</i></b>`, cl.address?`<i>${esc(cl.address).replace(/\n/g,' ')}</i>`:'', cl.attn?`<i>${L.attn}: ${esc(cl.attn)}</i>`:'', (cl.phone||cl.email)?`<i>${[cl.phone,cl.email].filter(Boolean).map(esc).join(' · ')}</i>`:''];
   const qtyTxt=it=>{ const q=+it.qty||0, u=String(it.unit||'').trim().toUpperCase(); if(!u) return String(q); return `${q} ${q>1&&/[A-RT-Z]$/.test(u)?u+'S':u}`; };
   const rows=(d.items||[]).filter(it=>(it.desc||'').trim()||+it.price).map((it,i)=>{ const [h,...rest]=String(it.desc||'').split('\n');
-    return `<tr><td class="dx-c">${i+1}</td><td class="dx-it"><b>${esc(h)}</b>${rest.filter(x=>x.trim()).map(x=>`<br>${esc(x)}`).join('')}</td>${T==='pv'?'':`<td class="dx-c">${esc(qtyTxt(it))}</td><td class="dx-c">${fmtRM(it.price)}</td>`}<td class="dx-c">${fmtRM((+it.qty||0)*(+it.price||0))}</td></tr>`; }).join('');
-  const ncol=T==='pv'?3:5;
+    return `<tr><td class="dx-c">${i+1}</td><td class="dx-it"><b>${esc(h)}</b>${rest.filter(x=>x.trim()).map(x=>`<br>${esc(x)}`).join('')}</td><td class="dx-c">${esc(qtyTxt(it))}</td><td class="dx-c">${fmtRM(it.price)}</td><td class="dx-c">${fmtRM((+it.qty||0)*(+it.price||0))}</td></tr>`; }).join('');
+  const ncol=5;
   const tl=(k,v)=>`<tr class="dx-tl"><td colspan="${ncol-2}" class="dx-blank"></td><td class="dx-k">${k}</td><td class="dx-v">${v}</td></tr>`;
   let tots=tl(lg==='ms'?'JUMLAH KECIL':'SUBTOTAL', fmtRM(c.sub));
   if(c.disc) tots+=tl(lg==='ms'?'DISKAUN':'DISCOUNT', '-'+fmtRM(c.disc));
   if(d.taxOn) tots+=tl(`${up(co.taxLabel||'SST')} ${+d.taxRate||0}%`, fmtRM(c.tax));
-  if(T==='rcpt'){ if(c.disc||d.taxOn) tots+=tl(lg==='ms'?'JUMLAH':'TOTAL', fmtRM(c.total)); tots+=tl(lg==='ms'?'AMAUN DIBAYAR':'AMOUNT PAID', fmtRM(c.paid))+tl(lg==='ms'?'BAKI':'TOTAL DUE', c.bal>0?fmtRM(c.bal):'0'); }
+  if(T==='pv'){ if(c.disc||d.taxOn) tots+=tl(lg==='ms'?'JUMLAH':'TOTAL', fmtRM(c.total)); tots+=tl(lg==='ms'?'AMAUN DIBAYAR':'AMOUNT PAID', fmtRM(c.total))+tl(lg==='ms'?'BAKI':'TOTAL DUE', '0'); }
+  else if(T==='rcpt'){ if(c.disc||d.taxOn) tots+=tl(lg==='ms'?'JUMLAH':'TOTAL', fmtRM(c.total)); tots+=tl(lg==='ms'?'AMAUN DIBAYAR':'AMOUNT PAID', fmtRM(c.paid))+tl(lg==='ms'?'BAKI':'TOTAL DUE', c.bal>0?fmtRM(c.bal):'0'); }
   else if(T==='inv'){ tots+=tl(lg==='ms'?'JUMLAH':'TOTAL', fmtRM(c.total)); if(c.paid) tots+=tl(lg==='ms'?'AMAUN DIBAYAR':'AMOUNT PAID', fmtRM(c.paid))+tl(lg==='ms'?'BAKI':'TOTAL DUE', fmtRM(c.bal)); }
   else tots+=tl(lg==='ms'?'JUMLAH':'TOTAL', fmtRM(c.total));
   const payNote = (T==='quo'||T==='inv') && co.accNo ? (lg==='ms'
       ? `Sila buat pembayaran kepada ${esc(co.bank||'')} (${esc(co.accNo)} - ${esc(co.accName||co.name||'')}) dan hantar bukti pemindahan kepada kami. Terima kasih!`
       : `Please make payment to ${esc(co.bank||'')} (${esc(co.accNo)} - ${esc(co.accName||co.name||'')}) and kindly send us the transfer proof once done. Thank you!`) : '';
   const terms=(T==='quo'||T==='inv') ? String(d.terms||'').split('\n').map(x=>x.replace(/^\s*\d+[.)]\s*/,'').trim()).filter(Boolean) : [];
-  const signs = T==='pv' ? `<table class="dx-sg"><tr>${[[L.prepared,d.prepBy],[L.approved,d.apprBy],[L.received,'']].map(([k,v])=>`<td><div class="dx-line"></div><b>${up(k)}</b><span>${esc(v||'')}</span></td>`).join('')}</tr></table>` : '';
-  return `<div class="doc ${T}"><div class="dx-frame">
+  const signs = false ? `<table class="dx-sg"><tr>${[[L.prepared,d.prepBy],[L.approved,d.apprBy],[L.received,'']].map(([k,v])=>`<td><div class="dx-line"></div><b>${up(k)}</b><span>${esc(v||'')}</span></td>`).join('')}</tr></table>` : '';
+  return `<div class="doc ${T==='pv'?'rcpt pv':T}"><div class="dx-frame">
   <div class="dx-dh">${co.logo?`<img src="${co.logo}" alt="">`:''}<h2>${esc(co.name||'escMedia')}</h2>${co.address?(()=>{ const L=String(co.address).split('\n').map(x=>x.trim()).filter(Boolean), m=Math.ceil(L.length/2); return `<p>${esc(L.slice(0,m).join(' '))}${L.length>1?'<br>'+esc(L.slice(m).join(' ')):''}</p>`; })():''}${(co.phone||co.regNo)?`<p>${[co.phone?(lg==='ms'?'Tel: ':'Phone: ')+esc(co.phone):'', co.regNo?(lg==='ms'?'No. Daftar: ':'Reg. No: ')+esc(co.regNo):''].filter(Boolean).join(' · ')}</p>`:''}</div>
-  <table class="dx-g">${T==='pv'?'<colgroup><col style="width:18%"><col><col style="width:22%"></colgroup>':'<colgroup><col style="width:17%"><col><col style="width:12%"><col style="width:16%"><col style="width:16%"></colgroup>'}
+  <table class="dx-g">${'<colgroup><col style="width:17%"><col><col style="width:12%"><col style="width:16%"><col style="width:16%"></colgroup>'}
     <tr><td colspan="${ncol}" class="dx-bar">${TT}</td></tr>
     ${meta.map(([k,v])=>`<tr><td class="dx-lab">${k}</td><td colspan="${ncol-1}" class="dx-val">${v}</td></tr>`).join('')}
     <tr><td colspan="${ncol}" class="dx-bar">${partyBar}</td></tr>
     ${party.filter(Boolean).map(x=>`<tr><td colspan="${ncol}" class="dx-pty">${x}</td></tr>`).join('')}
-    ${d.title?`<tr><td class="dx-lab">${T==='pv'?(lg==='ms'?'TUJUAN':'PURPOSE'):(lg==='ms'?'PERKARA':'SUBJECT')}</td><td colspan="${ncol-1}" class="dx-val">${esc(d.title)}</td></tr>`:''}
-    <tr class="dx-hd"><td class="dx-c">NO</td><td class="dx-c">${lg==='ms'?'BUTIRAN':'ITEM'}</td>${T==='pv'?'':`<td class="dx-c">${lg==='ms'?'KUANTITI':'QTY'}</td><td class="dx-c">${lg==='ms'?'HARGA':'PRICE'}</td>`}<td class="dx-c">${lg==='ms'?'JUMLAH':'TOTAL'}</td></tr>
+    ${d.title&&!(T==='pv'&&String((d.items||[])[0]?.desc||'').split('\n')[0].trim()===String(d.title).trim())?`<tr><td class="dx-lab">${T==='pv'?(lg==='ms'?'TUJUAN':'PURPOSE'):(lg==='ms'?'PERKARA':'SUBJECT')}</td><td colspan="${ncol-1}" class="dx-val">${esc(d.title)}</td></tr>`:''}
+    <tr class="dx-hd"><td class="dx-c">NO</td><td class="dx-c">${lg==='ms'?'BUTIRAN':'ITEM'}</td><td class="dx-c">${lg==='ms'?'KUANTITI':'QTY'}</td><td class="dx-c">${lg==='ms'?'HARGA':'PRICE'}</td><td class="dx-c">${lg==='ms'?'JUMLAH':'TOTAL'}</td></tr>
     ${rows||`<tr><td colspan="${ncol}" class="dx-c">—</td></tr>`}
     ${tots}
   </table>
-  ${T==='pv'?`<p class="dx-wd"><b>${L.words}:</b> <i>${words(c.total, lg)}</i></p>`:''}
   ${payNote?`<p class="dx-note">${payNote}</p>`:''}
   ${terms.length?`<ol class="dx-terms">${terms.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:''}
   ${d.notes?`<p class="dx-note">${nl2br(d.notes)}</p>`:''}
@@ -4290,7 +4295,7 @@ const docCss = () => DOC_CSS.replace('${ACC}', CO().accent||'#CCCCCC');
 function printDoc(d){
   const fr=document.createElement('iframe'); fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
   const w=fr.contentWindow, docu=w.document;
-  docu.open(); docu.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(d.no||'Dokumen')}${d.client?.name?' - '+esc(d.client.name):''}</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"><style>@page{size:${d.type==='rcpt'?'250mm 176mm':'A4'};margin:0}html,body{margin:0;background:#fff}.doc{min-height:${d.type==='rcpt'?'175mm':'296mm'}!important;page-break-after:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}${docCss()}</style></head><body>${docHTML(d)}</body></html>`); docu.close();
+  docu.open(); docu.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(d.no||'Dokumen')}${d.client?.name?' - '+esc(d.client.name):''}</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"><style>@page{size:${(d.type==='rcpt'||d.type==='pv')?'250mm 176mm':'A4'};margin:0}html,body{margin:0;background:#fff}.doc{min-height:${(d.type==='rcpt'||d.type==='pv')?'175mm':'296mm'}!important;page-break-after:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}${docCss()}</style></head><body>${docHTML(d)}</body></html>`); docu.close();
   const go=()=>{ try{ w.focus(); w.print(); }catch(e){ toast('Tidak dapat membuka cetakan.'); } setTimeout(()=>fr.remove(), 60000); };
   (docu.fonts?.ready||Promise.resolve()).then(()=>setTimeout(go, 250));
 }
@@ -4299,7 +4304,7 @@ function finInit(){
   if(finOn || !db || !isAdmin) return; finOn=true;
   $('rFin').hidden=false;
   const sub=(col,fn)=>{ const go=()=>db.collection(col).onSnapshot(s=>{ finErr=false; fn(s); renderFin(); }, ()=>{ finErr=true; renderFin(); setTimeout(go,10000); }); go(); };
-  sub('fin_docs', s=>{ finDocs=s.docs.map(x=>({id:x.id,...x.data()})); });
+  sub('fin_docs', s=>{ finDocs=s.docs.map(x=>({id:x.id,...x.data()})); schedAutoRc(); });
   sub('fin_clients', s=>{ finClients=s.docs.map(x=>({id:x.id,...x.data()})).sort((a,b)=>(a.name||'').localeCompare(b.name||'')); });
   sub('fin_settings', s=>{ const d=s.docs.find(x=>x.id==='company'); finCo=d?d.data():{}; const l=s.docs.find(x=>x.id==='ledger'); finLed=l?l.data():{}; });
   sub('fin_tx', s=>{ finTx=s.docs.map(x=>({id:x.id,...x.data()})); });
@@ -4309,7 +4314,7 @@ const FTABS=[['dash','Ringkasan'],['quo','Sebut Harga'],['inv','Invois'],['pv','
 function stChip(d){ const [l,c]=stShow(d); return `<span class="pill s-${c==='rev'?'rev':c}">${esc(l)}</span>`; }
 function docRow(d){
   const c=docCalc(d), who = d.type==='pv' ? d.payee?.name : d.client?.name;
-  return `<tr data-fd="${esc(d.id)}"><td class="mono nw"><b>${esc(d.no||'-')}</b><small class="t-${d.type}">${FT[d.type].bm}<span class="fdm"> · ${fmtDate(d.date)}</span></small></td><td class="nw fdc">${fmtDate(d.date)}</td>
+  return `<tr data-fd="${esc(d.id)}"><td class="mono nw"><b>${esc(d.no||'-')}</b><small class="t-${d.type}">${FT[d.type].bm}${d.auto?' · Auto':''}<span class="fdm"> · ${fmtDate(d.date)}</span></small></td><td class="nw fdc">${fmtDate(d.date)}</td>
     <td><span class="fw" translate="no">${esc(who||'-')}</span>${d.title?`<small translate="no">${esc(d.title)}</small>`:''}</td>
     <td class="r nw mono"><b>${fmtRM(d.type==='rcpt'?c.paid:c.total)}</b>${d.type==='inv'&&c.paid&&c.bal>0?`<small>Baki ${fmtRM(c.bal)}</small>`:''}</td><td>${stChip(d)}</td>
     <td class="r"><button class="iconbtn" data-fmenu="${esc(d.id)}" aria-label="Tindakan" title="Tindakan"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button></td></tr>`;
@@ -4571,7 +4576,7 @@ function renderLedger(el){
   for(const [k,list] of months){
     const [y,m]=k.split('-').map(Number); let lastDate='';
     list.forEach(r=>{ const [h,...rest]=String(r.cat||'').trim()?[r.cat, r.item]:[r.item]; 
-      body+=`<tr data-tx="${esc(r.id)}"><td class="nw">${r.date!==lastDate?esc(dmyS(r.date)):''}</td><td><b translate="no">${esc(r.cat||r.item||'-')}</b>${r.cat&&r.item?`<small translate="no">${esc(r.item)}</small>`:''}${r.src==='bigpay'?'<span class="lg-src">BigPay</span>':''}</td>
+      body+=`<tr data-tx="${esc(r.id)}"><td class="nw">${r.date!==lastDate?esc(dmyS(r.date)):''}</td><td><b translate="no">${esc(r.cat||r.item||'-')}</b>${r.cat&&r.item?`<small translate="no">${esc(r.item)}</small>`:''}${r.src==='bigpay'?'<span class="lg-src">BigPay</span>':''}${pvLinked(r)?`<button class="lg-pv" data-pvdl="${esc(r.pvId)}" title="Download baucar bayaran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>PV ${esc(pvLinked(r).no.split('/').slice(2,3).join('')||'')}</button>`:''}</td>
         <td class="r mono in">${+r.in?fmtNum(r.in):'-'}</td><td class="r mono out">${+r.out?fmtNum(r.out):'-'}</td><td class="r mono">${fmtNum(r.bal)}</td><td class="lg-note" translate="no">${r.notes?(/^https?:\/\//.test(r.notes)?`<a href="${esc(r.notes)}" target="_blank" rel="noopener">Lihat lampiran ↗</a>`:esc(r.notes)):''}</td></tr>`; lastDate=r.date; });
     const endBal=list[list.length-1].bal, net=r2(endBal-prevBal);
     body+=`<tr class="lg-close"><td colspan="4">${MONTH_UP[m-1]} ${k<ym?'CLOSE':'(SEMASA)'}</td><td class="r mono">${fmtNum(endBal)}</td><td class="r mono ${net<0?'neg':''}">Net ${net<0?'-':'+'}${fmtRM(Math.abs(net))}</td></tr>`;
@@ -4583,6 +4588,7 @@ function renderLedger(el){
       <div class="hs-card glass"><span class="lab">Keluar Bulan Ini</span><b class="fbig">${fmtRM(mOut)}</b><small>Amount out</small></div>
       <div class="hs-card glass"><span class="lab">Net Bulan Ini</span><b class="fbig">${mIn-mOut<0?'-':''}${fmtRM(Math.abs(mIn-mOut))}</b><small>${MONTH_UP[+ym.slice(5)-1].toLowerCase()}</small></div></div></section>
     <div class="ftools"><span class="fsum">Baki awal <b>${fmtRM(open)}</b>${finLed.openingDate?` pada ${esc(dmyS(finLed.openingDate))}`:''} <button class="btn sm ghost" id="lgOpen">Ubah</button></span>
+      ${(()=>{ const n=finTx.filter(t=>isPayOut(t)&&!pvLinked(t)).length; return n?`<button class="btn" id="lgPV">Jana Baucar (${n})</button>`:''; })()}
       <button class="btn" id="lgDl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download Excel</button>
       <button class="btn primary" id="lgUp" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Upload<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button></div>
     ${rows.length||open?`<div class="ftbl lg"><table><thead><tr><th>Tarikh</th><th>Item</th><th class="r">Amount In (RM)</th><th class="r">Amount Out (RM)</th><th class="r">Balance (RM)</th><th>Notes</th></tr></thead><tbody>${body}</tbody></table></div>`
@@ -4592,7 +4598,7 @@ function renderLedger(el){
     {icon:'xls', label:'Penyata bank (CSV)', desc:'Lajur tarikh, keterangan, amaun', run:()=>pickFile('.csv,text/csv', f=>importBank(f))},
     {icon:'xls', label:'Import Excel lama', desc:'Sheet "RECEIVE AND SPENT" sedia ada', run:()=>pickFile('.xlsx,.xls', f=>importOldLedger(f))},
     '-', {icon:'plus', label:'Tambah transaksi', desc:'Isi secara manual', run:()=>openTx(null)}]);
-  $('lgOpen').onclick=openOpening; $('lgDl').onclick=exportLedger;
+  $('lgOpen').onclick=openOpening; $('lgDl').onclick=exportLedger; if($('lgPV')) $('lgPV').onclick=backfillPV;
 }
 const dmyS=iso=>{ if(!iso) return ''; const [y,m,d]=iso.split('-'); return `${+d}/${m}/${y}`; };
 function pickFile(accept, fn){ const i=document.createElement('input'); i.type='file'; i.accept=accept; i.onchange=()=>{ if(i.files[0]) fn(i.files[0]); }; i.click(); }
@@ -4620,8 +4626,78 @@ function openTx(id){
   $('txSave').onclick=async()=>{ const amt=r2($('txAmt').value), d=$('txDir').querySelector('[aria-pressed="true"]').dataset.v;
     if(!(amt>0)){ $('txErr').textContent='Masukkan amaun.'; return; } if(!$('txDate').value){ $('txErr').textContent='Pilih tarikh.'; return; }
     const data={date:$('txDate').value, cat:$('txCat').value.trim(), item:$('txItem').value.trim(), in:d==='in'?amt:0, out:d==='out'?amt:0, notes:$('txNotes').value.trim(), updatedAt:Date.now()};
-    try{ if(id) await db.collection('fin_tx').doc(id).update(data); else await db.collection('fin_tx').doc().set({...data, src:'manual', seq:Date.now(), createdAt:Date.now()}); closeModal(); toast('Transaksi disimpan'); }catch(err){ $('txErr').textContent=writeErr(err); } };
-  if(id) $('txDel').onclick=async()=>{ const b=$('txDel'); if(!b.dataset.armed){ b.dataset.armed=1; b.textContent='Tekan lagi untuk padam'; b.classList.add('solid'); return; } try{ await db.collection('fin_tx').doc(id).delete(); closeModal(); toast('Transaksi dipadam'); }catch(err){ $('txErr').textContent=writeErr(err); } };
+    try{ let tt; if(id){ await db.collection('fin_tx').doc(id).update(data); tt={...t, ...data, id}; } else { const ref=db.collection('fin_tx').doc(); const nd={...data, src:'manual', seq:Date.now(), createdAt:Date.now()}; await ref.set(nd); tt={...nd, id:ref.id}; }
+      const pv=await ensurePV(tt); closeModal(); toast(pv&&!pvLinked(t)?'Transaksi disimpan · baucar dijana':'Transaksi disimpan'); }catch(err){ $('txErr').textContent=writeErr(err); } };
+  if(id) $('txDel').onclick=async()=>{ const b=$('txDel'); if(!b.dataset.armed){ b.dataset.armed=1; b.textContent='Tekan lagi untuk padam'; b.classList.add('solid'); return; } try{ const pv=pvLinked(t); if(pv && pv.auto) await db.collection('fin_docs').doc(pv.id).delete(); await db.collection('fin_tx').doc(id).delete(); closeModal(); toast(pv&&pv.auto?'Transaksi & baucar dipadam':'Transaksi dipadam'); }catch(err){ $('txErr').textContent=writeErr(err); } };
+}
+/* --- auto official receipts: invoice paid, or linked project's work all SUBMIT / DONE --- */
+const WORK_DONE=new Set(['SUBMIT','DONE']), WORK_SKIP=new Set(['BATAL','CANCEL']);
+let autoRcT=null, autoRcPids=new Set(), autoRcBusy=new Set();
+function schedAutoRc(pid){ if(pid) autoRcPids.add(pid); clearTimeout(autoRcT); autoRcT=setTimeout(()=>{ const p=autoRcPids; autoRcPids=new Set(); autoReceipts(p).catch(()=>{}); }, 1200); }
+async function projWorkDone(pid){
+  let list; try{ const sn=await db.collection(`projects/${pid}/entries`).get(); list=sn.docs.map(d=>d.data()); }catch{ return false; }
+  const live=list.filter(e=>!WORK_SKIP.has(String(e.status||'').toUpperCase()));
+  return live.length>0 && live.every(e=>WORK_DONE.has(String(e.status||'').toUpperCase()));
+}
+function rcptFromInv(inv, amt, pay){
+  const c=docCalc(inv), date=pay?.date||todayISO();
+  const r={type:'rcpt', no:nextNo('rcpt', date), date, status:'Dikeluarkan', client:inv.client||{}, clientId:inv.clientId||'', pid:inv.pid||'', title:inv.title||'',
+    items:(inv.items||[]).map(x=>({...x})), discount:inv.discount||0, taxOn:!!inv.taxOn, taxRate:inv.taxRate||0, paidAmt:r2(amt), balAfter:0, invId:inv.id, invNo:inv.no||'',
+    method:pay?.method||'', ref:pay?.ref||'', notes:'', payments:[], auto:true, createdAt:Date.now(), updatedAt:Date.now()};
+  r.total=docCalc(r).total; return r;
+}
+async function autoReceipts(pids){
+  if(!db || !isAdmin || !finOn) return;
+  const invs=finDocs.filter(d=>d.type==='inv' && d.status!=='Batal' && !d.rcptAuto && !autoRcBusy.has(d.id)
+    && !finDocs.some(r=>r.type==='rcpt' && r.invId===d.id && r.status!=='Batal'));
+  for(const inv of invs){
+    const c=docCalc(inv), paid = inv.status==='Dibayar' || (c.total>0 && c.bal<=0);
+    let pay=null;
+    if(!paid){
+      if(!inv.pid || inv.status==='Draf' || !(c.total>0)) continue;
+      if(pids && pids.size && !pids.has(inv.pid) && autoRcInit) continue;
+      if(!(await projWorkDone(inv.pid))) continue;
+      pay={date:todayISO(), amount:r2(c.bal), method:'Pindahan Online', ref:'', auto:true};
+    }
+    autoRcBusy.add(inv.id);
+    try{
+      const amt = pay ? c.total : (c.paid>0 ? c.paid : c.total);
+      const lastPay = pay || (inv.payments||[]).slice(-1)[0];
+      const rc=rcptFromInv(inv, amt, lastPay);
+      await db.collection('fin_docs').doc('autorc_'+inv.id).set(rc);
+      const upd={rcptAuto:true, updatedAt:Date.now()};
+      if(pay){ upd.payments=[...(inv.payments||[]), pay]; upd.status='Dibayar'; }
+      await db.collection('fin_docs').doc(inv.id).update(upd);
+      toast(`Resit ${rc.no} dijana untuk ${inv.no||'invois'}`);
+    }catch(e){ autoRcBusy.delete(inv.id); }
+  }
+  autoRcInit=true;
+}
+let autoRcInit=false;
+/* --- auto payment vouchers for "Payment" money out --- */
+const isPayOut = t => /^payment$/i.test(String(t.cat||'').trim()) && (+t.out||0)>0;
+const pvLinked = t => t.pvId && finDocs.find(d=>d.id===t.pvId);
+function pvNumberer(){ const issued=new Set();
+  const bump=no=>{ const m=no.match(/^(.*?\/[^/]+\/)(\d+)(\/.*)$/)||no.match(/^(.*-)(\d+)()$/); return m? m[1]+String(+m[2]+1).padStart(m[2].length,'0')+m[3] : no+'-1'; };
+  return date=>{ let no=nextNo('pv',date); const all=new Set(finDocs.filter(d=>d.type==='pv').map(d=>d.no)); while(issued.has(no)||all.has(no)) no=bump(no); issued.add(no); return no; }; }
+function pvFromTx(t, no){
+  const co=CO(), full=t.payee || (t.raw?String(t.raw).split(' · ')[0]:'') || t.item || '';
+  const purpose=[t.item && t.item!==shortName(full) && t.item!==full ? t.item : '', t.notes && !/^https?:/.test(t.notes) && !/^USD /.test(t.notes) ? t.notes : ''].filter(Boolean).join(' — ') || (CO().docLang==='ms'?`Bayaran kepada ${shortName(full)||full}`:`Payment to ${shortName(full)||full}`);
+  return {type:'pv', no, date:t.date, status:'Dibayar', payee:{name:full||'-', ic:'', bank:t.payBank||'', acc:t.payAcc||''}, method:t.src==='bigpay'?'Pindahan Online (BigPay)':'Pindahan Online', ref:t.extId||'',
+    pid:'', title:purpose, items:[{desc:purpose, qty:1, unit:'', price:r2(t.out)}], discount:0, taxOn:false, taxRate:0, notes:'', prepBy:co.signName||co.accName||'', apprBy:'', payments:[], txId:t.id, auto:true, total:r2(t.out), createdAt:Date.now(), updatedAt:Date.now()};
+}
+async function ensurePV(t, numberer){
+  if(!isPayOut(t)) return null;
+  const ex=pvLinked(t);
+  if(ex){ const upd=pvFromTx(t, ex.no); const keep={no:ex.no, prepBy:ex.prepBy, apprBy:ex.apprBy, status:ex.status, createdAt:ex.createdAt||Date.now()}; await db.collection('fin_docs').doc(ex.id).set({...upd, ...keep, updatedAt:Date.now()}); return ex.id; }
+  const ref=db.collection('fin_docs').doc(); await ref.set(pvFromTx(t, (numberer||pvNumberer())(t.date)));
+  await db.collection('fin_tx').doc(t.id).update({pvId:ref.id}); return ref.id;
+}
+async function backfillPV(){
+  const miss=finTx.filter(t=>isPayOut(t) && !pvLinked(t)).sort(txSort); if(!miss.length) return;
+  const b=$('lgPV'); if(b){ b.disabled=true; } const num=pvNumberer(); let i=0;
+  try{ for(const t of miss){ if(b) b.textContent=`Menjana ${++i}/${miss.length}…`; await ensurePV(t, num); } toast(`${miss.length} baucar bayaran dijana`); }
+  catch(err){ toast(writeErr(err)); }
 }
 /* --- bank statement parsing --- */
 async function parseBigPay(buf){
@@ -4650,7 +4726,7 @@ async function parseBigPay(buf){
       const [dd,mm,yy]=date.s.split('/');
       const note=det.filter(x=>!/^\d{8}[A-Z]{4}/.test(x) && !/^\d{6,}$/.test(x) && !/\*{3,}/.test(x) && !/^USD\s|=\s*MYR/.test(x) && !/(Bank|Berhad|BHD)\b/i.test(x)).join(' · ');
       const fx=det.find(x=>/^USD\s[\d.,]+$/.test(x));
-      out.push({extId:an.s, date:`${yy}-${mm}-${dd}`, name, catRaw:cat[0]||'', type:cat[1]||'', status, in:neg?0:amt, out:neg?amt:0, note, fx:fx||'', bank:det.find(x=>/(Bank|Berhad)/i.test(x))||''});
+      out.push({extId:an.s, date:`${yy}-${mm}-${dd}`, name, catRaw:cat[0]||'', type:cat[1]||'', status, in:neg?0:amt, out:neg?amt:0, note, fx:fx||'', bank:det.find(x=>/(Bank|Berhad)/i.test(x))||'', acc:det.find(x=>/^\d{8,16}$/.test(x))||''});
     });
   }
   return out;
@@ -4707,11 +4783,12 @@ async function importBank(file){
   $('biList').oninput=e=>{ const f=e.target.closest('[data-bf]'); if(f) plan[+f.dataset.bi][f.dataset.bf]=f.value; };
   $('biList').onchange=e=>{ const c=e.target.closest('[data-bk]'); if(c){ plan[+c.dataset.bk].keep=c.checked; draw(); } };
   $('biGo').onclick=async()=>{ const b=$('biGo'); b.disabled=true; const rules={...(finLed.rules||{})};
-    try{ let i=0; const now=Date.now(); for(const p of plan.filter(x=>x.keep)){ b.textContent=`Menyimpan ${++i}…`;
-        await db.collection('fin_tx').doc().set({date:p.date, cat:p.cat.trim(), item:p.item.trim(), in:p.in, out:p.out, notes:p.notes||'', src:/\.csv$/i.test(file.name)?'csv':'bigpay', extId:p.extId, raw:[titleName(p.name),p.catRaw,p.type].filter(Boolean).join(' · '), seq:now+i, createdAt:now, updatedAt:now});
+    try{ let i=0, nPV=0; const now=Date.now(), num=pvNumberer(); for(const p of plan.filter(x=>x.keep)){ b.textContent=`Menyimpan ${++i}…`;
+        const tref=db.collection('fin_tx').doc(); const tdata={date:p.date, cat:p.cat.trim(), item:p.item.trim(), in:p.in, out:p.out, notes:p.notes||'', src:/\.csv$/i.test(file.name)?'csv':'bigpay', extId:p.extId, raw:[titleName(p.name),p.catRaw,p.type].filter(Boolean).join(' · '), payee:titleName(p.name), payBank:p.bank||'', payAcc:p.acc||'', seq:now+i, createdAt:now, updatedAt:now};
+        await tref.set(tdata); if(isPayOut(tdata)){ await ensurePV({...tdata, id:tref.id}, num); nPV++; }
         rules[nameKey(p.name)]={cat:p.cat.trim(), item:p.item.trim()}; }
       await db.collection('fin_settings').doc('ledger').set({...finLed, rules, updatedAt:Date.now()});
-      closeModal(); toast(`${i} transaksi dimasukkan`); }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('biErr').textContent=writeErr(err); } };
+      closeModal(); toast(`${i} transaksi dimasukkan${nPV?` · ${nPV} baucar dijana`:''}`); }catch(err){ b.disabled=false; b.textContent='Cuba lagi'; $('biErr').textContent=writeErr(err); } };
 }
 async function importOldLedger(file){
   if(!window.XLSX){ toast('Pembaca Excel belum dimuatkan.'); return; }
@@ -4742,7 +4819,7 @@ async function importOldLedger(file){
     `<button class="btn ghost" data-act="close">Batal</button><button class="btn primary" id="oiGo">Import ${tx.length} transaksi</button>`);
   $('oiGo').onclick=async()=>{ const b=$('oiGo'); b.disabled=true; try{ const now=Date.now(); let i=0;
       if(!finTx.length && opening!==null) await db.collection('fin_settings').doc('ledger').set({...finLed, opening:r2(opening), openingDate:openingDate||tx[0].date, updatedAt:now});
-      for(const t of tx){ b.textContent=`Menyimpan ${++i}/${tx.length}…`; await db.collection('fin_tx').doc().set({...t, src:'excel', seq:now+i, createdAt:now, updatedAt:now}); }
+      const num=pvNumberer(); for(const t of tx){ b.textContent=`Menyimpan ${++i}/${tx.length}…`; const tref=db.collection('fin_tx').doc(); const td={...t, src:'excel', seq:now+i, createdAt:now, updatedAt:now}; await tref.set(td); if(isPayOut(td)) await ensurePV({...td, id:tref.id}, num); }
       closeModal(); toast(`${tx.length} transaksi diimport`); }catch(err){ b.disabled=false; $('oiErr').textContent=writeErr(err); } };
 }
 function exportLedger(){
@@ -4772,6 +4849,7 @@ $('finNew').onclick=()=>openMenu($('finNew'), [
   {icon:'up', label:'Baucar Bayaran', desc:'Payment voucher untuk bayaran keluar', run:()=>openDocEditor({type:'pv'})},
 ]);
 $('finBody').onclick=e=>{
+  const pvb=e.target.closest('[data-pvdl]'); if(pvb){ e.stopPropagation(); const d=finDocs.find(x=>x.id===pvb.dataset.pvdl); if(d) printDoc(d); return; }
   const tx=e.target.closest('[data-tx]'); if(tx && !e.target.closest('a')){ openTx(tx.dataset.tx); return; }
   const m=e.target.closest('[data-fmenu]'); if(m){ e.stopPropagation(); const d=finDocs.find(x=>x.id===m.dataset.fmenu); if(d) finMenu(m,d); return; }
   const ch=e.target.closest('[data-fst]'); if(ch){ finSt=ch.dataset.fst; renderFin(); return; }
